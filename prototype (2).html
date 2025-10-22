@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Food Info App</title>
+  <style>
+    :root{
+      --brand:#f5a623;
+      --bg:#fdf2f2;
+      --card:#f3f3f8;
+      --ink:#222;
+      --muted:#666;
+      --radius:12px;
+      --shadow:0 2px 8px rgba(0,0,0,.08);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;color:var(--ink);background:#fff}
+    img{display:block;max-width:100%}
+
+    header{
+      background:#fff;
+      padding:12px 30px;
+      margin:0 30px;
+      display:flex;align-items:center;justify-content:space-between;
+      border-bottom:1px solid #eee;
+    }
+    header .logo img{height:60px;width:auto}
+
+    nav ul{list-style:none;display:flex;gap:22px;margin:0;padding:0}
+    nav a{font-weight:700;color:var(--brand);text-decoration:none}
+    nav a:hover{text-decoration:underline}
+
+    .search-bar{
+      display:flex;justify-content:center;align-items:center;gap:10px;
+      margin:18px;color:#000;
+    }
+    .search-bar input,.search-bar select{
+      padding:10px 12px;border-radius:8px;border:1px solid #ccc;min-width:240px
+    }
+    .search-bar button{
+      background:var(--brand);color:#fff;border:0;border-radius:8px;
+      padding:10px 18px;cursor:pointer;font-weight:700
+    }
+    .search-bar button:hover{filter:brightness(.95)}
+
+    .main-container{display:flex;gap:20px;padding:10px 50px 50px}
+    .foods-section,.restaurants-section{
+      background:var(--bg);padding:20px;border-radius:10px;box-shadow:var(--shadow)
+    }
+    .foods-section{flex:2}
+    .restaurants-section{flex:1}
+
+    h2{margin:8px 0 14px}
+
+    .foods-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .restaurants-grid{display:grid;grid-template-columns:1fr;gap:14px}
+
+    .card{
+      position:relative;background:var(--card);border-radius:10px;padding:12px;
+      display:flex;align-items:center;gap:14px;box-shadow:var(--shadow)
+    }
+    .card img{
+      width:90px;height:90px;object-fit:cover;border-radius:10px;border:1px solid #e9e9f5
+    }
+    .card-info h3{margin:0 0 6px}
+    .card-info p{margin:2px 0;color:var(--muted)}
+    .rating{font-weight:700;color:#222}
+
+    .details_button{
+      margin-left:auto;background:var(--brand);color:#fff;border:0;border-radius:8px;
+      padding:8px 12px;cursor:pointer;font-weight:700
+    }
+    .details_button:hover{background:#e59400}
+
+    .popover{
+      position:absolute;right:12px;top:calc(100% + 8px);
+      background:var(--bg);color:#000;border:1px solid #ddd;border-radius:10px;
+      padding:10px;box-shadow:var(--shadow);z-index:10;display:none;min-width:220px
+    }
+    .card.show-popover .popover{display:block}
+
+    @media (max-width: 1100px){
+      .foods-grid{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width: 780px){
+      .main-container{flex-direction:column;padding:10px 16px 36px}
+      header{margin:0 0 8px}
+      .foods-grid{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo"><img src="logow.png" alt="Logo"/></div>
+    <nav>
+      <ul>
+        <li><a href="prototype.html">Home</a></li>
+        <li><a href="restaurant.html">Restaurants</a></li>
+        <li><a href="food.html">Foods</a></li>
+        <li><a href="login.html">Login</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="search-bar">
+    <input type="text" placeholder="Search for food or restaurant..."/>
+    <select>
+      <option value="">Select Location</option>
+      <option>MUIS I</option><option>MUIS II</option>
+      <option>MUIS III</option><option>MUIS IV</option>
+    </select>
+    <button>Search</button>
+  </div>
+
+  <div class="main-container">
+    <!-- FOODS -->
+    <section class="foods-section">
+      <h2>Popular</h2>
+      <div class="foods-grid">
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?q=80&w=300&auto=format&fit=crop" alt="Пирошки"/>
+          <div class="card-info">
+            <h3>Пирошки</h3>
+            <p>Үнэ: 2,000₮</p>
+            <p class="rating">5/5</p>
+          </div>
+          <button class="details_button">Details</button>
+          <div class="popover">
+            <p><strong>Орц:</strong> Гурил, мах, сонгино</p>
+            <p><strong>Калори:</strong> ~320 ккал</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1625944528833-3f2a9f2f7fcb?q=80&w=300&auto=format&fit=crop" alt="Гурилтай шөл"/>
+          <div class="card-info">
+            <h3>Гурилтай шөл</h3>
+            <p>Үнэ: 13,000₮</p>
+            <p class="rating">4/5</p>
+          </div>
+          <button class="details_button">Details</button>
+          <div class="popover">
+            <p><strong>Орц:</strong> Гурил, мах, ногоо</p>
+            <p><strong>Калори:</strong> ~280 ккал</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1617093727343-374698b1c509?q=80&w=300&auto=format&fit=crop" alt="Цуйван"/>
+          <div class="card-info">
+            <h3>Цуйван</h3>
+            <p>Үнэ: 12,000₮</p>
+            <p class="rating">4.5/5</p>
+          </div>
+          <button class="details_button">Details</button>
+          <div class="popover">
+            <p><strong>Орц:</strong> Гахайн мах, гоймон, ногоо</p>
+            <p><strong>Калори:</strong> ~520 ккал</p>
+          </div>
+        </div>
+      </div>
+
+      <h2>Favourites</h2>
+      <div class="foods-grid">
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1617093727343-374698b1c509?q=80&w=300&auto=format&fit=crop" alt="Цуйван"/>
+          <div class="card-info">
+            <h3>Цуйван</h3>
+            <p>Үнэ: 12,000₮</p>
+            <p class="rating">5/5</p>
+          </div>
+          <button class="details_button">Details</button>
+          <div class="popover">
+            <p><strong>Орц:</strong> Гахайн мах, гоймон, ногоо</p>
+            <p><strong>Калори:</strong> ~520 ккал</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1625944528833-3f2a9f2f7fcb?q=80&w=300&auto=format&fit=crop" alt="Гурилтай шөл"/>
+          <div class="card-info">
+            <h3>Гурилтай шөл</h3>
+            <p>Үнэ: 13,000₮</p>
+            <p class="rating">4/5</p>
+          </div>
+          <button class="details_button">Details</button>
+          <div class="popover">
+            <p><strong>Орц:</strong> Гурил, мах, ногоо</p>
+            <p><strong>Калори:</strong> ~280 ккал</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1625944528833-3f2a9f2f7fcb?q=80&w=300&auto=format&fit=crop" alt="Гурилтай шөл"/>
+          <div class="card-info">
+            <h3>Гурилтай шөл</h3>
+            <p>Үнэ: 13,000₮</p>
+            <p class="rating">4/5</p>
+          </div>
+          <button class="details_button">Details</button>
+          <div class="popover">
+            <p><strong>Орц:</strong> Гурил, мах, ногоо</p>
+            <p><strong>Калори:</strong> ~280 ккал</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1625944528833-3f2a9f2f7fcb?q=80&w=300&auto=format&fit=crop" alt="Гурилтай шөл"/>
+          <div class="card-info">
+            <h3>Гурилтай шөл</h3>
+            <p>Үнэ: 13,000₮</p>
+            <p class="rating">4/5</p>
+          </div>
+          <button class="details_button">Details</button>
+          <div class="popover">
+            <p><strong>Орц:</strong> Гурил, мах, ногоо</p>
+            <p><strong>Калори:</strong> ~280 ккал</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1625944528833-3f2a9f2f7fcb?q=80&w=300&auto=format&fit=crop" alt="Гурилтай шөл"/>
+          <div class="card-info">
+            <h3>Гурилтай шөл</h3>
+            <p>Үнэ: 13,000₮</p>
+            <p class="rating">4/5</p>
+          </div>
+          <button class="details_button">Details</button>
+          <div class="popover">
+            <p><strong>Орц:</strong> Гурил, мах, ногоо</p>
+            <p><strong>Калори:</strong> ~280 ккал</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=300&auto=format&fit=crop" alt="Банштай шөл"/>
+          <div class="card-info">
+            <h3>Банштай шөл</h3>
+            <p>Үнэ: 8,500₮</p>
+            <p class="rating">4/5</p>
+          </div>
+          <button class="details_button">Details</button>
+          <div class="popover">
+            <p><strong>Орц:</strong> Банш, шөл, ногоо</p>
+            <p><strong>Калори:</strong> ~260 ккал</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1604908176997-4316c99e1786?q=80&w=300&auto=format&fit=crop" alt="Хуушуур"/>
+          <div class="card-info">
+            <h3>Хуушуур</h3>
+            <p>Үнэ: 2,000₮</p>
+            <p class="rating">4.5/5</p>
+          </div>
+          <button class="details_button">Details</button>
+          <div class="popover">
+            <p><strong>Орц:</strong> Гурил, үхрийн мах, сонгино</p>
+            <p><strong>Калори:</strong> ~300 ккал</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESTAURANTS -->
+    <aside class="restaurants-section">
+      <h2>Top Restaurants</h2>
+      <div class="restaurants-grid">
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1498654200943-1088dd4438ae?q=80&w=300&auto=format&fit=crop" alt="Restaurant1"/>
+          <div class="card-info">
+            <h3>Restaurant 1</h3>
+            <p>MUIS III</p>
+            <p class="rating">5/5</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?q=80&w=300&auto=format&fit=crop" alt="Restaurant2"/>
+          <div class="card-info">
+            <h3>Restaurant 2</h3>
+            <p>MUIS II</p>
+            <p class="rating">4/5</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?q=80&w=300&auto=format&fit=crop" alt="Restaurant2"/>
+          <div class="card-info">
+            <h3>Restaurant 3</h3>
+            <p>MUIS II</p>
+            <p class="rating">4/5</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=300&auto=format&fit=crop" alt="Restaurant3"/>
+          <div class="card-info">
+            <h3>Restaurant 4</h3>
+            <p>MUIS I</p>
+            <p class="rating">4.5/5</p>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <script>
+    // Toggle popovers on Details click
+    document.querySelectorAll('.card .details_button').forEach(btn=>{
+      btn.addEventListener('click', e=>{
+        const card = e.currentTarget.closest('.card');
+        card.classList.toggle('show-popover');
+      });
+    });
+    // Click outside to close
+    document.addEventListener('click', e=>{
+      document.querySelectorAll('.card.show-popover').forEach(card=>{
+        if(!card.contains(e.target)) card.classList.remove('show-popover');
+      });
+    });
+  </script>
+</body>
+</html>
