@@ -5,10 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Food Info App</title>
   <link rel="stylesheet" href="style.css">
+  <script type="module" src="./com/fos-food.js"></script>
 </head>
 <body>
   <header>
-    <div class="logo"><img src="logow.png" alt="Logo"/></div>
+    <!-- <div class="logo"><img src="logow.png" alt="Logo"/></div> -->
     <nav>
       <ul>
         <li><a href="prototype.html">Home</a></li>
@@ -30,187 +31,47 @@
   </div>
 
   <div class="main-container">
-    <!-- FOODS -->
     <section class="foods-section">
-      <h2>Popular</h2>
-      <div class="foods-grid">
-        <div class="card">
-          <img src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?q=80&w=300&auto=format&fit=crop" alt="Пирошки"/>
-          <div class="card-info">
-            <h3>Пирошки</h3>
-            <p>Үнэ: 2,000₮</p>
-            <p class="rating">5/5</p>
-          </div>
-          <button class="details_button">Details</button>
-          <div class="popover">
-            <p><strong>Орц:</strong> Гурил, мах, сонгино</p>
-            <p><strong>Калори:</strong> ~320 ккал</p>
-          </div>
+      <section>
+        <h2>Popular</h2>
+        <div class="foods-grid">
+          <fos-food></fos-food>
+          <fos-food></fos-food>
+          <fos-food></fos-food>
+          <fos-food></fos-food>
         </div>
-
-        <div class="card">
-          <img src="https://images.unsplash.com/photo-1625944528833-3f2a9f2f7fcb?q=80&w=300&auto=format&fit=crop" alt="Гурилтай шөл"/>
-          <div class="card-info">
-            <h3>Гурилтай шөл</h3>
-            <p>Үнэ: 13,000₮</p>
-            <p class="rating">4/5</p>
-          </div>
-          <button class="details_button">Details</button>
-          <div class="popover">
-            <p><strong>Орц:</strong> Гурил, мах, ногоо</p>
-            <p><strong>Калори:</strong> ~280 ккал</p>
-          </div>
+      </section>
+      
+      <section>
+        <h2>Favourites</h2>
+        <div class="foods-grid">
+          <fos-food une="8.500" fname="Цуйван"></fos-food>
+          <fos-food fname="Банштай цай" unelgee="4.5" forts="мах, ногоо, гурил"></fos-food>
+          <fos-food></fos-food>
+          <fos-food></fos-food>
+          <fos-food></fos-food>
+          <fos-food></fos-food>
         </div>
-
-        <div class="card">
-          <img src="https://images.unsplash.com/photo-1617093727343-374698b1c509?q=80&w=300&auto=format&fit=crop" alt="Цуйван"/>
-          <div class="card-info">
-            <h3>Цуйван</h3>
-            <p>Үнэ: 12,000₮</p>
-            <p class="rating">4.5/5</p>
-          </div>
-          <button class="details_button">Details</button>
-          <div class="popover">
-            <p><strong>Орц:</strong> Гахайн мах, гоймон, ногоо</p>
-            <p><strong>Калори:</strong> ~520 ккал</p>
-          </div>
-        </div>
-      </div>
-
-      <h2>Favourites</h2>
-      <div class="foods-grid">
-        <div class="card">
-          <img src="https://images.unsplash.com/photo-1617093727343-374698b1c509?q=80&w=300&auto=format&fit=crop" alt="Цуйван"/>
-          <div class="card-info">
-            <h3>Цуйван</h3>
-            <p>Үнэ: 12,000₮</p>
-            <p class="rating">5/5</p>
-          </div>
-          <button class="details_button">Details</button>
-          <div class="popover">
-            <p><strong>Орц:</strong> Гахайн мах, гоймон, ногоо</p>
-            <p><strong>Калори:</strong> ~520 ккал</p>
-          </div>
-        </div>
-        <div class="card">
-          <img src="https://images.unsplash.com/photo-1625944528833-3f2a9f2f7fcb?q=80&w=300&auto=format&fit=crop" alt="Гурилтай шөл"/>
-          <div class="card-info">
-            <h3>Гурилтай шөл</h3>
-            <p>Үнэ: 13,000₮</p>
-            <p class="rating">4/5</p>
-          </div>
-          <button class="details_button">Details</button>
-          <div class="popover">
-            <p><strong>Орц:</strong> Гурил, мах, ногоо</p>
-            <p><strong>Калори:</strong> ~280 ккал</p>
-          </div>
-        </div>
-        <div class="card">
-          <img src="https://images.unsplash.com/photo-1625944528833-3f2a9f2f7fcb?q=80&w=300&auto=format&fit=crop" alt="Гурилтай шөл"/>
-          <div class="card-info">
-            <h3>Гурилтай шөл</h3>
-            <p>Үнэ: 13,000₮</p>
-            <p class="rating">4/5</p>
-          </div>
-          <button class="details_button">Details</button>
-          <div class="popover">
-            <p><strong>Орц:</strong> Гурил, мах, ногоо</p>
-            <p><strong>Калори:</strong> ~280 ккал</p>
-          </div>
-        </div>
-        <div class="card">
-          <img src="https://images.unsplash.com/photo-1625944528833-3f2a9f2f7fcb?q=80&w=300&auto=format&fit=crop" alt="Гурилтай шөл"/>
-          <div class="card-info">
-            <h3>Гурилтай шөл</h3>
-            <p>Үнэ: 13,000₮</p>
-            <p class="rating">4/5</p>
-          </div>
-          <button class="details_button">Details</button>
-          <div class="popover">
-            <p><strong>Орц:</strong> Гурил, мах, ногоо</p>
-            <p><strong>Калори:</strong> ~280 ккал</p>
-          </div>
-        </div>
-
-        <div class="card">
-          <img src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=300&auto=format&fit=crop" alt="Банштай шөл"/>
-          <div class="card-info">
-            <h3>Банштай шөл</h3>
-            <p>Үнэ: 8,500₮</p>
-            <p class="rating">4/5</p>
-          </div>
-          <button class="details_button">Details</button>
-          <div class="popover">
-            <p><strong>Орц:</strong> Банш, шөл, ногоо</p>
-            <p><strong>Калори:</strong> ~260 ккал</p>
-          </div>
-        </div>
-
-        <div class="card">
-          <img src="https://images.unsplash.com/photo-1604908176997-4316c99e1786?q=80&w=300&auto=format&fit=crop" alt="Хуушуур"/>
-          <div class="card-info">
-            <h3>Хуушуур</h3>
-            <p>Үнэ: 2,000₮</p>
-            <p class="rating">4.5/5</p>
-          </div>
-          <button class="details_button">Details</button>
-          <div class="popover">
-            <p><strong>Орц:</strong> Гурил, үхрийн мах, сонгино</p>
-            <p><strong>Калори:</strong> ~300 ккал</p>
-          </div>
-        </div>
-      </div>
+      </section>
     </section>
-
-    <!-- RESTAURANTS -->
-    <aside class="restaurants-section">
+    <section>
+      <aside class="restaurants-section">
       <h2>Top Restaurants</h2>
       <div class="restaurants-grid">
-        <div class="card">
-          <img src="https://images.unsplash.com/photo-1498654200943-1088dd4438ae?q=80&w=300&auto=format&fit=crop" alt="Restaurant1"/>
-          <div class="card-info">
-            <h3>Restaurant 1</h3>
-            <p>MUIS III</p>
-            <p class="rating">5/5</p>
-          </div>
-        </div>
-        <div class="card">
-          <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?q=80&w=300&auto=format&fit=crop" alt="Restaurant2"/>
-          <div class="card-info">
-            <h3>Restaurant 2</h3>
-            <p>MUIS II</p>
-            <p class="rating">4/5</p>
-          </div>
-        </div>
-        <div class="card">
-          <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?q=80&w=300&auto=format&fit=crop" alt="Restaurant2"/>
-          <div class="card-info">
-            <h3>Restaurant 3</h3>
-            <p>MUIS II</p>
-            <p class="rating">4/5</p>
-          </div>
-        </div>
-        <div class="card">
-          <img src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=300&auto=format&fit=crop" alt="Restaurant3"/>
-          <div class="card-info">
-            <h3>Restaurant 4</h3>
-            <p>MUIS I</p>
-            <p class="rating">4.5/5</p>
-          </div>
-        </div>
+       <fos-food isrest="true" fname="Мандах"></fos-food>
+       <fos-food></fos-food>
+       <fos-food></fos-food>
       </div>
     </aside>
   </div>
-
+</section>
   <script>
-    // Toggle popovers on Details click
     document.querySelectorAll('.card .details_button').forEach(btn=>{
       btn.addEventListener('click', e=>{
         const card = e.currentTarget.closest('.card');
         card.classList.toggle('show-popover');
       });
     });
-    // Click outside to close
     document.addEventListener('click', e=>{
       document.querySelectorAll('.card.show-popover').forEach(card=>{
         if(!card.contains(e.target)) card.classList.remove('show-popover');
