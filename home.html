@@ -7,11 +7,14 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <food-info-app></food-info-app>
+  <script type="module" src="./food-card.js"></script>
+  <script type="module" src="./food-info-app.js"></script>
   <header>
     <div class="logo"><img src="logow.png" alt="Logo"/></div>
     <nav>
       <ul>
-        <li><a href="prototype.html">Home</a></li>
+        <li><a href="main.html">Home</a></li>
         <li><a href="restaurant.html">Restaurants</a></li>
         <li><a href="food.html">Foods</a></li>
         <li><a href="login.html">Login</a></li>
@@ -30,7 +33,7 @@
   </div>
 
   <div class="main-container">
-    <section class="foods-section" style="overflow-x:scroll;overflow-y:hidden;width:200px;height:400px;" >
+    <section class="foods-section">
       <h2>Popular</h2>
       <div class="foods-grid">
         <div class="card">
@@ -173,8 +176,7 @@
       </div>
     </section>
 
-    <!-- RESTAURANTS -->
-    <aside class="restaurants-section" style="overflow-y: scroll; height:400px;" >
+    <aside class="restaurants-section" style="overflow-y: scroll; height:550px;" >
       <h2>Top Restaurants</h2>
       <div class="restaurants-grid">
         <div class="card">

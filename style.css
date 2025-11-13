@@ -39,15 +39,44 @@
     .search-bar button:hover{filter:brightness(.95)}
 
     .main-container{display:flex;gap:20px;padding:10px 50px 50px}
-    .foods-section,.restaurants-section{
-      background:var(--bg);padding:20px;border-radius:10px;box-shadow:var(--shadow)
+    
+    .foods-section {
+      flex: 2;
+      background: var(--bg);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: var(--shadow);
+      width:200px;
+      height:550px;
+      max-width: 1500px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      white-space: nowrap;
+      padding: 10px;
+      scroll-behavior: smooth;
+      box-sizing: border-box;
+      display: flex;
+      flex-wrap: nowrap;
+      flex-direction: column;
+      gap: 25px;
     }
-    .foods-section{flex:2}
+    .foods-grid {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 20px;
+      overflow-x: auto;
+      padding-bottom: 10px;
+    }
+    .foods-section::-webkit-scrollbar {
+      display: none;
+    }
+    .foods-grid {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
     .restaurants-section{flex:1}
 
     h2{margin:8px 0 14px}
-
-    .foods-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
     .restaurants-grid{display:grid;grid-template-columns:1fr;gap:14px}
 
     .card{
