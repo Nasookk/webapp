@@ -8,11 +8,14 @@
   <script type="module" src="./com/fos-food.js"></script>
 </head>
 <body>
+  <food-info-app></food-info-app>
+  <script type="module" src="./food-card.js"></script>
+  <script type="module" src="./food-info-app.js"></script>
   <header>
-    <!-- <div class="logo"><img src="logow.png" alt="Logo"/></div> -->
+      <img src="img/logo.png" height="55px" width="180px" alt="Logo">
     <nav>
       <ul>
-        <li><a href="prototype.html">Home</a></li>
+        <li><a href="main.html">Home</a></li>
         <li><a href="restaurant.html">Restaurants</a></li>
         <li><a href="food.html">Foods</a></li>
         <li><a href="login.html">Login</a></li>
@@ -32,6 +35,7 @@
 
   <div class="main-container">
     <section class="foods-section">
+<<<<<<< HEAD:main.html
       <section>
         <h2>Popular</h2>
         <div class="foods-grid">
@@ -39,6 +43,22 @@
           <fos-food></fos-food>
           <fos-food></fos-food>
           <fos-food></fos-food>
+=======
+      <h2>Popular</h2>
+      <div class="foods-grid">
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?q=80&w=300&auto=format&fit=crop" alt="Пирошки"/>
+          <div class="card-info">
+            <h3>Пирошки</h3>
+            <p>Үнэ: 2,000₮</p>
+            <p class="rating">5/5</p>
+          </div>
+          <button class="details_button">Details</button>
+          <div class="popover">
+            <p><strong>Орц:</strong> Гурил, мах, сонгино</p>
+            <p><strong>Калори:</strong> ~320 ккал</p>
+          </div>
+>>>>>>> 7f0c59a1b2d66bf6e0aec08648ca9de8d681fd8a:home.html
         </div>
       </section>
       
@@ -54,8 +74,13 @@
         </div>
       </section>
     </section>
+<<<<<<< HEAD:main.html
     <section>
       <aside class="restaurants-section">
+=======
+
+    <aside class="restaurants-section" style="overflow-y: scroll; height:550px;" >
+>>>>>>> 7f0c59a1b2d66bf6e0aec08648ca9de8d681fd8a:home.html
       <h2>Top Restaurants</h2>
       <div class="restaurants-grid">
        <fos-food isrest="true" fname="Мандах"></fos-food>
