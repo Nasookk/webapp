@@ -216,14 +216,12 @@
   </div>
 
   <script>
-    // Toggle popovers on Details click
     document.querySelectorAll('.card .details_button').forEach(btn=>{
       btn.addEventListener('click', e=>{
         const card = e.currentTarget.closest('.card');
         card.classList.toggle('show-popover');
       });
     });
-    // Click outside to close
     document.addEventListener('click', e=>{
       document.querySelectorAll('.card.show-popover').forEach(card=>{
         if(!card.contains(e.target)) card.classList.remove('show-popover');
