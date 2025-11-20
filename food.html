@@ -8,22 +8,21 @@
   <script type="module" src="./food.js"></script>
 </head>
 <body>
-<header>
-  <div class="logo">
-    <img src="logow.png" height="55px" width="180px" alt="Logo">
-  </div>
-  <nav>
-    <a href="home.html">Home</a>
-    <a href="restaurant.html">Restaurants</a>
-    <a href="food.html">Foods</a>
-    <a href="login.html">Login</a>
-  </nav>
-</header>
-
 <main>
-  <h2>Popular Foods</h2>
   <food-list></food-list>
 </main>
-
+  <script>
+    document.querySelectorAll('.card .details_button').forEach(btn=>{
+      btn.addEventListener('click', e=>{
+        const card = e.currentTarget.closest('.card');
+        card.classList.toggle('show-popover');
+      });
+    });
+    document.addEventListener('click', e=>{
+      document.querySelectorAll('.card.show-popover').forEach(card=>{
+        if(!card.contains(e.target)) card.classList.remove('show-popover');
+      });
+    });
+  </script>
 </body>
 </html>

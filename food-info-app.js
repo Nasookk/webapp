@@ -285,7 +285,7 @@ class FoodInfoApp extends HTMLElement {
         </div>
         <nav>
           <ul>
-            <li><a href="prototype.html">Home</a></li>
+            <li><a href="home.html">Home</a></li>
             <li><a href="restaurant.html">Restaurants</a></li>
             <li><a href="food.html">Foods</a></li>
             <li><a href="login.html">Login</a></li>
