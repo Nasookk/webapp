@@ -5,8 +5,75 @@ class FoodInfoApp extends HTMLElement {
     super();
     const shadow = this.attachShadow({ mode: "open" });
 
-    shadow.innerHTML = `
-      <style>
+
+
+
+  }
+
+  attachEventListeners() {
+
+    const searchBtn = this.shadowRoot.getElementById("searchBtn");
+    const searchInput = this.shadowRoot.getElementById("searchInput");
+    const locationSelect = this.shadowRoot.getElementById("locationSelect");
+
+    searchBtn.addEventListener("click", () => {
+      const searchText = searchInput.value.toLowerCase();
+      const location = locationSelect.value;
+      const allCards = shadow.querySelectorAll("food-card");
+
+      allCards.forEach(card => {
+        const name = card.getAttribute("name").toLowerCase();
+        const loc = card.getAttribute("location");
+        const matchSearch = !searchText || name.includes(searchText);
+        const matchLoc = !location || loc === location;
+        card.style.display = (matchSearch && matchLoc) ? "flex" : "none";
+      });
+    });
+  }
+  async downloadData() {
+    const r = await fetch(this.dataurl);
+    const d = await r.json();
+    this.data = d;
+  }
+  renderFoodCards() {
+    let foodCards = "";
+    this.data
+      .forEach(f => 
+        foodCards += `<food-card name="${f.name}" location="${f.location}" price="${f.price}" rating="${f.rating}"></food-card>`);
+    return foodCards;
+      }
+
+  async connectedCallback() {
+
+    // this.dataurl = this.getAttribute("url");
+    // console.log(this.getAttribute("url"));
+    // await this.downloadData();
+
+    this.data = [
+      {
+        id: 1,
+        name: "Huushuur",
+        price: 2000,
+        location: "MUIS I",
+        rating: "5/5"
+      },
+      {
+        id: 1,
+        name: "Huushuur2",
+        price: 2000,
+        location: "MUIS I",
+        rating: "5/5"
+      },
+      {
+        id: 1,
+        name: "Huushuur3",
+        price: 2000,
+        location: "MUIS I",
+        rating: "5/5"
+      }
+    ]
+    const css = `
+    <style>
         * {
           margin: 0;
           padding: 0;
@@ -276,7 +343,10 @@ class FoodInfoApp extends HTMLElement {
             padding: 0.4rem 0.8rem;
           }
         }
-      </style>
+      </style>`;
+
+    this.shadowRoot.innerHTML = `
+      ${css}
       <div class="search-bar">
       <input id="searchInput" type="text" placeholder="Search food...">
 
@@ -294,41 +364,7 @@ class FoodInfoApp extends HTMLElement {
         <div class="foods-section">
           <h2>Popular</h2>
           <div class="foods-grid" id="foodList">
-            <food-card name="Пирошки" location="MUIS I" price="2,000₮" rating="5/5"
-              img="https://source.unsplash.com/300x200/?pastry"
-              ingredients="Flour, meat, onion"
-              calories="350 kcal">
-            </food-card>
-
-            <food-card name="Гурилтай шөл" location="MUIS II" price="13,000₮" rating="4/5"
-              img="https://source.unsplash.com/300x200/?noodle-soup"
-              ingredients="Noodles, beef, vegetables"
-              calories="500 kcal">
-            </food-card>
-
-            <food-card name="Цуйван" location="MUIS III" price="12,000₮" rating="4.5/5"
-              img="https://source.unsplash.com/300x200/?stir-fry"
-              ingredients="Noodles, beef, carrot"
-              calories="600 kcal">
-            </food-card>
-
-            <food-card name="Бууз" location="MUIS I" price="8,000₮" rating="5/5"
-              img="https://source.unsplash.com/300x200/?dumpling"
-              ingredients="Flour, mutton, onion"
-              calories="450 kcal">
-            </food-card>
-
-            <food-card name="Хуушуур" location="MUIS IV" price="3,000₮" rating="4.5/5"
-              img="https://source.unsplash.com/300x200/?fried-food"
-              ingredients="Flour, beef, onion"
-              calories="400 kcal">
-            </food-card>
-
-            <food-card name="Банштай цай" location="MUIS II" price="5,000₮" rating="4/5"
-              img="https://source.unsplash.com/300x200/?tea"
-              ingredients="Tea, milk, flour"
-              calories="200 kcal">
-            </food-card>
+            ${this.renderFoodCards()}
           </div>
         </div>
 
@@ -359,23 +395,8 @@ class FoodInfoApp extends HTMLElement {
       </div>
     `;
 
-    const searchBtn = shadow.getElementById("searchBtn");
-    const searchInput = shadow.getElementById("searchInput");
-    const locationSelect = shadow.getElementById("locationSelect");
+    this.attachEventListeners();
 
-    searchBtn.addEventListener("click", () => {
-      const searchText = searchInput.value.toLowerCase();
-      const location = locationSelect.value;
-      const allCards = shadow.querySelectorAll("food-card");
-
-      allCards.forEach(card => {
-        const name = card.getAttribute("name").toLowerCase();
-        const loc = card.getAttribute("location");
-        const matchSearch = !searchText || name.includes(searchText);
-        const matchLoc = !location || loc === location;
-        card.style.display = (matchSearch && matchLoc) ? "flex" : "none";
-      });
-    });
   }
 }
 
