@@ -18,7 +18,6 @@ class FoodInfoApp extends HTMLElement {
           font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
           background: linear-gradient(135deg, #ffffff 0%, #fff5eb 100%);
           min-height: 100vh;
-          padding-bottom: 2rem;
         }
 
         header {
@@ -151,15 +150,17 @@ class FoodInfoApp extends HTMLElement {
           text-shadow: 2px 2px 4px rgba(255, 107, 53, 0.1);
           font-weight: 700;
         }
-
         .foods-grid {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          grid-template-rows: repeat(2, auto);
-          gap: 1.5rem;
+          display: flex; 
+          gap: 1rem;  
           overflow-x: auto;
-          overflow-y: hidden;
           padding-bottom: 1rem;
+          scroll-behavior: smooth;
+        }
+        .foods-grid > food-card {
+          flex: 0 0 calc(100% / 3.5);
+          min-width: 200px;
+          display: block;
         }
 
         .foods-grid::-webkit-scrollbar {
@@ -221,8 +222,8 @@ class FoodInfoApp extends HTMLElement {
             max-height: 500px;
           }
 
-          .foods-grid {
-            grid-template-columns: repeat(2, 1fr);
+          .foods-grid > food-card {
+            flex: 0 0 calc(100% / 2.2);
           }
         }
 
@@ -249,11 +250,9 @@ class FoodInfoApp extends HTMLElement {
             width: 100%;
           }
 
-          .foods-grid {
-            grid-template-columns: 1fr;
-            grid-template-rows: auto;
+          .foods-grid > food-card {
+            flex: 0 0 calc(100% / 1.2);
           }
-
           h2 {
             font-size: 1.5rem;
           }
@@ -278,33 +277,19 @@ class FoodInfoApp extends HTMLElement {
           }
         }
       </style>
-
-      <header>
-        <div class="logo">
-          <img src="logow.png" alt="Logo" />
-        </div>
-        <nav>
-          <ul>
-            <li><a href="home.html">Home</a></li>
-            <li><a href="restaurant.html">Restaurants</a></li>
-            <li><a href="food.html">Foods</a></li>
-            <li><a href="login.html">Login</a></li>
-          </ul>
-        </nav>
-      </header>
-
       <div class="search-bar">
-        <input type="text" id="searchInput" placeholder="Search for food or restaurant..." />
-        <select id="locationSelect">
-          <option value="">Select Location</option>
-          <option value="MUIS I">MUIS I</option>
-          <option value="MUIS II">MUIS II</option>
-          <option value="MUIS III">MUIS III</option>
-          <option value="MUIS IV">MUIS IV</option>
-        </select>
-        <button id="searchBtn">Search</button>
-      </div>
+      <input id="searchInput" type="text" placeholder="Search food...">
 
+      <select id="locationSelect">
+        <option value="">All Locations</option>
+        <option value="MUIS I">MUIS I</option>
+        <option value="MUIS II">MUIS II</option>
+        <option value="MUIS III">MUIS III</option>
+        <option value="MUIS IV">MUIS IV</option>
+      </select>
+
+      <button id="searchBtn">Search</button>
+      </div>
       <div class="main-container">
         <div class="foods-section">
           <h2>Popular</h2>

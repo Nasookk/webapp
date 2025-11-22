@@ -14,11 +14,6 @@ class FoodCard extends HTMLElement {
 
     this.shadowRoot.innerHTML = `
       <style>
-        :host {
-          display: block;
-          width: 100%;
-          min-width: 0;
-        }
         .card {
           background-color: #f3f3f8;
           border-radius: 10px;
@@ -55,51 +50,12 @@ class FoodCard extends HTMLElement {
           color: #f5a623;
         }
 
-        .details_button {
-          margin-top: 10px;
-          background-color: #f5a623;
-          color: white;
-          border: none;
-          padding: 8px 16px;
-          border-radius: 5px;
-          cursor: pointer;
-          transition: background 0.2s;
-        }
-
-        .details_button:hover {
-          background-color: #e59400;
-        }
-
-        dialog {
-          border: none;
-          border-radius: 10px;
-          padding: 20px;
-          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-          animation: fadeIn 0.3s ease;
-          max-width: 300px;
-        }
-
-        dialog::backdrop {
-          background: rgba(0, 0, 0, 0.4);
+        .ingredients {
         }
 
         @keyframes fadeIn {
           from { opacity: 0; transform: translateY(-10px); }
           to { opacity: 1; transform: translateY(0); }
-        }
-
-        #closeDialog {
-          margin-top: 10px;
-          background: #d33;
-          color: white;
-          border: none;
-          padding: 6px 12px;
-          border-radius: 5px;
-          cursor: pointer;
-        }
-
-        #closeDialog:hover {
-          background: #a00;
         }
       </style>
 
@@ -109,31 +65,19 @@ class FoodCard extends HTMLElement {
           <h3>${name}</h3>
           ${price ? `<p>Үнэ: ${price}</p>` : ""}
           ${location ? `<p>${location}</p>` : ""}
+          ${ingredients ? `<p class="ingredients">Орц<br> ${ingredients}</p>` : ""}
+          ${calories ? `<p class="calories">Калори<br> ${calories}</p>` : ""}
           ${rating ? `<p class="rating">Rating: ${rating}</p>` : ""}
         </div>
-
-        <button class="details_button">Details</button>
-
-        <dialog id="myDialog">
-          <h3>${name}</h3>
-          <img src="${img}" alt="${name}" style="width:100%; border-radius:8px;" />
-          <p><strong>Үнэ:</strong> ${price || "N/A"}</p>
-          <p><strong>Байршил:</strong> ${location || "N/A"}</p>
-          <p><strong>Орц:</strong> ${ingredients}</p>
-          <p><strong>Калори:</strong> ${calories}</p>
-          <button id="closeDialog">Close</button>
-        </dialog>
       </div>
     `;
   }
 
-  connectedCallback() {
-    const dialog = this.shadowRoot.querySelector("#myDialog");
-    const openBtn = this.shadowRoot.querySelector(".details_button");
-    const closeBtn = this.shadowRoot.querySelector("#closeDialog");
-    openBtn.addEventListener("click", () => dialog.showModal());
-    closeBtn.addEventListener("click", () => dialog.close());
-  }
+//   connectedCallback() {
+//     const dialog = this.shadowRoot.querySelector("#myDialog");
+//     const openBtn = this.shadowRoot.querySelector(".details_button");
+//     const closeBtn = this.shadowRoot.querySelector("#closeDialog");
+//   }
 }
 
 customElements.define("food-card", FoodCard);

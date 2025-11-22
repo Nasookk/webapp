@@ -1,4 +1,5 @@
-import "./food-card.js";
+import "./food-page-info.js";
+
 
 const foodsData = [
   {
@@ -30,6 +31,8 @@ const foodsData = [
 class FoodList extends HTMLElement {
   constructor() {
     super();
+    const url = this.getAttribute("url");
+    console.log("URL:", url);
     this.attachShadow({ mode: "open" });
   }
 
@@ -44,6 +47,7 @@ class FoodList extends HTMLElement {
           margin: 0;
           padding: 0;
           box-sizing: border-box;
+          display: flexbox;
         }
 
         :host {
