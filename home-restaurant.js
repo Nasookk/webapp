@@ -27,7 +27,34 @@ class RestaurantList extends HTMLElement {
                 location: "MUIS I",
                 rating: "4.5/5",
                 img: "https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=300&auto=format&fit=crop"
-            }
+            },
+            {
+                name: "Restaurant 4",
+                location: "MUIS I",
+                rating: "4.5/5",
+                img: "https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=300&auto=format&fit=crop"
+            },
+             {
+                name: "Restaurant 4",
+                location: "MUIS I",
+                rating: "4.5/5",
+                img: "https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=300&auto=format&fit=crop"
+            },
+             {
+                name: "Restaurant 4",
+                location: "MUIS I",
+                rating: "4.5/5",
+                img: "https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=300&auto=format&fit=crop"
+            },
+             {
+                name: "Restaurant 4",
+                location: "MUIS I",
+                rating: "4.5/5",
+                img: "https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=300&auto=format&fit=crop"
+            },
+          
+
+
         ];
         const css = `
         <style>
@@ -36,8 +63,8 @@ class RestaurantList extends HTMLElement {
             }
             .restaurants-grid {
                 display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-                gap: 15px;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 20px;
             }
             .card {
                 background: #fff;
@@ -47,7 +74,7 @@ class RestaurantList extends HTMLElement {
                 transition: transform 0.2s ease;
             }
             .card:hover {
-                transform: translateY(-5px);
+                transform: translateY(-10px);
             }
             .card img {
                 width: 100%;
@@ -58,7 +85,11 @@ class RestaurantList extends HTMLElement {
                 padding: 10px;
             }
             h2 {
-                margin-bottom: 15px;
+                color: #ff6b35;
+                font-size: 2rem;
+                margin-bottom: 1.5rem;
+                text-shadow: 2px 2px 4px rgba(255, 107, 53, 0.1);
+                font-weight: 700;
             }
                 * {
           margin: 0;
@@ -213,17 +244,16 @@ class RestaurantList extends HTMLElement {
       </div>
         <div class="restaurants-section">
             <h2>Restaurants</h2>
-            <div class="restaurants-grid">
-                ${restaurants.map(r => `
-                    <div class="card">
-                        <img src="${r.img}" alt="${r.name}">
-                        <div class="card-info">
-                            <h3>${r.name}</h3>
-                            <p>${r.location}</p>
-                            <p class="rating">${r.rating}</p>
-                        </div>
-                    </div>
-                `).join("")}
+             <div class="restaurants-grid">
+              ${restaurants.map(r => `
+                <restaurant-card 
+                  name="${r.name}" 
+                  location="${r.location}" 
+                  rating="${r.rating}" 
+                  img="${r.img}">
+                </restaurant-card>
+              `).join("")}
+            </div>
             </div>
         </div>
         `;

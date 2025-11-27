@@ -11,7 +11,7 @@ class FoodCard extends HTMLElement {
       this.getAttribute("img") || "https://source.unsplash.com/300x200/?food";
     const ingredients = this.getAttribute("ingredients") || "N/A";
     const calories = this.getAttribute("calories") || "N/A";
-
+    
     this.shadowRoot.innerHTML = `
       <style>
         :host {
