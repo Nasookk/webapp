@@ -18,14 +18,21 @@ class RestaurantCard extends HTMLElement {
           overflow: hidden;
           box-shadow: 0 2px 8px rgba(0,0,0,0.15);
           margin: 10px;
+          gap: 20px;
         }
         img {
-          width: 100%;
-          height: 140px;
+          width: 300px;
+          height: 200px;
           object-fit: cover;
+          display: block;
+          margin: 20px auto;
+          border-radius: 1rem;
         }
         .info {
           padding: 10px;
+        }
+        h3 {
+        font-size: 12;
         }
       </style>
       <div class="card">

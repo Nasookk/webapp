@@ -44,11 +44,7 @@ class RestaurantList extends HTMLElement {
         .card:hover {
           transform: translateY(-10px);
         }
-        .card img {
-          width: 100%;
-          height: 140px;
-          object-fit: cover;
-        }
+        
         .card-info {
           padding: 10px;
         }
