@@ -76,7 +76,7 @@ class RestaurantList extends HTMLElement {
           box-shadow: 0 4px 6px rgba(255, 107, 53, 0.2);
         }
         .logo img {
-          height: 50px;
+          height: 60px;
           width: auto;
         }
         nav ul {
@@ -171,7 +171,7 @@ class RestaurantList extends HTMLElement {
       ${css}
       <header>
         <div class="logo">
-          <img src="logow.png" alt="Logo" />
+          <img src="logo.png" alt="Logo" />
         </div>
         <nav>
           <ul>
