@@ -21,7 +21,7 @@ class RestaurantCard extends HTMLElement {
           gap: 20px;
         }
         img {
-          width: 300px;
+          width: 250px;
           height: 200px;
           object-fit: cover;
           display: block;
@@ -30,6 +30,8 @@ class RestaurantCard extends HTMLElement {
         }
         .info {
           padding: 10px;
+          display: block;
+          margin: 10px auto;
         }
         h3 {
         font-size: 12;
@@ -38,9 +40,10 @@ class RestaurantCard extends HTMLElement {
       <div class="card">
         <img src="${img}" alt="${name}">
         <div class="info">
-          <h3>${name}</h3>
-          <p>${location}</p>
-          <p>${rating}</p>
+          <h3>Нэр: ${name}</h3>
+          <p>Байршил:${location}</p>
+          <p>Үнэлгээ:${rating}</p>
+          <p>Ачаалал: </p>
         </div>
       </div>
     `;

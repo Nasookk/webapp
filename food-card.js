@@ -106,10 +106,10 @@ class FoodCard extends HTMLElement {
       <div class="card">
         <img src="${img}" alt="${name}" />
         <div class="card-info">
-          <h3>${name}</h3>
+          <h3>Нэр:${name}</h3>
           ${price ? `<p>Үнэ: ${price}</p>` : ""}
-          ${location ? `<p>${location}</p>` : ""}
-          ${rating ? `<p class="rating">Rating: ${rating}</p>` : ""}
+          ${location ? `<p>Байршил:${location}</p>` : ""}
+          ${rating ? `<p class="rating">Үнэлгээ: ${rating}</p>` : ""}
         </div>
 
         <button class="details_button">Details</button>
