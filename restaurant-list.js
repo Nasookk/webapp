@@ -202,7 +202,9 @@ class RestaurantList extends HTMLElement {
             <restaurant-card  
               name="${r.name}"  
               location="${r.location}"  
-              rating="${r.rating}"  
+              rating="${r.rating}"
+              menu="${r.menu}" 
+              traf="${r.traf}" 
               img="${r.img}">
             </restaurant-card>
           `).join("")}

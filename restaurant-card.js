@@ -8,7 +8,10 @@ class RestaurantCard extends HTMLElement {
     const name = this.getAttribute("name");
     const location = this.getAttribute("location");
     const rating = this.getAttribute("rating");
+    const menu = this.getAttribute("menu");
+    const traf =this.getAttribute("traf");
     const img = this.getAttribute("img");
+    
 
     this.shadowRoot.innerHTML = `
       <style>
@@ -43,7 +46,8 @@ class RestaurantCard extends HTMLElement {
           <h3>Нэр: ${name}</h3>
           <p>Байршил:${location}</p>
           <p>Үнэлгээ:${rating}</p>
-          <p>Ачаалал: </p>
+          <p>Гарах хоол:${menu}</p>
+          <p>Ачаалал:${traf}</p>
         </div>
       </div>
     `;
