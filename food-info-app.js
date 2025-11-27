@@ -46,37 +46,6 @@ class FoodInfoApp extends HTMLElement {
     this.dataurl = this.getAttribute("url");
     console.log(this.getAttribute("url"));
     await this.downloadData();
-
-    // this.data = [
-    //   {
-    //     id: 1,
-    //     name: "Huushuur",
-    //     price: 2000,
-    //     location: "MUIS I",
-    //     rating: "5/5"
-    //   },
-    //   {
-    //     id: 1,
-    //     name: "Huushuur2",
-    //     price: 2000,
-    //     location: "MUIS I",
-    //     rating: "5/5"
-    //   },
-    //   {
-    //     id: 1,
-    //     name: "Huushuur3",
-    //     price: 2000,
-    //     location: "MUIS I",
-    //     rating: "5/5"
-    //   },
-    //   {
-    //     id: 1,
-    //     name: "Huushuur4",
-    //     price: 2000,
-    //     location: "MUIS I",
-    //     rating: "5/5"
-    //   }
-    // ]
     const css = `
     <style>
         * {
