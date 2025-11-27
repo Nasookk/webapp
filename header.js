@@ -3,7 +3,7 @@ class Header extends HTMLElement {
     super();
     const shadow = this.attachShadow({ mode: "open" });
     
-    shadow.innerHTML = `
+    shadow.innerHTML =/*css*/`
       <style>
         :host {
           display: block;

@@ -29,8 +29,7 @@ class RestaurantList extends HTMLElement {
                 img: "https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=300&auto=format&fit=crop"
             }
         ];
-
-        this.shadowRoot.innerHTML = `
+        const css = `
         <style>
             .restaurants-section {
                 padding: 20px;
@@ -184,7 +183,9 @@ class RestaurantList extends HTMLElement {
           grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
           gap: 15px;
         }
-      </style>
+      </style>`;
+      this.shadowRoot.innerHTML = `
+      ${css}
       <header>
         <div class="logo">
           <img src="logow.png" alt="Logo" />
