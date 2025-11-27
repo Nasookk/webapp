@@ -5,10 +5,6 @@ class RestaurantCard extends HTMLElement {
   }
 
   connectedCallback() {
-    this.render();
-  }
-
-  render() {
     const name = this.getAttribute("name");
     const location = this.getAttribute("location");
     const rating = this.getAttribute("rating");
@@ -21,26 +17,23 @@ class RestaurantCard extends HTMLElement {
           border-radius: 10px;
           overflow: hidden;
           box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-          transition: transform 0.2s ease;
+          margin: 10px;
         }
-        .card:hover {
-          transform: translateY(-10px);
-        }
-        .card img {
+        img {
           width: 100%;
           height: 140px;
           object-fit: cover;
         }
-        .card-info {
+        .info {
           padding: 10px;
         }
       </style>
       <div class="card">
         <img src="${img}" alt="${name}">
-        <div class="card-info">
+        <div class="info">
           <h3>${name}</h3>
           <p>${location}</p>
-          <p class="rating">${rating}</p>
+          <p>${rating}</p>
         </div>
       </div>
     `;
@@ -48,3 +41,4 @@ class RestaurantCard extends HTMLElement {
 }
 
 customElements.define("restaurant-card", RestaurantCard);
+

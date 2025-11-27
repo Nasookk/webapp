@@ -1,102 +1,69 @@
 class RestaurantList extends HTMLElement {
-    constructor() {
-        super();
-        this.attachShadow({ mode: "open" });
+  constructor() {
+    super();
+    this.attachShadow({ mode: "open" });
+    this.data = []; // өгөгдлийг хадгалах
+  }
+
+  async downloadData() {
+    try {
+      const r = await fetch("restaurant.json");
+      const d = await r.json();
+      this.data = d;
+    } catch (err) {
+      console.error("JSON татахад алдаа гарлаа:", err);
+      this.data = [];
     }
+  }
 
-    connectedCallback() {
-        this.render();
-    }
+  async connectedCallback() {
+    await this.downloadData();
+    this.render();
+  }
 
-    render() {
-        const restaurants = [
-            {
-                name: "Restaurant 1",
-                location: "MUIS III",
-                rating: "5/5",
-                img: "https://images.unsplash.com/photo-1498654200943-1088dd4438ae?q=80&w=300&auto=format&fit=crop"
-            },
-            {
-                name: "Restaurant 2",
-                location: "MUIS II",
-                rating: "4/5",
-                img: "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?q=80&w=300&auto=format&fit=crop"
-            },
-            {
-                name: "Restaurant 3",
-                location: "MUIS I",
-                rating: "4.5/5",
-                img: "https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=300&auto=format&fit=crop"
-            },
-            {
-                name: "Restaurant 4",
-                location: "MUIS I",
-                rating: "4.5/5",
-                img: "https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=300&auto=format&fit=crop"
-            },
-             {
-                name: "Restaurant 4",
-                location: "MUIS I",
-                rating: "4.5/5",
-                img: "https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=300&auto=format&fit=crop"
-            },
-             {
-                name: "Restaurant 4",
-                location: "MUIS I",
-                rating: "4.5/5",
-                img: "https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=300&auto=format&fit=crop"
-            },
-             {
-                name: "Restaurant 4",
-                location: "MUIS I",
-                rating: "4.5/5",
-                img: "https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=300&auto=format&fit=crop"
-            },
-          
+  render() {
+    const restaurants = this.data || [];
 
-
-        ];
-        const css = `
-        <style>
-            .restaurants-section {
-                padding: 20px;
-            }
-            .restaurants-grid {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-                gap: 20px;
-            }
-            .card {
-                background: #fff;
-                border-radius: 10px;
-                overflow: hidden;
-                box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-                transition: transform 0.2s ease;
-            }
-            .card:hover {
-                transform: translateY(-10px);
-            }
-            .card img {
-                width: 100%;
-                height: 140px;
-                object-fit: cover;
-            }
-            .card-info {
-                padding: 10px;
-            }
-            h2 {
-                color: #ff6b35;
-                font-size: 2rem;
-                margin-bottom: 1.5rem;
-                text-shadow: 2px 2px 4px rgba(255, 107, 53, 0.1);
-                font-weight: 700;
-            }
-                * {
+    const css = `
+      <style>
+        .restaurants-section {
+          padding: 20px;
+        }
+        .restaurants-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 20px;
+        }
+        .card {
+          background: #fff;
+          border-radius: 10px;
+          overflow: hidden;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+          transition: transform 0.2s ease;
+        }
+        .card:hover {
+          transform: translateY(-10px);
+        }
+        .card img {
+          width: 100%;
+          height: 140px;
+          object-fit: cover;
+        }
+        .card-info {
+          padding: 10px;
+        }
+        h2 {
+          color: #ff6b35;
+          font-size: 2rem;
+          margin-bottom: 1.5rem;
+          text-shadow: 2px 2px 4px rgba(255, 107, 53, 0.1);
+          font-weight: 700;
+        }
+        * {
           margin: 0;
           padding: 0;
           box-sizing: border-box;
         }
-
         :host {
           display: block;
           font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -104,7 +71,6 @@ class RestaurantList extends HTMLElement {
           min-height: 100vh;
           padding-bottom: 2rem;
         }
-
         header {
           display: flex;
           justify-content: space-between;
@@ -113,18 +79,15 @@ class RestaurantList extends HTMLElement {
           background: linear-gradient(135deg, #ff8c42 0%, #ff6b35 100%);
           box-shadow: 0 4px 6px rgba(255, 107, 53, 0.2);
         }
-
         .logo img {
           height: 50px;
           width: auto;
         }
-
         nav ul {
           display: flex;
           list-style: none;
           gap: 2rem;
         }
-
         nav a {
           color: white;
           text-decoration: none;
@@ -134,12 +97,10 @@ class RestaurantList extends HTMLElement {
           padding: 0.5rem 1rem;
           border-radius: 8px;
         }
-
         nav a:hover {
           background: rgba(255, 255, 255, 0.2);
           transform: translateY(-2px);
         }
-
         .search-bar {
           display: flex;
           gap: 1rem;
@@ -148,7 +109,6 @@ class RestaurantList extends HTMLElement {
           padding: 0 1rem;
           flex-wrap: wrap;
         }
-
         #searchInput {
           flex: 1;
           min-width: 250px;
@@ -159,14 +119,12 @@ class RestaurantList extends HTMLElement {
           box-shadow: 0 4px 15px rgba(255, 140, 66, 0.15);
           transition: all 0.3s ease;
         }
-
         #searchInput:focus {
           outline: none;
           border-color: #ff6b35;
           box-shadow: 0 6px 20px rgba(255, 107, 53, 0.25);
           transform: translateY(-2px);
         }
-
         #locationSelect {
           padding: 1rem 1.5rem;
           border: 2px solid #ff8c42;
@@ -180,13 +138,11 @@ class RestaurantList extends HTMLElement {
           color: #ff6b35;
           font-weight: 500;
         }
-
         #locationSelect:focus {
           outline: none;
           border-color: #ff6b35;
           box-shadow: 0 6px 20px rgba(255, 107, 53, 0.25);
         }
-
         #searchBtn {
           padding: 1rem 2.5rem;
           border: none;
@@ -199,13 +155,11 @@ class RestaurantList extends HTMLElement {
           box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
           transition: all 0.3s ease;
         }
-
         #searchBtn:hover {
           transform: translateY(-2px);
           box-shadow: 0 6px 20px rgba(255, 107, 53, 0.5);
           background: linear-gradient(135deg, #ff9d5c 0%, #ff7c45 100%);
         }
-
         #searchBtn:active {
           transform: translateY(0);
         }
@@ -214,8 +168,10 @@ class RestaurantList extends HTMLElement {
           grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
           gap: 15px;
         }
-      </style>`;
-      this.shadowRoot.innerHTML = `
+      </style>
+    `;
+
+    this.shadowRoot.innerHTML = `
       ${css}
       <header>
         <div class="logo">
@@ -242,22 +198,22 @@ class RestaurantList extends HTMLElement {
         </select>
         <button id="searchBtn">Search</button>
       </div>
-        <div class="restaurants-section">
-            <h2>Restaurants</h2>
-             <div class="restaurants-grid">
-              ${restaurants.map(r => `
-                <restaurant-card 
-                  name="${r.name}" 
-                  location="${r.location}" 
-                  rating="${r.rating}" 
-                  img="${r.img}">
-                </restaurant-card>
-              `).join("")}
-            </div>
-            </div>
+
+      <div class="restaurants-section">
+        <h2>Restaurants</h2>
+        <div class="restaurants-grid">
+          ${restaurants.map(r => `
+            <restaurant-card  
+              name="${r.name}"  
+              location="${r.location}"  
+              rating="${r.rating}"  
+              img="${r.img}">
+            </restaurant-card>
+          `).join("")}
         </div>
-        `;
-    }
+      </div>
+    `;
+  }
 }
 
 customElements.define("restaurant-list", RestaurantList);
