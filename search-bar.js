@@ -4,8 +4,9 @@ class SearchBar extends HTMLElement {
         const shadow = this.attachShadow({ mode: "open" });
     }
     connectedCallback() {
-        const css=`<style>
-            .search-bar {
+        const css=`
+        <style>
+          .search-bar {
           display: flex;
           gap: 1rem;
           max-width: 900px;
@@ -79,7 +80,7 @@ class SearchBar extends HTMLElement {
         this.shadowRoot.innerHTML = `
             ${css}
             <div class="search-bar">
-                <input id="searchInput" type="text" placeholder="Search food...">
+                <input id="searchInput" type="text" placeholder="Search...">
 
             <select id="locationSelect">
                 <option value="">All Locations</option>

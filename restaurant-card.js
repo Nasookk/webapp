@@ -20,8 +20,9 @@ class RestaurantCard extends HTMLElement {
           border-radius: 10px;
           overflow: hidden;
           box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-          margin: 10px;
+          margin: 5px;
           gap: 20px;
+          transition: transform 0.2s ease;
         }
         img {
           width: 250px;
@@ -31,13 +32,19 @@ class RestaurantCard extends HTMLElement {
           margin: 20px auto;
           border-radius: 1rem;
         }
+        .card:hover {
+          transform: translateY(-10px);
+        }
+        .card-info {
+          padding: 10px;
+        }
         .info {
           padding: 10px;
           display: block;
           margin: 10px auto;
         }
         h3 {
-        font-size: 12;
+        font-size: 12px;
         }
       </style>
       <div class="card">

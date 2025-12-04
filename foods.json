@@ -30,5 +30,13 @@
     "ingredients": "Гахайн мах, гоймон, ногоо",
     "calories": "~520 ккал",
     "img": "https://images.unsplash.com/photo-1617093727343-374698b1c509?q=80&w=300&auto=format&fit=crop"
+  },
+   {
+    "name": "Цуйван",
+    "price": "12,000₮",
+    "rating": "4.5/5",
+    "ingredients": "Гахайн мах, гоймон, ногоо",
+    "calories": "~520 ккал",
+    "img": "https://images.unsplash.com/photo-1617093727343-374698b1c509?q=80&w=300&auto=format&fit=crop"
   }
 ]
