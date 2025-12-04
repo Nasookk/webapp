@@ -55,30 +55,8 @@ class RestaurantList extends HTMLElement {
           text-shadow: 2px 2px 4px rgba(255, 107, 53, 0.1);
           font-weight: 700;
         }
-        * {
-          margin: 0;
-          padding: 0;
-          box-sizing: border-box;
-        }
-        :host {
-          display: block;
-          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-          background: linear-gradient(135deg, #ffffff 0%, #fff5eb 100%);
-          min-height: 100vh;
-          padding-bottom: 2rem;
-        }
-        header {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding: 1.5rem 3rem;
-          background: linear-gradient(135deg, #ff8c42 0%, #ff6b35 100%);
-          box-shadow: 0 4px 6px rgba(255, 107, 53, 0.2);
-        }
-        .logo img {
-          height: 60px;
-          width: auto;
-        }
+       
+       
         nav ul {
           display: flex;
           list-style: none;
@@ -169,20 +147,7 @@ class RestaurantList extends HTMLElement {
 
     this.shadowRoot.innerHTML = `
       ${css}
-      <header>
-        <div class="logo">
-          <img src="logo.png" alt="Logo" />
-        </div>
-        <nav>
-          <ul>
-            <li><a href="home.html">Home</a></li>
-            <li><a href="restaurant.html">Restaurants</a></li>
-            <li><a href="food.html">Foods</a></li>
-            <li><a href="login.html">Login</a></li>
-          </ul>
-        </nav>
-      </header>
-
+     
       <div class="search-bar">
         <input type="text" id="searchInput" placeholder="Search for food or restaurant..." />
         <select id="locationSelect">
