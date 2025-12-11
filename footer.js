@@ -16,18 +16,16 @@ class Footer extends HTMLElement {
           text-align: center;
           box-shadow: 0 -4px 6px rgba(255, 107, 53, 0.3);
         }
-        .ads {
-          margin-top: 1rem;
-          background: white;
-          color: #333;
-          padding: 1rem;
-          border-radius: 8px;
-          box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        footer p {
+          margin-top: 0.5rem;
+          font-size: 1.1rem;
+          font-weight: 600;
         }
       </style>
 
       <footer>
         <div>© 2025 Your Website. All rights reserved.</div>
+        <p>Та хоолны бизнесийг базах цаг боллоо</p>
       </footer>
     `;
   }
