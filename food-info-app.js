@@ -7,10 +7,10 @@ class FoodInfoApp extends HTMLElement {
   }
 
   attachEventListeners() {
-    const searchBar=document.querySelector("search-bar");
+    const searchBar = document.querySelector("search-bar");
     if (!searchBar) return;
-    const root=searchBar.shadowRoot;
-    const searchBtn=root.getElementById("searchBtn");
+    const root = searchBar.shadowRoot;
+    const searchBtn = root.getElementById("searchBtn");
     const searchInput = root.getElementById("searchInput");
     const locationSelect = root.getElementById("locationSelect");
 
@@ -36,10 +36,10 @@ class FoodInfoApp extends HTMLElement {
   renderFoodCards() {
     let foodCards = "";
     this.data
-      .forEach(f => 
+      .forEach(f =>
         foodCards += `<food-card name="${f.name}" location="${f.location}" price="${f.price}" rating="${f.rating}"></food-card>`);
     return foodCards;
-      }
+  }
 
   async connectedCallback() {
 

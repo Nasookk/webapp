@@ -10,14 +10,14 @@
         "id": 1,
         "name": "Huushuur2",
         "price": 2000,
-        "location": "MUIS I",
+        "location": "MUIS II",
         "rating": "5/5"
     },
     {
         "id": 1,
         "name": "Huushuur3",
         "price": 2000,
-        "location": "MUIS I",
+        "location": "MUIS III",
         "rating": "5/5"
     },
     {
