@@ -6,12 +6,12 @@ import './food-info-app.js';
 import './restaurant-list.js';
 import './restaurant-card.js';
 import './food.js';
-
+import './header.js';
 const routes = {
   "/": HomePage,
   "/food": FoodPage,
   "/restaurant": RestaurantPage,
-  "/login": LoginPage
+  "/login": LoginPage,
 };
 
 function router() {

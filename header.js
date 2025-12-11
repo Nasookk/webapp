@@ -69,6 +69,7 @@ class Header extends HTMLElement {
             <a href="#/">Home</a>
             <a href="#/food">Foods</a>
             <a href="#/restaurant">Restaurants</a>
+            <a href="#/login">Log in</a>
           </ul>
         </nav>
       </header>

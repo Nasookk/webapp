@@ -1,5 +1,3 @@
-import "./food-page-info.js";
-
 class FoodList extends HTMLElement {
   constructor() {
     super();

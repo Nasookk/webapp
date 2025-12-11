@@ -1,6 +1,5 @@
 export function LoginPage() {
   return `
-    <search-bar></search-bar>
-    <restaurant-list></restaurant-list>
+    <login-page></login-page>
   `;
 }
