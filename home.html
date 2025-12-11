@@ -10,10 +10,11 @@
   <header-js></header-js>
   <search-bar></search-bar>
   <food-info-app url="./food.json" ></food-info-app>
+  <footer-js></footer-js>
   <script type="module" src="./search-bar.js"></script>
   <script type="module" src="./header.js"></script>
   <script type="module" src="./food-info-app.js"></script>
-  <script
+  <script type="module" src="./footer.js"></script>
   <script>
     document.querySelectorAll('.card .details_button').forEach(btn=>{
       btn.addEventListener('click', e=>{
@@ -26,6 +27,7 @@
         if(!card.contains(e.target)) card.classList.remove('show-popover');
       });
     });
+  
   </script>
 </body>
 </html>
