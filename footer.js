@@ -24,12 +24,8 @@ class Footer extends HTMLElement {
       </style>
 
       <footer>
-<<<<<<< HEAD
         <div>© 2025 Your Website. All rights reserved.</div>
         <p>Та хоолны бизнесийг базах цаг боллоо</p>
-=======
-        <div>© 2025 ForkU. All rights reserved.</div>
->>>>>>> 9bf6188436ed6542b41d609e3467ec053e7cdbbe
       </footer>
     `;
   }
