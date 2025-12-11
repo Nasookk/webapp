@@ -59,16 +59,16 @@ class Header extends HTMLElement {
 
       <header>
         <div class="logo">
-          <a href="home.html">
-            <img src="logo.png" alt="Logo" />
+          <a href="#/">
+            <img src="logo.png" alt="Logo"/>
+          </a>
         </div>
 
         <nav>
           <ul>
-            <li><a href="home.html">Home</a></li>
-            <li><a href="restaurant.html">Restaurants</a></li>
-            <li><a href="food.html">Foods</a></li>
-            <li><a href="login.html">Login</a></li>
+            <a href="#/">Home</a>
+            <a href="#/food">Foods</a>
+            <a href="#/restaurant">Restaurants</a>
           </ul>
         </nav>
       </header>
