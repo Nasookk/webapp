@@ -8,12 +8,12 @@ class FoodInfoApp extends HTMLElement {
 
   attachEventListeners() {
     const searchBar = document.querySelector("search-bar");
-    if(!searchBar||!searchBar.shadowRoot) return;
+    if (!searchBar || !searchBar.shadowRoot) return;
     const root = searchBar.shadowRoot;
     const searchBtn = root.getElementById("searchBtn");
     const searchInput = root.getElementById("searchInput");
     const locationSelect = root.getElementById("locationSelect");
-    if(!searchBtn||!searchInput||!locationSelect) return;
+    if (!searchBtn || !searchInput || !locationSelect) return;
 
     searchBtn.addEventListener("click", () => {
       const searchText = searchInput.value.toLowerCase();
@@ -40,6 +40,13 @@ class FoodInfoApp extends HTMLElement {
       .forEach(f =>
         foodCards += `<food-card name="${f.name}" location="${f.location}" price="${f.price}" rating="${f.rating}"></food-card>`);
     return foodCards;
+  }
+  renderRestaurants() {
+    let restaurantCard = "";
+    this.data
+      .forEach(r =>
+        restaurantCard += `<food-card name="${r.name}" location="${r.location}" rating="${r.rating}" img="${r.img}"></food-card>`);
+    return restaurantCard;
   }
 
   async connectedCallback() {
@@ -157,7 +164,7 @@ class FoodInfoApp extends HTMLElement {
           display: flex;
           flex-direction: column;
           gap: 1.5rem;
-          max-height: calc(100vh - 300px);
+          max-height: calc(100vh);
           overflow-y: auto;
           overflow-x: hidden;
           padding-right: 0.5rem;
@@ -267,26 +274,9 @@ class FoodInfoApp extends HTMLElement {
         <div class="restaurants-section">
           <h2>Top Restaurants</h2>
           <div class="restaurants-grid" id="restaurantList">
-            <food-card name="Restaurant1" location="MUIS III" rating="5/5"
-              img="https://source.unsplash.com/300x200/?restaurant">
-            </food-card>
-
-            <food-card name="Restaurant2" location="MUIS II" rating="4/5"
-              img="https://source.unsplash.com/300x200/?cafe">
-            </food-card>
-
-            <food-card name="Restaurant3" location="MUIS I" rating="4.5/5"
-              img="https://source.unsplash.com/300x200/?dining">
-            </food-card>
-
-            <food-card name="Restaurant4" location="MUIS IV" rating="4.5/5"
-              img="https://source.unsplash.com/300x200/?bistro">
-            </food-card>
-
-            <food-card name="Restaurant5" location="MUIS I" rating="5/5"
-              img="https://source.unsplash.com/300x200/?eatery">
-            </food-card>
+          ${this.renderRestaurants()}
           </div>
+          <br>
         </div>
       </div>
     `;

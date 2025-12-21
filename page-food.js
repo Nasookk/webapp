@@ -52,7 +52,7 @@ class FoodList extends HTMLElement {
         }
         .foods-section {
           max-width:1400px;
-          margin: 20px;
+          margin: 20px auto;
         }
         .foods-grid {
           display: grid;

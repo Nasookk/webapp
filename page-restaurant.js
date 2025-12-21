@@ -35,7 +35,7 @@ class RestaurantList extends HTMLElement {
         }
         .restaurants-section {
           max-width:1400px;
-          margin: 20px;
+          margin: 20px auto;
         }
         .restaurants-grid {
           display: grid;
