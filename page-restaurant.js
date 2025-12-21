@@ -11,7 +11,7 @@ class RestaurantList extends HTMLElement {
       const d = await r.json();
       this.data = d;
     } catch (err) {
-      console.error("JSON татахад алдаа гарлаа:", err);
+      console.error("JSON", err);
       this.data = [];
     }
   }

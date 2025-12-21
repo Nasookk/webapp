@@ -136,4 +136,4 @@ class FoodCard extends HTMLElement {
   }
 }
 
-customElements.define("food-card", FoodCard);
+customElements.define("card-home", FoodCard);

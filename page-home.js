@@ -1,4 +1,4 @@
-import "./food-card.js";
+import "./card-home.js";
 
 class FoodInfoApp extends HTMLElement {
   constructor() {
@@ -18,7 +18,7 @@ class FoodInfoApp extends HTMLElement {
     searchBtn.addEventListener("click", () => {
       const searchText = searchInput.value.toLowerCase();
       const location = locationSelect.value;
-      const allCards = this.shadowRoot.querySelectorAll("food-card");
+      const allCards = this.shadowRoot.querySelectorAll("card-home");
 
       allCards.forEach(card => {
         const name = card.getAttribute("name").toLowerCase();
@@ -38,14 +38,14 @@ class FoodInfoApp extends HTMLElement {
     let foodCards = "";
     this.data
       .forEach(f =>
-        foodCards += `<food-card name="${f.name}" location="${f.location}" price="${f.price}" rating="${f.rating}"></food-card>`);
+        foodCards += `<card-home name="${f.name}" location="${f.location}" price="${f.price}" rating="${f.rating}"></card-home>`);
     return foodCards;
   }
   renderRestaurants() {
     let restaurantCard = "";
     this.data
       .forEach(r =>
-        restaurantCard += `<food-card name="${r.name}" location="${r.location}" rating="${r.rating}" img="${r.img}"></food-card>`);
+        restaurantCard += `<card-home name="${r.name}" location="${r.location}" rating="${r.rating}" img="${r.img}"></card-home>`);
     return restaurantCard;
   }
 
@@ -136,7 +136,7 @@ class FoodInfoApp extends HTMLElement {
           padding-bottom: 1rem;
           scroll-behavior: smooth;
         }
-        .foods-grid > food-card {
+        .foods-grid > card-home {
           flex: 0 0 calc(100% / 3.5);
           min-width: 200px;
           display: block;
@@ -201,7 +201,7 @@ class FoodInfoApp extends HTMLElement {
             max-height: 500px;
           }
 
-          .foods-grid > food-card {
+          .foods-grid > card-home {
             flex: 0 0 calc(100% / 2.2);
           }
         }
@@ -229,7 +229,7 @@ class FoodInfoApp extends HTMLElement {
             width: 100%;
           }
 
-          .foods-grid > food-card {
+          .foods-grid > card-home {
             flex: 0 0 calc(100% / 1.2);
           }
           h2 {
