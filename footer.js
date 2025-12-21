@@ -11,7 +11,7 @@ class Footer extends HTMLElement {
           align-items: center;
           justify-content: center;
           padding: 1.5rem 2rem;
-          background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+          background: linear-gradient(135deg, #ff8c42 0%, #ff6b35 100%);
           color: white;
           text-align: center;
           box-shadow: 0 -4px 6px rgba(255, 107, 53, 0.3);
