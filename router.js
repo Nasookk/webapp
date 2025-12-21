@@ -5,7 +5,8 @@ import { LoginPage } from "./pages/login.js";
 import './page-home.js';
 import './page-food.js';
 import './page-restaurant.js';
-import './restaurant-card.js';
+import './card-restaurant.js';
+import './card-food.js';
 import './header.js';
 import './page-login.js';
 const routes = {

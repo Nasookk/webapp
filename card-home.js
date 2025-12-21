@@ -1,4 +1,4 @@
-class FoodCard extends HTMLElement {
+class HomeCard extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
@@ -136,4 +136,4 @@ class FoodCard extends HTMLElement {
   }
 }
 
-customElements.define("card-home", FoodCard);
+customElements.define("card-home", HomeCard);

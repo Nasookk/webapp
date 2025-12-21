@@ -5,7 +5,7 @@
     "rating": "5/5",
     "ingredients": "Гурил, мах, сонгино",
     "calories": "~320 ккал",
-    "img": "https://images.unsplash.com/photo-1551183053-bf91a1d81141?q=80&w=300&auto=format&fit=crop"
+    "img": "./img/img_foods/piroshki.png"
   },
   {
     "name": "Гурилтай шөл",
@@ -13,7 +13,7 @@
     "rating": "4/5",
     "ingredients": "Гурил, мах, ногоо",
     "calories": "~280 ккал",
-    "img": "https://images.unsplash.com/photo-1625944528833-3f2a9f2f7fcb?q=80&w=300&auto=format&fit=crop"
+    "img": "./img/img_foods/shul.png"
   },
   {
     "name": "Цуйван",
@@ -21,22 +21,46 @@
     "rating": "4.5/5",
     "ingredients": "Гахайн мах, гоймон, ногоо",
     "calories": "~520 ккал",
-    "img": "https://images.unsplash.com/photo-1617093727343-374698b1c509?q=80&w=300&auto=format&fit=crop"
+    "img": "./img/img_foods/tsuivan.png"
   },
   {
-    "name": "Цуйван",
+    "name": "Төмсний хучмал",
     "price": "12,000₮",
     "rating": "4.5/5",
     "ingredients": "Гахайн мах, гоймон, ногоо",
     "calories": "~520 ккал",
-    "img": "https://images.unsplash.com/photo-1617093727343-374698b1c509?q=80&w=300&auto=format&fit=crop"
+    "img": "./img/img_foods/huchmal.png"
   },
    {
-    "name": "Цуйван",
+    "name": "Өндөгтэй хуурга",
     "price": "12,000₮",
     "rating": "4.5/5",
     "ingredients": "Гахайн мах, гоймон, ногоо",
     "calories": "~520 ккал",
-    "img": "https://images.unsplash.com/photo-1617093727343-374698b1c509?q=80&w=300&auto=format&fit=crop"
+    "img": "./img/img_foods/uhuurga.png"
+  },
+  {
+    "name": "Тактуритан",
+    "price": "12,000₮",
+    "rating": "4.5/5",
+    "ingredients": "Гахайн мах, гоймон, ногоо",
+    "calories": "~520 ккал",
+    "img": "./img/img_foods/takturitan.png"
+  },
+  {
+    "name": "Банштай цай",
+    "price": "12,000₮",
+    "rating": "4.5/5",
+    "ingredients": "Гахайн мах, гоймон, ногоо",
+    "calories": "~520 ккал",
+    "img": "./img/img_foods/tsai.png"
+  },
+  {
+    "name": "Хуушуур",
+    "price": "12,000₮",
+    "rating": "4.5/5",
+    "ingredients": "Гахайн мах, гоймон, ногоо",
+    "calories": "~520 ккал",
+    "img": "./img/img_foods/huushuur.png"
   }
 ]
