@@ -4,6 +4,8 @@ class FoodInfoApp extends HTMLElement {
   constructor() {
     super();
     const shadow = this.attachShadow({ mode: "open" });
+    this.food = []
+    this.restaurant = []
   }
 
   attachEventListeners() {
@@ -29,35 +31,36 @@ class FoodInfoApp extends HTMLElement {
       });
     });
   }
-  async downloadData() {
-    const r = await fetch(this.dataurl);
-    const d = await r.json();
-    this.data = d;
+  async downloadData(url) {
+    const r = await fetch(url);
+    return await r.json();
   }
   renderFoodCards() {
-    let foodCards = "";
-    this.data
-      .forEach(f =>
-        foodCards += `<card-home name="${f.name}" location="${f.location}" price="${f.price}" rating="${f.rating}"></card-home>`);
-    return foodCards;
+    return this.food.map(f =>
+      `<card-home name="${f.name}" location="${f.location}" price="${f.price}" rating="${f.rating}"></card-home>`).join("");
   }
   renderRestaurants() {
-    let restaurantCard = "";
-    this.data
-      .forEach(r =>
-        restaurantCard += `<card-home name="${r.name}" location="${r.location}" rating="${r.rating}" img="${r.img}"></card-home>`);
-    return restaurantCard;
+    return this.restaurant.map(r =>
+      `<card-home name="${r.name}" location="${r.location}" rating="${r.rating}" img="${r.img}"></card-home>`).join("");
   }
 
   async connectedCallback() {
-
-    this.dataurl = this.getAttribute("url");
-    console.log(this.getAttribute("url"));
-    await this.downloadData();
+    const foodUrl = this.getAttribute("food-url");
+    const restaurantUrl = this.getAttribute("restaurant-url");
+    if (!foodUrl || !restaurantUrl) {
+      console.error("Both food-url and restaurant-url are required");
+      return;
+    }
+    const [foodData, restuarantData] = await Promise.all([
+      this.downloadData(foodUrl),
+      this.downloadData(restaurantUrl)
+    ]);
+    this.food = foodData;
+    this.restaurant = restuarantData;
     const css = `
     <style>
         * {
-          margin: 0;
+          margin: 20;
           padding: 0;
           box-sizing: border-box;
         }
