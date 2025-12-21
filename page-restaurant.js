@@ -7,7 +7,7 @@ class RestaurantList extends HTMLElement {
 
   async downloadData() {
     try {
-      const r = await fetch("restaurant.json");
+      const r = await fetch("data-restaurant-page.json");
       const d = await r.json();
       this.data = d;
     } catch (err) {

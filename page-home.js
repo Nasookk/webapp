@@ -8,11 +8,12 @@ class FoodInfoApp extends HTMLElement {
 
   attachEventListeners() {
     const searchBar = document.querySelector("search-bar");
-    if (!searchBar) return;
+    if(!searchBar||!searchBar.shadowRoot) return;
     const root = searchBar.shadowRoot;
     const searchBtn = root.getElementById("searchBtn");
     const searchInput = root.getElementById("searchInput");
     const locationSelect = root.getElementById("locationSelect");
+    if(!searchBtn||!searchInput||!locationSelect) return;
 
     searchBtn.addEventListener("click", () => {
       const searchText = searchInput.value.toLowerCase();

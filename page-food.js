@@ -1,7 +1,7 @@
 class FoodList extends HTMLElement {
   constructor() {
     super();
-    const url = this.getAttribute("url") || "foods.json"; 
+    const url = this.getAttribute("url") || "data-food-page.json"; 
     this.url = url;
     this.attachShadow({ mode: "open" });
     this.foodsData = [];
