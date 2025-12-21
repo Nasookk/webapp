@@ -3,9 +3,9 @@ import "./card-home.js";
 class FoodInfoApp extends HTMLElement {
   constructor() {
     super();
-    const shadow = this.attachShadow({ mode: "open" });
-    this.food = []
-    this.restaurant = []
+    this.attachShadow({ mode: "open" });
+    this.food = [];
+    this.restaurant = [];
   }
 
   attachEventListeners() {
@@ -31,17 +31,35 @@ class FoodInfoApp extends HTMLElement {
       });
     });
   }
+
   async downloadData(url) {
     const r = await fetch(url);
     return await r.json();
   }
+
   renderFoodCards() {
-    return this.food.map(f =>
-      `<card-home name="${f.name}" location="${f.location}" price="${f.price}" rating="${f.rating}"></card-home>`).join("");
+    return this.food.map(f => `
+      <card-home 
+        name="${f.name}" 
+        location="${f.location}" 
+        price="${f.price}" 
+        rating="${f.rating}" 
+        img="${f.img}" 
+        ingredients="${f.ingredients}" 
+        calories="${f.calories}">
+      </card-home>
+    `).join("");
   }
+
   renderRestaurants() {
-    return this.restaurant.map(r =>
-      `<card-home name="${r.name}" location="${r.location}" rating="${r.rating}" img="${r.img}"></card-home>`).join("");
+    return this.restaurant.map(r => `
+      <card-home 
+        name="${r.name}" 
+        location="${r.location}" 
+        rating="${r.rating}" 
+        img="${r.img}">
+      </card-home>
+    `).join("");
   }
 
   async connectedCallback() {
@@ -51,62 +69,23 @@ class FoodInfoApp extends HTMLElement {
       console.error("Both food-url and restaurant-url are required");
       return;
     }
-    const [foodData, restuarantData] = await Promise.all([
+
+    const [foodData, restaurantData] = await Promise.all([
       this.downloadData(foodUrl),
       this.downloadData(restaurantUrl)
     ]);
     this.food = foodData;
-    this.restaurant = restuarantData;
-    const css = `
-    <style>
-        * {
-          margin: 20;
-          padding: 0;
-          box-sizing: border-box;
-        }
+    this.restaurant = restaurantData;
 
+    const css = `
+      <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         :host {
           display: block;
           font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
           background: linear-gradient(135deg, #ffffff 0%, #fff5eb 100%);
           min-height: 100vh;
         }
-
-        header {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding: 1.5rem 3rem;
-          background: linear-gradient(135deg, #ff8c42 0%, #ff6b35 100%);
-          box-shadow: 0 4px 6px rgba(255, 107, 53, 0.2);
-        }
-
-        .logo img {
-          height: 50px;
-          width: auto;
-        }
-
-        nav ul {
-          display: flex;
-          list-style: none;
-          gap: 2rem;
-        }
-
-        nav a {
-          color: white;
-          text-decoration: none;
-          font-weight: 500;
-          font-size: 1.1rem;
-          transition: all 0.3s ease;
-          padding: 0.5rem 1rem;
-          border-radius: 8px;
-        }
-
-        nav a:hover {
-          background: rgba(255, 255, 255, 0.2);
-          transform: translateY(-2px);
-        }
-
         .main-container {
           max-width: 1400px;
           margin: 0 auto;
@@ -114,17 +93,8 @@ class FoodInfoApp extends HTMLElement {
           display: flex;
           gap: 2rem;
         }
-
-        .foods-section {
-          flex: 1;
-          min-width: 0;
-        }
-
-        .restaurants-section {
-          width: 350px;
-          flex-shrink: 0;
-        }
-
+        .foods-section { flex: 1; min-width: 0; }
+        .restaurants-section { width: 350px; flex-shrink: 0; }
         h2 {
           color: #ff6b35;
           font-size: 2rem;
@@ -133,8 +103,8 @@ class FoodInfoApp extends HTMLElement {
           font-weight: 700;
         }
         .foods-grid {
-          display: flex; 
-          gap: 1rem;  
+          display: flex;
+          gap: 1rem;
           overflow-x: auto;
           padding-bottom: 1rem;
           scroll-behavior: smooth;
@@ -144,25 +114,10 @@ class FoodInfoApp extends HTMLElement {
           min-width: 200px;
           display: block;
         }
-
-        .foods-grid::-webkit-scrollbar {
-          height: 8px;
-        }
-
-        .foods-grid::-webkit-scrollbar-track {
-          background: #fff5eb;
-          border-radius: 10px;
-        }
-
-        .foods-grid::-webkit-scrollbar-thumb {
-          background: #ff8c42;
-          border-radius: 10px;
-        }
-
-        .foods-grid::-webkit-scrollbar-thumb:hover {
-          background: #ff6b35;
-        }
-
+        .foods-grid::-webkit-scrollbar { height: 8px; }
+        .foods-grid::-webkit-scrollbar-track { background: #fff5eb; border-radius: 10px; }
+        .foods-grid::-webkit-scrollbar-thumb { background: #ff8c42; border-radius: 10px; }
+        .foods-grid::-webkit-scrollbar-thumb:hover { background: #ff6b35; }
         .restaurants-grid {
           display: flex;
           flex-direction: column;
@@ -172,120 +127,44 @@ class FoodInfoApp extends HTMLElement {
           overflow-x: hidden;
           padding-right: 0.5rem;
         }
-
-        .restaurants-grid::-webkit-scrollbar {
-          width: 8px;
-        }
-
-        .restaurants-grid::-webkit-scrollbar-track {
-          background: #fff5eb;
-          border-radius: 10px;
-        }
-
-        .restaurants-grid::-webkit-scrollbar-thumb {
-          background: #ff8c42;
-          border-radius: 10px;
-        }
-
-        .restaurants-grid::-webkit-scrollbar-thumb:hover {
-          background: #ff6b35;
-        }
-
+        .restaurants-grid::-webkit-scrollbar { width: 8px; }
+        .restaurants-grid::-webkit-scrollbar-track { background: #fff5eb; border-radius: 10px; }
+        .restaurants-grid::-webkit-scrollbar-thumb { background: #ff8c42; border-radius: 10px; }
+        .restaurants-grid::-webkit-scrollbar-thumb:hover { background: #ff6b35; }
         @media (max-width: 1024px) {
-          .main-container {
-            flex-direction: column;
-          }
-
-          .restaurants-section {
-            width: 100%;
-          }
-
-          .restaurants-grid {
-            max-height: 500px;
-          }
-
-          .foods-grid > card-home {
-            flex: 0 0 calc(100% / 2.2);
-          }
+          .main-container { flex-direction: column; }
+          .restaurants-section { width: 100%; }
+          .restaurants-grid { max-height: 500px; }
+          .foods-grid > card-home { flex: 0 0 calc(100% / 2.2); }
         }
-
         @media (max-width: 768px) {
-          header {
-            flex-direction: column;
-            gap: 1rem;
-            padding: 1rem;
-          }
-
-          nav ul {
-            flex-direction: column;
-            gap: 0.5rem;
-            text-align: center;
-          }
-
-          .search-bar {
-            flex-direction: column;
-          }
-
-          #searchInput,
-          #locationSelect,
-          #searchBtn {
-            width: 100%;
-          }
-
-          .foods-grid > card-home {
-            flex: 0 0 calc(100% / 1.2);
-          }
-          h2 {
-            font-size: 1.5rem;
-          }
-
-          .main-container {
-            padding: 0 1rem;
-          }
+          .foods-grid > card-home { flex: 0 0 calc(100% / 1.2); }
+          h2 { font-size: 1.5rem; }
+          .main-container { padding: 0 1rem; }
         }
-
         @media (max-width: 480px) {
-          header {
-            padding: 0.5rem;
-          }
-
-          .logo img {
-            height: 40px;
-          }
-
-          nav a {
-            font-size: 0.9rem;
-            padding: 0.4rem 0.8rem;
-          }
+          h2 { font-size: 1.2rem; }
         }
-      </style>`;
+      </style>
+    `;
 
     this.shadowRoot.innerHTML = `
       ${css}
       <div class="main-container">
         <div class="foods-section">
           <h2>Popular</h2>
-          <div class="foods-grid" id="foodList">
-            ${this.renderFoodCards()}
-          </div>
+          <div class="foods-grid">${this.renderFoodCards()}</div>
           <h2>Favourite</h2>
-          <div class="foods-grid" id="foodList">
-            ${this.renderFoodCards()}
-          </div>
+          <div class="foods-grid">${this.renderFoodCards()}</div>
         </div>
-
         <div class="restaurants-section">
           <h2>Top Restaurants</h2>
-          <div class="restaurants-grid" id="restaurantList">
-          ${this.renderRestaurants()}
-          </div>
-          <br>
+          <div class="restaurants-grid">${this.renderRestaurants()}</div>
         </div>
       </div>
     `;
 
     this.attachEventListeners();
-
   }
 }
 
