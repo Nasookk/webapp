@@ -2,11 +2,12 @@ import { HomePage } from "./pages/home.js";
 import { FoodPage } from "./pages/food.js";
 import { RestaurantPage } from "./pages/restaurant.js";
 import { LoginPage } from "./pages/login.js";
-import './food-info-app.js';
-import './restaurant-list.js';
+import './page-home.js';
+import './page-food.js';
+import './page-restaurant.js';
 import './restaurant-card.js';
-import './food.js';
 import './header.js';
+import './page-login.js';
 const routes = {
   "/": HomePage,
   "/food": FoodPage,
