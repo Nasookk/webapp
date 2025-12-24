@@ -23,7 +23,7 @@ class Footer extends HTMLElement {
           padding-bottom: 20px;
           border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         }
-
+      
         .logo-area {
           display: flex;
           flex-direction: column;

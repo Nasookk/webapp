@@ -47,7 +47,7 @@ class FoodList extends HTMLElement {
           border-radius: 8px;
         }
         nav a:hover {
-          background: rgba(255, 255, 255, 0.2);
+          background: rgba(136, 59, 59, 0.2);
           transform: translateY(-2px);
         }
         .foods-section {

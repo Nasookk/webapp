@@ -16,7 +16,7 @@ class LoginPage extends HTMLElement {
           justify-content: center;
           align-items: center;
           padding: 2rem;
-        }
+           }
         .login-section h2 {
           text-align: center;
           color: #ff6b35;
