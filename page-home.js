@@ -96,12 +96,12 @@ class FoodInfoApp extends HTMLElement {
         .foods-section { 
           flex: 1; 
           min-width: 0; 
-          margin: 20px auto;}
+          margin-top: 20px;}
 
         .restaurants-section { 
           width: 350px; 
           flex-shrink: 0; 
-          margin: 20px auto;}
+          margin-top: 20px;}
       h2 {
           color: #ff6b35;
           font-size: 2rem;

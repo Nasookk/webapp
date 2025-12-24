@@ -2,10 +2,11 @@ class LoginPage extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
       <style>
+      
         body {
           margin: 0;
           padding: 0;
-          background: linear-gradient(135deg, #fff5eb 0%, #ffe0cc 100%);
+          background: linear-gradient(135deg, #ffffff 0%, #fff5eb 100%);
           min-height: 100vh;
           display: flex;
           flex-direction: column;

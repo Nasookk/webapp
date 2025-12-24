@@ -82,7 +82,7 @@ class Footer extends HTMLElement {
       <footer>
         <div class="footer-bottom">
           <div class="logo-area">
-            <div class="logo-text">LOGO</div>
+            <div class="logo-text">ForkU</div>
             <span class="copyright-text">©2025 . Бүх эрх хуулиар хамгаалагдсан.</span>
           </div>
         </div>

@@ -25,6 +25,11 @@ class FoodList extends HTMLElement {
   render() {
     this.shadowRoot.innerHTML = `
       <style>
+      :host {
+          display: block;
+          background: linear-gradient(135deg, #ffffff 0%, #fff5eb 100%);
+          min-height: 100vh;
+        }
         nav ul {
           display: flex;
           list-style: none;
@@ -52,7 +57,7 @@ class FoodList extends HTMLElement {
         }
         .foods-section {
           max-width:1400px;
-          margin: 20px auto;
+          margin: 0px auto;
         }
         .foods-grid {
           display: grid;

@@ -26,6 +26,11 @@ class RestaurantList extends HTMLElement {
 
     const css = `
       <style>
+       :host {
+          display: block;
+          background: linear-gradient(135deg, #ffffff 0%, #fff5eb 100%);
+          min-height: 100vh;
+        }
        h2 {
           color: #ff6b35;
           font-size: 2rem;
@@ -35,7 +40,7 @@ class RestaurantList extends HTMLElement {
         }
         .restaurants-section {
           max-width:1400px;
-          margin: 20px auto;
+          margin: 0px auto;
         }
         .restaurants-grid {
           display: grid;

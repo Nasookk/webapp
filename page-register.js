@@ -2,6 +2,11 @@ class RegisterPage extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
       <style>
+      :host {
+          display: block;
+          background: linear-gradient(135deg, #ffffff 0%, #fff5eb 100%);
+          min-height: 100vh;
+        }
         .register-section {
           flex: 1;
           display: flex;
