@@ -2,39 +2,42 @@ class HomeCard extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
+  }
 
-    const name = this.getAttribute("name") || "Unknown Food";
-    const location = this.getAttribute("location") || "";
-    const price = this.getAttribute("price") || "";
-    const rating = this.getAttribute("rating") || "";
-    const img =
-      this.getAttribute("img") || "https://source.unsplash.com/300x200/?food";
+  connectedCallback() {
+    this.render();
+  }
+
+  render() {
+    const name = this.getAttribute("name") || "Нэр байхгүй";
+    const price = this.getAttribute("price") || "0₮";
+    const rating = this.getAttribute("rating") || "0.0";
     const ingredients = this.getAttribute("ingredients") || "N/A";
     const calories = this.getAttribute("calories") || "N/A";
-    
+    const img = this.getAttribute("img") || "https://via.placeholder.com/300x200";
+    const location = this.getAttribute("location") || "Тодорхойгүй";
+
     this.shadowRoot.innerHTML = `
       <style>
         :host {
           display: block;
-          width: 100%;
-          min-width: 0;
         }
+        /* FoodCard-ийн яг ижил CSS */
         .card {
-          background-color: #f3f3f8;
+          background: #f3f3f8;
           border-radius: 10px;
           padding: 15px;
           display: flex;
           flex-direction: column;
           align-items: flex-start;
           transition: transform 0.2s, box-shadow 0.2s;
-          position: relative;
+          cursor: pointer;
+          font-family: sans-serif;
         }
-
         .card:hover {
           transform: translateY(-3px);
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 4px 8px rgba(0,0,0,0.15);
         }
-
         img {
           width: 100%;
           height: 140px;
@@ -43,96 +46,85 @@ class HomeCard extends HTMLElement {
           margin-bottom: 10px;
           background: #eaeaea;
         }
-
-        .card-info h3 {
-          margin-bottom: 5px;
+        .info h3 {
+          margin: 0 0 5px 0;
           font-size: 18px;
           color: #333;
         }
-
+          .container {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          gap: 25px;           
+          padding: 40px 10%;   
+      }
+        .info p {
+          margin: 3px 0;
+          font-size: 14px;
+          color: #555;
+        }
         .rating {
           font-weight: bold;
           color: #f5a623;
         }
 
-        .details_button {
-          margin-top: 10px;
-          background-color: #f5a623;
-          color: white;
-          border: none;
-          padding: 8px 16px;
-          border-radius: 5px;
-          cursor: pointer;
-          transition: background 0.2s;
-        }
-
-        .details_button:hover {
-          background-color: #e59400;
-        }
-
+        /* Dialog/Popup стиль */
         dialog {
           border: none;
-          border-radius: 10px;
+          border-radius: 15px;
           padding: 20px;
-          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-          animation: fadeIn 0.3s ease;
-          max-width: 300px;
+          box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+          width: 300px;
+          text-align: left;
         }
-
         dialog::backdrop {
-          background: rgba(0, 0, 0, 0.4);
+          background: rgba(0,0,0,0.5);
         }
-
-        @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(-10px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-
-        #closeDialog {
-          margin-top: 10px;
-          background: #d33;
+        .close-btn {
+          background: #ff4136;
           color: white;
           border: none;
-          padding: 6px 12px;
+          padding: 8px 15px;
           border-radius: 5px;
           cursor: pointer;
-        }
-
-        #closeDialog:hover {
-          background: #a00;
+          width: 100%;
+          margin-top: 10px;
         }
       </style>
 
       <div class="card">
         <img src="${img}" alt="${name}" />
-        <div class="card-info">
-          <h3>Нэр:${name}</h3>
-          ${price ? `<p>Үнэ: ${price}</p>` : ""}
-          ${location ? `<p>Байршил:${location}</p>` : ""}
-          ${rating ? `<p class="rating">Үнэлгээ: ${rating}</p>` : ""}
+        <div class="info">
+          <h3>Нэр: ${name}</h3>
+          <p>Үнэ: ${price}</p>
+          <p class="rating">Үнэлгээ: ${rating}</p>
+          <p>Орц: ${ingredients}</p>
+          <p>Калори: ${calories}</p>
         </div>
-
-        <button class="details_button">Details</button>
-
-        <dialog id="myDialog">
-          <h3>${name}</h3>
-          <img src="${img}" alt="${name}" style="width:100%; border-radius:8px;" />
-          <p><strong>Үнэ:</strong> ${price || "N/A"}</p>
-          <p><strong>Байршил:</strong> ${location || "N/A"}</p>
-          <p><strong>Орц:</strong> ${ingredients}</p>
-          <p><strong>Калори:</strong> ${calories}</p>
-          <button id="closeDialog">Close</button>
-        </dialog>
       </div>
-    `;
-  }
 
-  connectedCallback() {
-    const dialog = this.shadowRoot.querySelector("#myDialog");
-    const openBtn = this.shadowRoot.querySelector(".details_button");
-    const closeBtn = this.shadowRoot.querySelector("#closeDialog");
-    openBtn.addEventListener("click", () => dialog.showModal());
-    closeBtn.addEventListener("click", () => dialog.close());
+      <dialog id="foodDialog">
+        <img src="${img}" style="height:120px" />
+        <h2 style="margin: 10px 0">${name}</h2>
+        <p><strong>Байршил:</strong> ${location}</p>
+        <p><strong>Орц:</strong> ${ingredients}</p>
+        <p><strong>Калори:</strong> ${calories}</p>
+        <button id="closeBtn" class="close-btn">Хаах</button>
+      </dialog>
+    `;
+
+    // Эвентүүдээ энд холбоно
+    const card = this.shadowRoot.querySelector(".card");
+    const dialog = this.shadowRoot.querySelector("#foodDialog");
+    const closeBtn = this.shadowRoot.querySelector("#closeBtn");
+
+    card.addEventListener("click", () => {
+      dialog.showModal();
+    });
+
+    closeBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      dialog.close();
+    });
   }
 }
 

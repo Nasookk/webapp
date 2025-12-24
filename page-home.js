@@ -82,7 +82,6 @@ class FoodInfoApp extends HTMLElement {
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :host {
           display: block;
-          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
           background: linear-gradient(135deg, #ffffff 0%, #fff5eb 100%);
           min-height: 100vh;
         }
@@ -90,12 +89,20 @@ class FoodInfoApp extends HTMLElement {
           max-width: 1400px;
           margin: 0 auto;
           padding: 0 2rem;
+          padding-bottom: 50px; 
           display: flex;
           gap: 2rem;
         }
-        .foods-section { flex: 1; min-width: 0; }
-        .restaurants-section { width: 350px; flex-shrink: 0; }
-        h2 {
+        .foods-section { 
+          flex: 1; 
+          min-width: 0; 
+          margin: 20px auto;}
+
+        .restaurants-section { 
+          width: 350px; 
+          flex-shrink: 0; 
+          margin: 20px auto;}
+      h2 {
           color: #ff6b35;
           font-size: 2rem;
           margin-bottom: 1.5rem;
