@@ -61,7 +61,7 @@ class RegisterPage extends HTMLElement {
             <select id="reg-role" required>
               <option value="user">Хэрэглэгч</option>
               <option value="owner">Бизнес эрхлэгч</option>
-            </select>
+            </select>ы
           </div>
 
           <div class="form-group">
@@ -73,7 +73,6 @@ class RegisterPage extends HTMLElement {
             <label>И-мэйл хаяг:</label>
             <input type="email" id="reg-email" placeholder="example@gmail.com" required>
           </div>
-
           <div class="form-group">
             <label>Нууц үг:</label>
             <input type="password" id="reg-password" placeholder="Нууц үг" required>
