@@ -61,7 +61,7 @@ class RegisterPage extends HTMLElement {
             <select id="reg-role" required>
               <option value="user">Хэрэглэгч</option>
               <option value="owner">Бизнес эрхлэгч</option>
-            </select>ы
+            </select>
           </div>
 
           <div class="form-group">
