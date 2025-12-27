@@ -35,12 +35,15 @@ class RestaurantList extends HTMLElement {
           color: #ff6b35;
           font-size: 2rem;
           margin-bottom: 1.5rem;
+          margin-top: 0px;
           text-shadow: 2px 2px 4px rgba(255, 107, 53, 0.1);
           font-weight: 700;
         }
         .restaurants-section {
           max-width:1400px;
           margin: 0px auto;
+          padding: 2rem; /* Энд padding нэмж өгснөөр агуулга ирмэгээсээ хөндийрнө */
+          padding-top: 1rem; /* Хэрэв дээд талын цагаан зай их байвал үүнийг багасгаж болно */
         }
         .restaurants-grid {
           display: grid;

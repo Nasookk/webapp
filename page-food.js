@@ -41,6 +41,7 @@ class FoodList extends HTMLElement {
           margin-bottom: 1.5rem;
           text-shadow: 2px 2px 4px rgba(255, 107, 53, 0.1);
           font-weight: 700;
+          margin-top: 0px;
         }
         nav a {
           color: white;
@@ -56,9 +57,12 @@ class FoodList extends HTMLElement {
           transform: translateY(-2px);
         }
         .foods-section {
-          max-width:1400px;
-          margin: 0px auto;
-        }
+          max-width: 1400px;
+          margin: 0 auto;
+          padding: 2rem; /* Энд padding нэмж өгснөөр агуулга ирмэгээсээ хөндийрнө */
+          padding-top: 1rem; /* Хэрэв дээд талын цагаан зай их байвал үүнийг багасгаж болно */
+          
+}
         .foods-grid {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
