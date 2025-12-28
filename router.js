@@ -3,6 +3,7 @@ import { FoodPage } from "./pages/food.js";
 import { RestaurantPage } from "./pages/restaurant.js";
 import { LoginPage } from "./pages/login.js";
 import { RegisterPage } from "./pages/register.js";
+import "./search-bar.js";
 import './page-home.js';
 import './page-food.js';
 import './page-restaurant.js';
