@@ -4,60 +4,122 @@ class RegisterPage extends HTMLElement {
       <style>
         :host {
           display: block;
-          background: linear-gradient(135deg, #ffffff 0%, #fff5eb 100%);
-          min-height: 100vh;
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
+
         .register-section {
+          min-height: 100vh;
           display: flex;
           justify-content: center;
           align-items: center;
-          padding: 2rem;
+          background: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1350&q=80') no-repeat center center;
+          background-size: cover;
+          position: relative;
+          padding: 20px;
         }
+
+        .register-section::before {
+          content: '';
+          position: absolute;
+          top: 0; left: 0; right: 0; bottom: 0;
+          background: rgba(255, 255, 255, 0.3); 
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+        }
+
         #register-form {
-          background: #fff;
-          padding: 2.5rem;
-          border-radius: 12px;
-          box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+          position: relative;
+          background: rgba(255, 255, 255, 0.85);
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
+          padding: 2.2rem 2rem;
+          border-radius: 25px;
+          border: 1px solid rgba(255, 255, 255, 0.5);
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
           width: 100%;
-          max-width: 450px;
-        }
-        #register-form h2 {
-          text-align: center;
-          color: #ff6b35;
-          margin-bottom: 1.5rem;
-          font-size: 2rem;
-        }
-        .form-group { margin-bottom: 1.2rem; }
-        label { display: block; margin-bottom: 0.5rem; font-weight: 600; color: #333; }
-        input, select {
-          width: 100%;
-          padding: 0.85rem;
-          border: 2px solid #ff8c42;
-          border-radius: 8px;
-          font-size: 1rem;
+          max-width: 380px; /* Presne rovnaké ako Login */
+          color: #333;
           box-sizing: border-box;
         }
+
+        h2 {
+          text-align: center;
+          font-size: 1.8rem;
+          margin-bottom: 0.3rem;
+          color: #ff6b35;
+          font-weight: 800;
+          letter-spacing: -1px;
+        }
+
+        .subtitle {
+          text-align: center;
+          font-size: 0.85rem;
+          color: #777;
+          margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+          margin-bottom: 1rem;
+        }
+
+        label {
+          display: block;
+          margin-bottom: 0.4rem;
+          font-size: 0.75rem;
+          font-weight: 700;
+          color: #555;
+          text-transform: uppercase;
+        }
+
+        input, select {
+          width: 100%;
+          padding: 0.75rem 0.9rem;
+          background: rgba(255, 255, 255, 0.9);
+          border: 1.5px solid #eee;
+          border-radius: 12px;
+          font-size: 0.9rem;
+          color: #333;
+          outline: none;
+          box-sizing: border-box;
+        }
+
         .submit-button {
           width: 100%;
-          padding: 1rem;
+          padding: 0.9rem;
+          margin-top: 0.8rem;
           border: none;
-          border-radius: 8px;
+          border-radius: 12px;
           background: linear-gradient(135deg, #ff8c42 0%, #ff6b35 100%);
           color: white;
+          font-size: 1rem;
           font-weight: 700;
           cursor: pointer;
-          transition: 0.3s;
+          box-shadow: 0 8px 15px rgba(255, 107, 53, 0.2);
         }
-        .submit-button:hover { transform: translateY(-2px); box-shadow: 0 6px 15px rgba(255,107,53,0.4); }
-        .error-message { color: #ff4136; font-size: 0.9rem; margin-top: 5px; display: none; }
+
+        .login-link {
+          text-align: center;
+          margin-top: 1.2rem;
+          font-size: 0.85rem;
+          color: #666;
+          border-top: 1px solid rgba(0,0,0,0.05);
+          padding-top: 1rem;
+        }
+
+        .login-link a {
+          color: #ff6b35;
+          text-decoration: none;
+          font-weight: bold;
+        }
       </style>
 
       <section class="register-section">
         <form id="register-form">
           <h2>Бүртгүүлэх</h2>
+          <p class="subtitle">Мэдээллээ оруулна уу</p>
           
           <div class="form-group">
-            <label>Таны нэвтрэх төрөл?</label>
+            <label>Төрөл</label>
             <select id="reg-role" required>
               <option value="user">Хэрэглэгч</option>
               <option value="owner">Бизнес эрхлэгч</option>
@@ -65,26 +127,25 @@ class RegisterPage extends HTMLElement {
           </div>
 
           <div class="form-group">
-            <label>Нэр:</label>
-            <input type="text" id="reg-name" placeholder="Нэрээ оруулна уу" required>
+            <label id="name-label">Нэвтрэх нэр</label>
+            <input type="text" id="reg-name" placeholder="Хэрэглэгчийн нэр" required>
           </div>
 
           <div class="form-group">
-            <label>И-мэйл хаяг:</label>
-            <input type="email" id="reg-email" placeholder="example@gmail.com" required>
-          </div>
-          <div class="form-group">
-            <label>Нууц үг:</label>
-            <input type="password" id="reg-password" placeholder="Нууц үг" required>
+            <label>И-мэйл хаяг</label>
+            <input type="email" placeholder="mail@example.com" required>
           </div>
 
           <div class="form-group">
-            <label>Нууц үг давтах:</label>
-            <input type="password" id="confirm-password" placeholder="Нууц үгээ дахин оруулна уу" required>
-            <div id="error-msg" class="error-message">Нууц үг таарахгүй байна!</div>
+            <label>Нууц үг</label>
+            <input type="password" placeholder="••••••••" required>
           </div>
 
           <button type="submit" class="submit-button">Бүртгэл үүсгэх</button>
+
+          <div class="login-link">
+            Бүртгэлтэй юу? <a href="#/login">Нэвтрэх</a>
+          </div>
         </form>
       </section>
     `;
@@ -93,27 +154,26 @@ class RegisterPage extends HTMLElement {
   }
 
   initLogic() {
-    const form = this.querySelector("#register-form");
-    const roleInput = this.querySelector("#reg-role");
-    const passInput = this.querySelector("#reg-password");
-    const confirmInput = this.querySelector("#confirm-password");
-    const errorMsg = this.querySelector("#error-msg");
+    const roleSelect = this.querySelector("#reg-role");
+    const nameLabel = this.querySelector("#name-label");
+    const nameInput = this.querySelector("#reg-name");
 
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-
-      if (passInput.value !== confirmInput.value) {
-        errorMsg.style.display = "block";
-        confirmInput.style.borderColor = "#ff4136";
-        return;
+    roleSelect.addEventListener("change", (e) => {
+      if (e.target.value === "owner") {
+        nameLabel.textContent = "Байгууллагын нэр";
+        nameInput.placeholder = "Байгууллагын нэрээ оруулна уу";
+      } else {
+        nameLabel.textContent = "Нэвтрэх нэр";
+        nameInput.placeholder = "Хэрэглэгчийн нэр";
       }
+    });
 
-      const role = roleInput.value;
-      alert(`Амжилттай бүртгэгдлээ! (${role === 'owner' ? 'Owner' : 'User'})`);
-      
-      // Role-оос хамаарч шилжих
-      window.location.hash = role === "owner" ? "#/admin-dashboard" : "#/login";
+    this.querySelector("#register-form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      alert("Амжилттай бүртгэгдлээ!");
+      window.location.hash = "#/login";
     });
   }
 }
+
 customElements.define("register-page", RegisterPage);
