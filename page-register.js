@@ -12,7 +12,7 @@ class RegisterPage extends HTMLElement {
           display: flex;
           justify-content: center;
           align-items: center;
-          background: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1350&q=80') no-repeat center center;
+          background: url('./img/back.png') no-repeat center center;
           background-size: cover;
           position: relative;
           padding: 20px;
