@@ -27,9 +27,9 @@ class RestaurantList extends HTMLElement {
     const css = `
       <style>
        :host {
-          display: block;
-          background: linear-gradient(135deg, #ffffff 0%, #fff5eb 100%);
-          min-height: 100vh;
+        display: block;
+        background: linear-gradient(135deg, #ffffff 0%, #fff5eb 100%);
+        min-height: 100vh;
         }
        h2 {
           color: #ff6b35;
@@ -42,8 +42,8 @@ class RestaurantList extends HTMLElement {
         .restaurants-section {
           max-width:1400px;
           margin: 0px auto;
-          padding: 2rem; /* Энд padding нэмж өгснөөр агуулга ирмэгээсээ хөндийрнө */
-          padding-top: 1rem; /* Хэрэв дээд талын цагаан зай их байвал үүнийг багасгаж болно */
+          padding: 2rem; 
+          padding-top: 1rem; 
         }
         .restaurants-grid {
           display: grid;

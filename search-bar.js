@@ -6,6 +6,13 @@ class SearchBar extends HTMLElement {
     connectedCallback() {
         const css=`
         <style>
+        :host {
+            display: block;
+            width: 100%;
+            overflow: hidden;
+            background: linear-gradient(135deg, #ffffff 0%, #fff5eb 100%);
+           
+          }
           .search-bar {
           display: flex;
           gap: 1rem;
@@ -13,6 +20,7 @@ class SearchBar extends HTMLElement {
           margin: 2rem auto;
           padding: 0 1rem;
           flex-wrap: wrap;
+         
         }
 
         #searchInput {
