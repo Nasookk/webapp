@@ -2,6 +2,7 @@ class HomeCard extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
+    this.isLiked = false;
   }
 
   connectedCallback() {
@@ -11,111 +12,158 @@ class HomeCard extends HTMLElement {
   render() {
     const name = this.getAttribute("name") || "Нэр байхгүй";
     const price = this.getAttribute("price") || "0₮";
-    const rating = this.getAttribute("rating") || "0.0";
-    const ingredients = this.getAttribute("ingredients") || "N/A";
-    const calories = this.getAttribute("calories") || "N/A";
+    const rating = parseFloat(this.getAttribute("rating")) || 0;
+    const ingredients = this.getAttribute("ingredients") || "Мэдээлэлгүй";
+    const calories = this.getAttribute("calories") || "0";
     const img = this.getAttribute("img") || "https://via.placeholder.com/300x200";
     const location = this.getAttribute("location") || "Тодорхойгүй";
 
+    const stars = Array.from({ length: 5 }, (_, i) => 
+      `<span class="star">${i < Math.floor(rating) ? '★' : '☆'}</span>`
+    ).join('');
+
     this.shadowRoot.innerHTML = `
       <style>
-        :host {
-          display: block;
-        }
-        /* FoodCard-ийн яг ижил CSS */
+        :host { display: block; }
+        
         .card {
-          background: #f3f3f8;
+          background: #ffffff;
           border-radius: 10px;
-          padding: 15px;
+          padding: 15px; /* Анхны хэмжээ хэвээрээ */
           display: flex;
           flex-direction: column;
           align-items: flex-start;
           transition: transform 0.2s, box-shadow 0.2s;
           cursor: pointer;
           font-family: sans-serif;
+          position: relative;
+          border: 1px solid #eee;
         }
+
         .card:hover {
           transform: translateY(-3px);
-          box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+          box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
+        
+        .like-btn {
+          position: absolute; top: 20px; right: 20px;
+          background: rgba(255,255,255,0.9); border: none; border-radius: 50%;
+          width: 30px; height: 30px; cursor: pointer; font-size: 18px; color: #ccc;
+          display: flex; align-items: center; justify-content: center;
+          box-shadow: 0 2px 5px rgba(0,0,0,0.1); z-index: 2;
+        }
+        .like-btn.active { color: #ff4d4d; }
+
         img {
           width: 100%;
-          height: 140px;
+          height: 140px; /* Анхны өндөр хэвээрээ */
           border-radius: 10px;
           object-fit: cover;
           margin-bottom: 10px;
-          background: #eaeaea;
-        }
-        .info h3 {
-          margin: 0 0 5px 0;
-          font-size: 18px;
-          color: #333;
-        }
-          .container {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-          gap: 25px;           
-          padding: 40px 10%;   
-      }
-        .info p {
-          margin: 3px 0;
-          font-size: 14px;
-          color: #555;
-        }
-        .rating {
-          font-weight: bold;
-          color: #f5a623;
         }
 
-        /* Dialog/Popup стиль */
-        dialog {
-          border: none;
-          border-radius: 15px;
-          padding: 20px;
-          box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-          width: 300px;
-          text-align: left;
+        .info { width: 100%; }
+
+        /* Байршил (H3) - Улбар шар */
+        .info h3 {
+          margin: 0 0 5px 0;
+          font-size: 14px;
+          color: #ff6b35; 
+          font-weight: bold;
         }
-        dialog::backdrop {
-          background: rgba(0,0,0,0.5);
+
+        /* Хоолны нэр - Хар */
+        .food-name {
+          font-size: 17px;
+          color: #333;
+          font-weight: bold;
+          margin-bottom: 3px;
         }
-        .close-btn {
-          background: #ff4136;
-          color: white;
-          border: none;
-          padding: 8px 15px;
-          border-radius: 5px;
-          cursor: pointer;
+
+        /* Үнэ - Улбар шар */
+        .price-tag {
+          color: #ff6b35; 
+          font-weight: 800;
+          font-size: 16px;
+          margin-bottom: 5px;
+        }
+
+        .rating-container {
+          margin-top: 5px;
+          padding-top: 8px;
+          border-top: 1px dashed #eee;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
           width: 100%;
-          margin-top: 10px;
+        }
+
+        .star { color: #f5a623; font-size: 14px; }
+
+        /* Dialog стиль */
+        dialog {
+          border: none; border-radius: 15px; padding: 25px; width: 320px;
+          font-family: sans-serif;
+          box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        dialog::backdrop { background: rgba(0,0,0,0.6); backdrop-filter: blur(2px); }
+        
+        .dialog-content h3 { color: #ff6b35; margin: 15px 0 5px 0; }
+        .dialog-content h2 { margin: 0 0 15px 0; color: #333; }
+        .dialog-price { color: #ff6b35; font-weight: 800; font-size: 20px; margin-bottom: 15px; }
+        .dialog-details { font-size: 14px; color: #555; line-height: 1.6; }
+        
+        .close-btn {
+          background: #ff6b35; color: white; border: none; padding: 12px;
+          border-radius: 8px; cursor: pointer; width: 100%; margin-top: 20px;
+          font-weight: bold; font-size: 16px;
         }
       </style>
 
       <div class="card">
+        <button class="like-btn" id="likeBtn">❤</button>
         <img src="${img}" alt="${name}" />
         <div class="info">
-          <h3>Нэр: ${name}</h3>
-          <p>Үнэ: ${price}</p>
-          <p class="rating">Үнэлгээ: ${rating}</p>
-          <p>Орц: ${ingredients}</p>
-          <p>Калори: ${calories}</p>
+          <h3>📍 ${location}</h3>
+          <div class="food-name">${name}</div>
+          <div class="price-tag">${price}</div>
+          <div class="rating-container">
+            <div>${stars}</div>
+            <span style="font-size: 11px; color: #999;">${rating}</span>
+          </div>
         </div>
       </div>
 
       <dialog id="foodDialog">
-        <img src="${img}" style="height:120px" />
-        <h2 style="margin: 10px 0">${name}</h2>
-        <p><strong>Байршил:</strong> ${location}</p>
-        <p><strong>Орц:</strong> ${ingredients}</p>
-        <p><strong>Калори:</strong> ${calories}</p>
-        <button id="closeBtn" class="close-btn">Хаах</button>
+        <div class="dialog-content">
+          <img src="${img}" style="height:160px; width: 100%; border-radius: 10px; object-fit: cover;" />
+          <h3>📍 ${location}</h3>
+          <h2>${name}</h2>
+          <div class="dialog-price">${price}</div>
+          <div class="dialog-details">
+            <p>🌿 <b>Орц:</b> ${ingredients}</p>
+            <p>🔥 <b>Калори:</b> ${calories} ккал</p>
+            <p>⭐ <b>Үнэлгээ:</b> ${rating} / 5.0</p>
+          </div>
+          <button id="closeBtn" class="close-btn">Хаах</button>
+        </div>
       </dialog>
     `;
 
-    // Эвентүүдээ энд холбоно
+    this.setupEvents();
+  }
+
+  setupEvents() {
     const card = this.shadowRoot.querySelector(".card");
     const dialog = this.shadowRoot.querySelector("#foodDialog");
     const closeBtn = this.shadowRoot.querySelector("#closeBtn");
+    const likeBtn = this.shadowRoot.querySelector("#likeBtn");
+
+    likeBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      this.isLiked = !this.isLiked;
+      likeBtn.classList.toggle("active", this.isLiked);
+    });
 
     card.addEventListener("click", () => {
       dialog.showModal();

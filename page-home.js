@@ -89,7 +89,7 @@ class FoodInfoApp extends HTMLElement {
           max-width: 1400px;
           margin: 0 auto;
           padding: 2rem;
-           
+          
           display: flex;
           gap: 2rem;
         }

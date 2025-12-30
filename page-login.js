@@ -7,119 +7,153 @@ class LoginPage extends HTMLElement {
     }
     this.innerHTML = `
       <style>
-      
-        body {
-          margin: 0;
-          padding: 0;
-          background: linear-gradient(135deg, #ffffff 0%, #fff5eb 100%);
-          min-height: 100vh;
-          display: flex;
-          flex-direction: column;
+        :host {
+          display: block;
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
+
         .login-section {
-          flex: 1;
+          min-height: 100vh;
           display: flex;
           justify-content: center;
           align-items: center;
-          padding: 2rem;
-           }
-        .login-section h2 {
-          text-align: center;
-          color: #ff6b35;
-          margin-bottom: 1.5rem;
-          font-size: 2rem;
-          text-shadow: 1px 1px 3px rgba(255, 107, 53, 0.2);
+          background: url('./img/back.png') no-repeat center center;
+          position: relative;
+          padding: 20px;
         }
+
+        .login-section::before {
+          content: '';
+          position: absolute;
+          top: 0; left: 0; right: 0; bottom: 0;
+          background: rgba(255, 255, 255, 0.3); 
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+        }
+
         #login-form {
-          background: #fff;
-          padding: 2rem;
-          border-radius: 12px;
-          box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+          position: relative;
+          background: rgba(255, 255, 255, 0.85);
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
+          padding: 2.2rem 2rem; /* Жижигсгэсэн зай */
+          border-radius: 25px;
+          border: 1px solid rgba(255, 255, 255, 0.5);
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
           width: 100%;
-          max-width: 400px;
+          max-width: 380px; /* Register-тэй яг ижил өргөн */
+          color: #333;
+          box-sizing: border-box;
         }
+
+        h2 {
+          text-align: center;
+          font-size: 1.8rem; /* Жижигсгэсэн гарчиг */
+          margin-bottom: 0.3rem;
+          color: #ff6b35;
+          font-weight: 800;
+          letter-spacing: -1px;
+        }
+
+        .subtitle {
+          text-align: center;
+          font-size: 0.85rem;
+          color: #777;
+          margin-bottom: 1.5rem;
+        }
+
         .form-group {
-          margin-bottom: 1.2rem;
+          margin-bottom: 1rem; /* Нягтаршуулсан зай */
         }
+
         label {
           display: block;
-          margin-bottom: 0.5rem;
-          font-weight: 600;
-          color: #333;
+          margin-bottom: 0.4rem;
+          font-size: 0.75rem; /* Жижигсгэсэн label */
+          font-weight: 700;
+          color: #555;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
         }
-        input[type="text"],
-        input[type="password"] {
+
+        input {
           width: 100%;
-          display: center;
-          padding: 0.8rem 0.5rem;
-          border: 2px solid #ff8c42;
-          border-radius: 8px;
-          font-size: 1rem;
-          transition: all 0.3s ease;
-        }
-        input:focus {
+          padding: 0.75rem 0.9rem; /* Жижигсгэсэн input өндөр */
+          background: rgba(255, 255, 255, 0.9);
+          border: 1.5px solid #eee;
+          border-radius: 12px;
+          font-size: 0.9rem; /* Жижигсгэсэн текст */
+          color: #333;
           outline: none;
-          border-color: #ff6b35;
-          box-shadow: 0 0 8px rgba(255, 107, 53, 0.4);
+          transition: all 0.3s ease;
+          box-sizing: border-box;
         }
+
+        input::placeholder {
+          color: #bbb;
+        }
+
+        input:focus {
+          background: #fff;
+          border-color: #ff6b35;
+          box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.1);
+        }
+
         .login-button {
           width: 100%;
           padding: 0.9rem;
+          margin-top: 0.8rem;
           border: none;
-          border-radius: 8px;
+          border-radius: 12px;
           background: linear-gradient(135deg, #ff8c42 0%, #ff6b35 100%);
           color: white;
           font-size: 1rem;
-          font-weight: 600;
+          font-weight: 700;
           cursor: pointer;
           transition: all 0.3s ease;
+          box-shadow: 0 8px 15px rgba(255, 107, 53, 0.2);
         }
+
         .login-button:hover {
           transform: translateY(-2px);
-          box-shadow: 0 6px 15px rgba(255, 107, 53, 0.4);
+          box-shadow: 0 12px 20px rgba(255, 107, 53, 0.3);
         }
+
         .register-link {
           text-align: center;
-          margin-top: 1rem;
+          margin-top: 1.2rem;
+          font-size: 0.85rem;
+          color: #666;
+          border-top: 1px solid rgba(0,0,0,0.05);
+          padding-top: 1rem;
         }
-        .register-link p {
-          margin: 0.5rem 0;
-          color: #555;
-        }
-        .register-button {
-          display: inline-block;
-          padding: 0.6rem 1.2rem;
-          background: #fff;
-          border: 2px solid #ff6b35;
-          border-radius: 8px;
+
+        .register-link a {
           color: #ff6b35;
-          font-weight: 600;
           text-decoration: none;
-          transition: all 0.3s ease;
-        }
-        .register-button:hover {
-          background: #ff6b35;
-          color: white;
+          font-weight: bold;
         }
       </style>
 
       <section class="login-section">
         <form id="login-form">
+          <h2>Нэвтрэх</h2>
+          <p class="subtitle">Амтлаг бүхний ертөнцөд тавтай морил</p>
+
           <div class="form-group">
-            <label for="login-username-email">Хэрэглэгчийн нэр эсвэл И-мэйл:</label>
-            <input type="text" id="login-username-email" placeholder="Хэрэглэгчийн нэр эсвэл И-мэйлээ оруулна уу" required>
+            <label for="login-id">Нэвтрэх нэр</label>
+            <input type="text" id="login-id" placeholder="Нэр эсвэл и-мэйл" required>
           </div>
 
           <div class="form-group">
-            <label for="login-password">Нууц үг:</label>
-            <input type="password" id="login-password" placeholder="Нууц үгээ оруулна уу" required>
+            <label for="login-password">Нууц үг</label>
+            <input type="password" id="login-password" placeholder="••••••••" required>
           </div>
 
           <button type="submit" class="login-button">Нэвтрэх</button>
 
           <div class="register-link">
-            <p>Шинэ хэрэглэгч үү?</p>
-            <a href="#/register" class="register-button">Бүртгүүлэх</a>
+            Шинэ хэрэглэгч үү? <a href="#/register">Бүртгэл үүсгэх</a>
           </div>
         </form>
       </section>
@@ -127,6 +161,7 @@ class LoginPage extends HTMLElement {
 
     this.querySelector("#login-form").addEventListener("submit", async (e) => {
       e.preventDefault();
+<<<<<<< HEAD
 
       const email = document.getElementById("login-username-email").value;
       const password = document.getElementById("login-password").value;
@@ -153,6 +188,11 @@ class LoginPage extends HTMLElement {
         console.error(error);
         alert("Сервертэй холбогдож чадсангүй");
       }
+=======
+      const userId = this.querySelector("#login-id").value;
+      alert(`Сайн байна уу, ${userId}!`);
+      window.location.hash = "#/"; 
+>>>>>>> fbab95ac4537b7c2771565821c01c4ebbf7ff67f
     });
 
   }
