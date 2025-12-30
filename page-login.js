@@ -1,5 +1,10 @@
 class LoginPage extends HTMLElement {
   connectedCallback() {
+    const token = localStorage.getItem("token");
+    if (token) {
+      window.location.hash = "/";
+      return;
+    }
     this.innerHTML = `
       <style>
       
@@ -120,10 +125,36 @@ class LoginPage extends HTMLElement {
       </section>
     `;
 
-    this.querySelector("#login-form").addEventListener("submit", (e) => {
+    this.querySelector("#login-form").addEventListener("submit", async (e) => {
       e.preventDefault();
-      alert("Амжилттай нэвтэрлээ!");
+
+      const email = document.getElementById("login-username-email").value;
+      const password = document.getElementById("login-password").value;
+
+      try {
+        const res = await fetch("http://localhost:3000/api/auth/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password })
+        });
+
+        if (!res.ok) {
+          const err = await res.json();
+          alert(err.error || "Нэвтрэх үед алдаа гарлаа");
+          return;
+        }
+
+        const data = await res.json();
+        localStorage.setItem("token", data.token);
+
+        alert("Амжилттай нэвтэрлээ!");
+        window.location.hash = "/";
+      } catch (error) {
+        console.error(error);
+        alert("Сервертэй холбогдож чадсангүй");
+      }
     });
+
   }
 }
 
