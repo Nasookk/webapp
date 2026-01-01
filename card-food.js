@@ -105,8 +105,8 @@ class FoodCard extends HTMLElement {
           <h3>${name}</h3>
           <div class="price">${price}</div>
           <div class="details">
-            <div><b>🌿 Орц:</b> ${ingredients}</div>
-            <div><b>🔥 Калори:</b> ${calories} ккал</div>
+            <div><b>Орц:</b> ${ingredients}</div>
+            <div><b>Калори:</b> ${calories} ккал</div>
           </div>
         </div>
         

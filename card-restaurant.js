@@ -61,8 +61,6 @@ class RestaurantCard extends HTMLElement {
         }
 
         .info h3 { margin: 0 0 5px 0; font-size: 1.2rem; color: #333; }
-        
-        /* FoodCard-ийн үнэтэй ижил түвшинд харагдахын тулд */
         .location-text { color: #ff6b35; font-weight: 800; font-size: 1.1rem; margin-bottom: 10px; }
         
         .details {
@@ -70,11 +68,6 @@ class RestaurantCard extends HTMLElement {
           flex-grow: 1; /* Текст богино байсан ч доод хэсгийг түгжинэ */
         }
         .details b { color: #444; }
-
-        .traffic-light {
-          display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 5px;
-          background: ${traf.includes('их') ? '#ff4d4d' : '#4caf50'};
-        }
 
         .rating-section {
           display: flex; align-items: center; justify-content: space-between;
@@ -102,8 +95,8 @@ class RestaurantCard extends HTMLElement {
           <h3>${name}</h3>
           <div class="location-text">${location}</div>
           <div class="details">
-            <div><b>🍽️ Цэс:</b> ${menu}</div>
-            <div><span class="traffic-light"></span><b>🚦 Ачаалал:</b> ${traf}</div>
+            <div><b>Цэс:</b> ${menu}</div>
+            <div><span class="traffic-light"></span><b>Ачаалал:</b> ${traf}</div>
           </div>
         </div>
         
