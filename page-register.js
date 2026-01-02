@@ -133,12 +133,12 @@ class RegisterPage extends HTMLElement {
 
           <div class="form-group">
             <label>И-мэйл хаяг</label>
-            <input type="email" placeholder="mail@example.com" required>
+            <input type="email" id="reg-email" placeholder="mail@example.com" required>
           </div>
 
           <div class="form-group">
             <label>Нууц үг</label>
-            <input type="password" placeholder="••••••••" required>
+            <input type="password" id="reg-password" placeholder="••••••••" required>
           </div>
 
           <button type="submit" class="submit-button">Бүртгэл үүсгэх</button>
@@ -186,7 +186,7 @@ class RegisterPage extends HTMLElement {
           return;
         }
         alert("Амжилттай бүртгэгдлээ!");
-        window.location.hash = "/login";
+        window.location.hash = "#/login";
       } catch (err) {
         console.error(err);
         alert("Сервертэй холбогдож чадсангүй");
