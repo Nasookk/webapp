@@ -164,13 +164,13 @@ class LoginPage extends HTMLElement {
       const email = this.querySelector("#login-id").value;
       const password = this.querySelector("#login-password").value;
       try {
-        const res = await fetch("http://localhost:3000/api/auth/login", {
+        const API_URL = `${window.location.origin}`;
+        const res = await fetch(`${API_URL}/api/auth/login`, {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email, password })
         });
+
 
         if (!res.ok) {
           alert("Нэвтрэх нэр эсвэл нууц үг буруу");
