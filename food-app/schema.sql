@@ -1,6 +1,5 @@
 PRAGMA foreign_keys = ON;
 
--- 1. Хэрэглэгчид
 CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     email TEXT UNIQUE NOT NULL,
@@ -8,7 +7,6 @@ CREATE TABLE IF NOT EXISTS users (
     role TEXT CHECK(role IN ('user', 'owner', 'admin')) NOT NULL
 );
 
--- 2. Ресторанууд
 CREATE TABLE IF NOT EXISTS restaurants (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
@@ -21,7 +19,6 @@ CREATE TABLE IF NOT EXISTS restaurants (
     FOREIGN KEY (owner_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
--- 3. Хоолнууд
 CREATE TABLE IF NOT EXISTS foods (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
@@ -34,7 +31,6 @@ CREATE TABLE IF NOT EXISTS foods (
     FOREIGN KEY (restaurant_id) REFERENCES restaurants(id) ON DELETE CASCADE
 );
 
--- 4. Дуртай ресторанууд
 CREATE TABLE IF NOT EXISTS favorite_restaurants (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER NOT NULL,
@@ -45,7 +41,6 @@ CREATE TABLE IF NOT EXISTS favorite_restaurants (
     UNIQUE(user_id, restaurant_id)
 );
 
--- 5. Дуртай хоолнууд
 CREATE TABLE IF NOT EXISTS favorite_foods (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER NOT NULL,
@@ -56,7 +51,6 @@ CREATE TABLE IF NOT EXISTS favorite_foods (
     UNIQUE(user_id, food_id)
 );
 
--- 6. Рестораны үнэлгээ
 CREATE TABLE IF NOT EXISTS restaurant_ratings (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER NOT NULL,
@@ -69,7 +63,6 @@ CREATE TABLE IF NOT EXISTS restaurant_ratings (
     UNIQUE(user_id, restaurant_id)
 );
 
--- 7. Хоолны үнэлгээ
 CREATE TABLE IF NOT EXISTS food_ratings (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER NOT NULL,

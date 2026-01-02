@@ -1,8 +1,6 @@
--- Эзэн хэрэглэгч үүсгэх
 INSERT OR IGNORE INTO users (id, email, password, role) 
 VALUES (1, 'admin@foodapp.mn', '123456', 'owner');
 
--- Ресторануудыг оруулах
 INSERT OR IGNORE INTO restaurants (id, name, location, rating, menu, traf, img, owner_id) VALUES 
 (1, 'Этүгэн', 'MUIS III', '5/5', 'Цуйван,Хуушуур', '80%', './img/img_restaurants/etugen.png', 1),
 (2, 'Мандах зоог', 'MUIS II', '4/5', NULL, NULL, './img/img_restaurants/mandah.png', 1),
@@ -12,7 +10,6 @@ INSERT OR IGNORE INTO restaurants (id, name, location, rating, menu, traf, img, 
 (6, 'Сайн зоог', 'MUIS I', '4.5/5', NULL, NULL, 'https://images.unsplash.com/photo-1544025162-d76694265947', 1),
 (7, 'Малатан', 'MUIS I', '4.5/5', NULL, NULL, 'https://images.unsplash.com/photo-1544025162-d76694265947', 1);
 
--- Хоолнуудыг оруулах (Этүгэн ресторан руу холбов)
 INSERT OR IGNORE INTO foods (name, price, rating, ingredients, calories, img, restaurant_id) VALUES 
 ('Пирошки', '2,000₮', '5/5', 'Гурил, мах, сонгино', '~320 ккал', './img/img_foods/piroshki.png', 1),
 ('Гурилтай шөл', '13,000₮', '4/5', 'Гурил, мах, ногоо', '~280 ккал', './img/img_foods/shul.png', 1),
