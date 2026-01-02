@@ -71,16 +71,12 @@ class HomeCard extends HTMLElement {
           color: #ff6b35; 
           font-weight: bold;
         }
-
-        /* Хоолны нэр - Хар */
         .food-name {
           font-size: 17px;
           color: #333;
           font-weight: bold;
           margin-bottom: 3px;
         }
-
-        /* Үнэ - Улбар шар */
         .price-tag {
           color: #ff6b35; 
           font-weight: 800;
@@ -141,9 +137,9 @@ class HomeCard extends HTMLElement {
           <h2>${name}</h2>
           <div class="dialog-price">${price}</div>
           <div class="dialog-details">
-            <p>🌿 <b>Орц:</b> ${ingredients}</p>
-            <p>🔥 <b>Калори:</b> ${calories} ккал</p>
-            <p>⭐ <b>Үнэлгээ:</b> ${rating} / 5.0</p>
+            <p><b>Орц:</b> ${ingredients}</p>
+            <p><b>Калори:</b> ${calories} ккал</p>
+            <p><b>Үнэлгээ:</b> ${rating} / 5.0</p>
           </div>
           <button id="closeBtn" class="close-btn">Хаах</button>
         </div>
