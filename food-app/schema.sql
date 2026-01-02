@@ -2,6 +2,7 @@ PRAGMA foreign_keys = ON;
 
 CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username TEXT,             -- Хэрэглэгчийн нэр эсвэл Байгууллагын нэрийг энд хадгална
     email TEXT UNIQUE NOT NULL,
     password TEXT NOT NULL,
     role TEXT CHECK(role IN ('user', 'owner', 'admin')) NOT NULL
