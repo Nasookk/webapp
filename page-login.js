@@ -161,39 +161,30 @@ class LoginPage extends HTMLElement {
 
     this.querySelector("#login-form").addEventListener("submit", async (e) => {
       e.preventDefault();
-<<<<<<< HEAD
-
-      const email = document.getElementById("login-username-email").value;
-      const password = document.getElementById("login-password").value;
-
+      const email = this.querySelector("#login-id").value;
+      const password = this.querySelector("#login-password").value;
       try {
         const res = await fetch("http://localhost:3000/api/auth/login", {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json"
+          },
           body: JSON.stringify({ email, password })
         });
 
         if (!res.ok) {
-          const err = await res.json();
-          alert(err.error || "Нэвтрэх үед алдаа гарлаа");
+          alert("Нэвтрэх нэр эсвэл нууц үг буруу");
           return;
         }
-
         const data = await res.json();
         localStorage.setItem("token", data.token);
-
-        alert("Амжилттай нэвтэрлээ!");
         window.location.hash = "/";
-      } catch (error) {
-        console.error(error);
+      } catch (err) {
+        console.error(err);
         alert("Сервертэй холбогдож чадсангүй");
       }
-=======
-      const userId = this.querySelector("#login-id").value;
-      alert(`Сайн байна уу, ${userId}!`);
-      window.location.hash = "#/"; 
->>>>>>> fbab95ac4537b7c2771565821c01c4ebbf7ff67f
     });
+
 
   }
 }

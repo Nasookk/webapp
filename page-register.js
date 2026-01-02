@@ -168,11 +168,31 @@ class RegisterPage extends HTMLElement {
       }
     });
 
-    this.querySelector("#register-form").addEventListener("submit", (e) => {
+    this.querySelector("#register-form").addEventListener("submit", async (e) => {
       e.preventDefault();
-      alert("Амжилттай бүртгэгдлээ!");
-      window.location.hash = "#/login";
+      const role = this.querySelector("#reg-role").value;
+      const email = this.querySelector("#reg-email").value;
+      const password = this.querySelector("#reg-password").value;
+      try {
+        const res = await fetch("http://localhost:3000/api/auth/register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ email, password, role })
+        });
+        if (!res.ok) {
+          alert("Бүртгэл амжилтгүй");
+          return;
+        }
+        alert("Амжилттай бүртгэгдлээ!");
+        window.location.hash = "/login";
+      } catch (err) {
+        console.error(err);
+        alert("Сервертэй холбогдож чадсангүй");
+      }
     });
+
   }
 }
 

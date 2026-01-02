@@ -1,9 +1,20 @@
 class Header extends HTMLElement {
   constructor() {
     super();
-    const shadow = this.attachShadow({ mode: "open" });
-    
-    shadow.innerHTML =`
+    this.attachShadow({ mode: "open" });
+  }
+  connectedCallback() {
+    this.render();
+    this.attachEvents();
+
+    window.addEventListener("hashchange", () => {
+      this.render();
+      this.attachEvents();
+    });
+  }
+  render() {
+    const token = localStorage.getItem("token");
+    this.shadowRoot.innerHTML = `
       <style>
         :host {
           display: block;
@@ -66,14 +77,30 @@ class Header extends HTMLElement {
 
         <nav>
           <ul>
-            <a href="#/">Home</a>
-            <a href="#/food">Foods</a>
-            <a href="#/restaurant">Restaurants</a>
-            <a href="#/login">Log in</a>
+            <li><a href="#/">Home</a></li>
+            <li><a href="#/food">Foods</a></li>
+            <li><a href="#/restaurant">Restaurants</a></li>
+            ${token
+        ? `<li><a href="#/logout" id="logout-link">Log out</a></li>`
+        : `<li><a href="#/login">Log in</a></li>`
+      }
           </ul>
         </nav>
       </header>
     `;
+  }
+  attachEvents() {
+    const logoutLink = this.shadowRoot.querySelector("#logout-link");
+    if (logoutLink) {
+      logoutLink.addEventListener("click", (e) => {
+        e.preventDefault();
+        localStorage.removeItem("token");
+        window.location.hash = "/login";
+        this.render();
+        this.attachEvents();
+      });
+    }
+
   }
 }
 
