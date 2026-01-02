@@ -56,8 +56,6 @@ class RestaurantList extends HTMLElement {
 
     this.shadowRoot.innerHTML = `
       ${css}
-    
-
       <div class="restaurants-section">
         <h2>Restaurants</h2>
         <div class="restaurants-grid">

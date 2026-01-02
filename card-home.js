@@ -18,7 +18,7 @@ class HomeCard extends HTMLElement {
     const img = this.getAttribute("img") || "https://via.placeholder.com/300x200";
     const location = this.getAttribute("location") || "Тодорхойгүй";
 
-    const stars = Array.from({ length: 5 }, (_, i) => 
+    const stars = Array.from({ length: 5 }, (_, i) =>
       `<span class="star">${i < Math.floor(rating) ? '★' : '☆'}</span>`
     ).join('');
 
@@ -29,7 +29,7 @@ class HomeCard extends HTMLElement {
         .card {
           background: #ffffff;
           border-radius: 10px;
-          padding: 15px; /* Анхны хэмжээ хэвээрээ */
+          padding: 15px;
           display: flex;
           flex-direction: column;
           align-items: flex-start;
@@ -56,7 +56,7 @@ class HomeCard extends HTMLElement {
 
         img {
           width: 100%;
-          height: 140px; /* Анхны өндөр хэвээрээ */
+          height: 140px;
           border-radius: 10px;
           object-fit: cover;
           margin-bottom: 10px;
@@ -64,7 +64,6 @@ class HomeCard extends HTMLElement {
 
         .info { width: 100%; }
 
-        /* Байршил (H3) - Улбар шар */
         .info h3 {
           margin: 0 0 5px 0;
           font-size: 14px;
@@ -96,7 +95,6 @@ class HomeCard extends HTMLElement {
 
         .star { color: #f5a623; font-size: 14px; }
 
-        /* Dialog стиль */
         dialog {
           border: none; border-radius: 15px; padding: 25px; width: 320px;
           font-family: sans-serif;
@@ -154,11 +152,32 @@ class HomeCard extends HTMLElement {
     const dialog = this.shadowRoot.querySelector("#foodDialog");
     const closeBtn = this.shadowRoot.querySelector("#closeBtn");
     const likeBtn = this.shadowRoot.querySelector("#likeBtn");
+    const token = localStorage.getItem("token");
 
-    likeBtn.addEventListener("click", (e) => {
+    likeBtn.addEventListener("click", async (e) => {
       e.stopPropagation();
-      this.isLiked = !this.isLiked;
-      likeBtn.classList.toggle("active", this.isLiked);
+      if (!token) {
+        alert("Please Login");
+        return;
+      }
+      const foodId = this.getAttribute("food-id");
+      const method = this.isLiked ? "DELETE" : "POST";
+      const url = `http://localhost:3000/api/favorites/foods${this.isLiked ? "/" + foodId : ""}`;
+      try {
+        await fetch(url, {
+          method,
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + token
+          },
+          body: !this.isLiked ? JSON.stringify({ id: foodId }) : undefined
+        });
+        this.isLiked = !this.isLiked;
+        likeBtn.classList.toggle("active", this.isLiked);
+      } catch (err) {
+        console.error(err);
+        alert("Could not update favorite");
+      }
     });
 
     card.addEventListener("click", () => {

@@ -19,16 +19,16 @@ class RestaurantCard extends HTMLElement {
       <style>
         :host { 
   display: block;
-  width: 100%; /* Grid-ийн нүхэнд тааруулж сунана */
+  width: 100%;
 }
 
 .card {
   background: #ffffff;
   border-radius: 20px;
   padding: 18px;
-  width: 100%; /* Хатуу 280px биш 100% болгох */
-  min-height: 400px; /* Өндрийг нь түгжиж өгөх */
-  box-sizing: border-box; /* Энэ маш чухал! */
+  width: 100%;
+  min-height: 400px;
+  box-sizing: border-box;
   box-shadow: 0 10px 25px rgba(0,0,0,0.06);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   position: relative;
@@ -65,7 +65,7 @@ class RestaurantCard extends HTMLElement {
         
         .details {
           font-size: 0.85rem; color: #666; line-height: 1.5; margin-bottom: 15px;
-          flex-grow: 1; /* Текст богино байсан ч доод хэсгийг түгжинэ */
+          flex-grow: 1; 
         }
         .details b { color: #444; }
 

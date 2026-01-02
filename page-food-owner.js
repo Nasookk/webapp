@@ -10,7 +10,6 @@ class FoodCard extends HTMLElement {
   }
 
   render() {
-    // Байгууллагаар нэвтэрсэн эсэхийг шалгах атрибут
     const isAdmin = this.getAttribute("is-admin") === "true";
     const name = this.getAttribute("name") || "Хоол";
     const price = this.getAttribute("price") || "0₮";
@@ -86,8 +85,6 @@ class FoodCard extends HTMLElement {
     this.shadowRoot.querySelector("#favBtn").onclick = (e) => {
       e.target.classList.toggle("active");
     };
-
-    // Байгууллага засах, устгах үйлдэл
     const editBtn = this.shadowRoot.querySelector("#editBtn");
     const delBtn = this.shadowRoot.querySelector("#delBtn");
 
@@ -110,7 +107,6 @@ class FoodList extends HTMLElement {
     super();
     this.attachShadow({ mode: "open" });
     this.foodsData = [];
-    // Энэ нь жинхэнэ систем дээр нэвтэрсэн хэрэглэгчийн төрлөөс хамаарна
     this.isAdmin = true; 
   }
 

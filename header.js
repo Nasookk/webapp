@@ -54,16 +54,42 @@ class Header extends HTMLElement {
           background: rgba(255,255,255,0.25);
         }
 
-        @media (max-width: 700px) {
-          header {
-            flex-direction: column;
-            gap: 1rem;
+        @media (max-width: 768px) {
+          #app {
+            padding-bottom: 80px;
           }
-
+          :host {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            z-index: 1000;
+          }
+          header {
+            padding: 0;
+            height: 64px;
+            box-shadow: 0 -4px 10px rgba(0,0,0,0.15);
+          }
+          nav {
+            width: 100%;
+          }
           nav ul {
-            flex-direction: column;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+            gap: 0;
+            height: 100%;
+          }
+          nav li {
+            flex: 1;
             text-align: center;
-            gap: .5rem;
+          }
+          nav a {
+            font-size: 12px;
+            padding: 6px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
           }
         }
       </style>
@@ -77,12 +103,12 @@ class Header extends HTMLElement {
 
         <nav>
           <ul>
-            <li><a href="#/">Home</a></li>
-            <li><a href="#/food">Foods</a></li>
-            <li><a href="#/restaurant">Restaurants</a></li>
+            <li><a href="#/"><span>Home</span></a></li>
+            <li><a href="#/food"><span>Foods</span></a></li>
+            <li><a href="#/restaurant"><span>Restaurants</span></a></li>
             ${token
-        ? `<li><a href="#/logout" id="logout-link">Log out</a></li>`
-        : `<li><a href="#/login">Log in</a></li>`
+        ? `<li><a href="#/logout" id="logout-link"><span>Log out</span></a></li>`
+        : `<li><a href="#/login"><span>Log in</span></a></li>`
       }
           </ul>
         </nav>

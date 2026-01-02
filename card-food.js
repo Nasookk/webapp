@@ -13,10 +13,9 @@ class FoodCard extends HTMLElement {
   }
 
   render() {
-    // Бүх атрибутуудыг хүлээж авах
     const name = this.getAttribute("name") || "Хоолны нэр";
     const price = this.getAttribute("price") || "0₮";
-    const rating = this.getAttribute("rating") || "0.0"; // Энэ бол нийт дундаж үнэлгээ
+    const rating = this.getAttribute("rating") || "0.0";
     const ingredients = this.getAttribute("ingredients") || "Мэдээлэл байхгүй";
     const calories = this.getAttribute("calories") || "0";
     const img = this.getAttribute("img") || "back.png";
@@ -25,16 +24,16 @@ class FoodCard extends HTMLElement {
       <style>
         :host { 
   display: block;
-  width: 100%; /* Grid-ийн нүхэнд тааруулж сунана */
+  width: 100%;
 }
 
 .card {
   background: #ffffff;
   border-radius: 20px;
   padding: 18px;
-  width: 100%; /* Хатуу 280px биш 100% болгох */
-  min-height: 400px; /* Өндрийг нь түгжиж өгөх */
-  box-sizing: border-box; /* Энэ маш чухал! */
+  width: 100%;
+  min-height: 400px;
+  box-sizing: border-box;
   box-shadow: 0 10px 25px rgba(0,0,0,0.06);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   position: relative;
@@ -75,7 +74,6 @@ class FoodCard extends HTMLElement {
         }
         .details b { color: #444; }
 
-        /* Rating System */
         .rating-section {
           display: flex; align-items: center; justify-content: space-between;
           padding-top: 12px; border-top: 1px dashed #eee;
