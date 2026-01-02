@@ -1,28 +1,41 @@
 PRAGMA foreign_keys = ON;
 
-CREATE TABLE users (
+-- 1. Хэрэглэгчид
+CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     email TEXT UNIQUE NOT NULL,
     password TEXT NOT NULL,
     role TEXT CHECK(role IN ('user', 'owner', 'admin')) NOT NULL
 );
 
-CREATE TABLE restaurants (
+-- 2. Ресторанууд
+CREATE TABLE IF NOT EXISTS restaurants (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
     location TEXT,
-    owner_id INTEGER NOT NULL,
+    rating TEXT,
+    menu TEXT,
+    traf TEXT,
+    img TEXT,
+    owner_id INTEGER DEFAULT 1,
     FOREIGN KEY (owner_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
-CREATE TABLE foods (
+-- 3. Хоолнууд
+CREATE TABLE IF NOT EXISTS foods (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
-    price REAL NOT NULL,
+    price TEXT,
+    rating TEXT,
+    ingredients TEXT,
+    calories TEXT,
+    img TEXT,
     restaurant_id INTEGER NOT NULL,
     FOREIGN KEY (restaurant_id) REFERENCES restaurants(id) ON DELETE CASCADE
 );
-CREATE TABLE favorite_restaurants (
+
+-- 4. Дуртай ресторанууд
+CREATE TABLE IF NOT EXISTS favorite_restaurants (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER NOT NULL,
     restaurant_id INTEGER NOT NULL,
@@ -31,7 +44,9 @@ CREATE TABLE favorite_restaurants (
     FOREIGN KEY(restaurant_id) REFERENCES restaurants(id) ON DELETE CASCADE,
     UNIQUE(user_id, restaurant_id)
 );
-CREATE TABLE favorite_foods (
+
+-- 5. Дуртай хоолнууд
+CREATE TABLE IF NOT EXISTS favorite_foods (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER NOT NULL,
     food_id INTEGER NOT NULL,
@@ -40,7 +55,9 @@ CREATE TABLE favorite_foods (
     FOREIGN KEY(food_id) REFERENCES foods(id) ON DELETE CASCADE,
     UNIQUE(user_id, food_id)
 );
-CREATE TABLE restaurant_ratings (
+
+-- 6. Рестораны үнэлгээ
+CREATE TABLE IF NOT EXISTS restaurant_ratings (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER NOT NULL,
     restaurant_id INTEGER NOT NULL,
@@ -51,7 +68,9 @@ CREATE TABLE restaurant_ratings (
     FOREIGN KEY(restaurant_id) REFERENCES restaurants(id) ON DELETE CASCADE,
     UNIQUE(user_id, restaurant_id)
 );
-CREATE TABLE food_ratings (
+
+-- 7. Хоолны үнэлгээ
+CREATE TABLE IF NOT EXISTS food_ratings (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER NOT NULL,
     food_id INTEGER NOT NULL,
