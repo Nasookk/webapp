@@ -3,11 +3,12 @@ class RestaurantList extends HTMLElement {
     super();
     this.attachShadow({ mode: "open" });
     this.data = []; 
+    this.url = this.getAttribute("url") || "http://localhost:3000/api/restaurants";
   }
 
   async downloadData() {
     try {
-      const r = await fetch("data-restaurant-page.json");
+      const r = await fetch(this.url);
       const d = await r.json();
       this.data = d;
     } catch (err) {

@@ -1,7 +1,7 @@
 class FoodList extends HTMLElement {
   constructor() {
     super();
-    const url = this.getAttribute("url") || "data-food-page.json"; 
+    const url = this.getAttribute("url") || "http://localhost:3000/api/foods";
     this.url = url;
     this.attachShadow({ mode: "open" });
     this.foodsData = [];
@@ -59,8 +59,8 @@ class FoodList extends HTMLElement {
         .foods-section {
           max-width: 1400px;
           margin: 0 auto;
-          padding: 2rem; /* Энд padding нэмж өгснөөр агуулга ирмэгээсээ хөндийрнө */
-          padding-top: 1rem; /* Хэрэв дээд талын цагаан зай их байвал үүнийг багасгаж болно */
+          padding: 2rem;
+          padding-top: 1rem;
           
 }
         .foods-grid {
@@ -80,6 +80,7 @@ class FoodList extends HTMLElement {
             ingredients="${food.ingredients}" 
             calories="${food.calories}" 
             img="${food.img}">
+            restaurant="${food.restaurant}"
           </food-card>
         `).join('')}
       </div>
