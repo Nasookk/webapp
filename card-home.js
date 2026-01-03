@@ -3,6 +3,14 @@ class HomeCard extends HTMLElement {
     super();
     this.attachShadow({ mode: "open" });
   }
+  static get observedAttributes() {
+    return ["is_favorite"];
+  }
+  attributeChangedCallback(name, oldValue, newValue) {
+    if (name === "is_favorite" && oldValue !== newValue) {
+      this.render();
+    }
+  }
 
   connectedCallback() {
     this.render();

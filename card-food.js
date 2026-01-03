@@ -139,7 +139,6 @@ class FoodCard extends HTMLElement {
     const token = localStorage.getItem("token");
     this.state.isFavorite = this.getAttribute("is_favorite") === "1";
     favBtn.classList.toggle("active", this.state.isFavorite);
-
     favBtn.addEventListener("click", async () => {
       if (!token) {
         alert("Please Login");
@@ -160,9 +159,12 @@ class FoodCard extends HTMLElement {
           },
           body: !this.state.isFavorite ? JSON.stringify({ id: foodId }) : undefined
         });
-
         this.state.isFavorite = !this.state.isFavorite;
         favBtn.classList.toggle("active", this.state.isFavorite);
+        this.dispatchEvent(new CustomEvent("favorite-updated", {
+          bubbles: true,
+          composed: true
+        }));
       } catch (err) {
         console.error(err);
         alert("Could not update favorite");

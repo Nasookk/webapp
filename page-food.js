@@ -96,6 +96,7 @@ class FoodList extends HTMLElement {
       <div class="foods-grid">
         ${this.foodsData.map(food => `
           <food-card 
+            food-id="${food.id}"
             name="${food.name}" 
             price="${food.price}" 
             rating="${food.rating}" 
