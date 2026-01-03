@@ -17,18 +17,29 @@ class FoodList extends HTMLElement {
   async loadData() {
     try {
       const res = await fetch(this.url);
-      this.foodsData = await res.json();
+      if (!res.ok) {
+        throw new Error(await res.text());
+      }
+      const data = await res.json();
+      if (!Array.isArray(data)) {
+        throw new Error("API did not return array");
+      }
+      this.foodsData = data;
       this.render();
     } catch (err) {
-      console.error("Failed to load foods.json:", err);
-      this.shadowRoot.innerHTML = `<p style="color:red">Error loading food data</p>`;
+      console.error("Failed to load foods:", err);
+      this.foodsData = [];
+      this.shadowRoot.innerHTML = `
+      <p style="color:red">Failed to load food data</p>
+    `;
     }
   }
-  
-  openFoodDetail(food){
+
+
+  openFoodDetail(food) {
     const card = document.createElement("food-card");
-    Object.entries(food).forEach(([k,v]) => {
-      if(v!=null) card.setAttribute(k,v);
+    Object.entries(food).forEach(([k, v]) => {
+      if (v != null) card.setAttribute(k, v);
     });
     document.body.appendChild(card);
   }

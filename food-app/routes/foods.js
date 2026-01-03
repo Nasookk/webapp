@@ -40,9 +40,9 @@ router.get("/search", (req, res) => {
     res.json(rows);
 });
 
-router.get("/", authenticate, (req, res) => {
-    try {
-        const rows = db.prepare(`
+router.get("/", (req, res) => {
+  try {
+    const rows = db.prepare(`
       SELECT 
         foods.id,
         foods.name,
@@ -51,20 +51,17 @@ router.get("/", authenticate, (req, res) => {
         foods.ingredients,
         foods.calories,
         foods.img,
-        foods.restaurant_id,
         restaurants.name AS restaurant_name,
-        restaurants.location AS restaurant_location,
-        CASE WHEN ff.id IS NOT NULL THEN 1 ELSE 0 END AS is_favorite
+        restaurants.location AS restaurant_location
       FROM foods
       JOIN restaurants ON foods.restaurant_id = restaurants.id
-      LEFT JOIN favorite_foods ff
-        ON ff.food_id = foods.id AND ff.user_id = ?
-    `).all(req.user.id);
-        res.json(rows);
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: "Could not fetch foods" });
-    }
+    `).all();
+    res.json(rows);
+  } catch (err) {
+    console.error("FOODS QUERY ERROR:", err);
+    res.status(500).json({ error: "Could not fetch foods" });
+  }
 });
+
 
 export default router;
