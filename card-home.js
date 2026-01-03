@@ -10,12 +10,16 @@ class HomeCard extends HTMLElement {
   }
 
   render() {
+    const type = this.getAttribute("type") || "food";
     const name = this.getAttribute("name") || "Нэр байхгүй";
     const price = this.getAttribute("price") || "0₮";
     const rating = parseFloat(this.getAttribute("rating")) || 0;
     const ingredients = this.getAttribute("ingredients") || "Мэдээлэлгүй";
     const calories = this.getAttribute("calories") || "0";
-    const img = this.getAttribute("img") || "https://via.placeholder.com/300x200";
+    const imgAttr = this.getAttribute("img");
+    const img = imgAttr && imgAttr.trim() !== ""
+      ? imgAttr
+      : "https://via.placeholder.com/300x200";
     const location = this.getAttribute("location") || "Тодорхойгүй";
 
     const stars = Array.from({ length: 5 }, (_, i) =>
@@ -94,19 +98,6 @@ class HomeCard extends HTMLElement {
         }
 
         .star { color: #f5a623; font-size: 14px; }
-
-        dialog {
-          border: none; border-radius: 15px; padding: 25px; width: 320px;
-          font-family: sans-serif;
-          box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-        }
-        dialog::backdrop { background: rgba(0,0,0,0.6); backdrop-filter: blur(2px); }
-        
-        .dialog-content h3 { color: #ff6b35; margin: 15px 0 5px 0; }
-        .dialog-content h2 { margin: 0 0 15px 0; color: #333; }
-        .dialog-price { color: #ff6b35; font-weight: 800; font-size: 20px; margin-bottom: 15px; }
-        .dialog-details { font-size: 14px; color: #555; line-height: 1.6; }
-        
         .close-btn {
           background: #ff6b35; color: white; border: none; padding: 12px;
           border-radius: 8px; cursor: pointer; width: 100%; margin-top: 20px;
@@ -118,30 +109,15 @@ class HomeCard extends HTMLElement {
         <button class="like-btn" id="likeBtn">❤</button>
         <img src="${img}" alt="${name}" />
         <div class="info">
-          <h3>📍 ${location}</h3>
+          <h3>${location}</h3>
           <div class="food-name">${name}</div>
-          <div class="price-tag">${price}</div>
+          ${type === "food" ? `<div class="price-tag">${price}</div>` : ""}
           <div class="rating-container">
             <div>${stars}</div>
             <span style="font-size: 11px; color: #999;">${rating}</span>
           </div>
         </div>
       </div>
-
-      <dialog id="foodDialog">
-        <div class="dialog-content">
-          <img src="${img}" style="height:160px; width: 100%; border-radius: 10px; object-fit: cover;" />
-          <h3>📍 ${location}</h3>
-          <h2>${name}</h2>
-          <div class="dialog-price">${price}</div>
-          <div class="dialog-details">
-            <p><b>Орц:</b> ${ingredients}</p>
-            <p><b>Калори:</b> ${calories} ккал</p>
-            <p><b>Үнэлгээ:</b> ${rating} / 5.0</p>
-          </div>
-          <button id="closeBtn" class="close-btn">Хаах</button>
-        </div>
-      </dialog>
     `;
 
     this.setupEvents();
@@ -149,8 +125,6 @@ class HomeCard extends HTMLElement {
 
   setupEvents() {
     const card = this.shadowRoot.querySelector(".card");
-    const dialog = this.shadowRoot.querySelector("#foodDialog");
-    const closeBtn = this.shadowRoot.querySelector("#closeBtn");
     const likeBtn = this.shadowRoot.querySelector("#likeBtn");
     const token = localStorage.getItem("token");
 
@@ -181,12 +155,20 @@ class HomeCard extends HTMLElement {
     });
 
     card.addEventListener("click", () => {
-      dialog.showModal();
-    });
-
-    closeBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      dialog.close();
+      this.dispatchEvent(new CustomEvent("open-food", {
+        detail: {
+          id: this.getAttribute("food-id"),
+          name: this.getAttribute("name"),
+          price: this.getAttribute("price"),
+          rating: this.getAttribute("rating"),
+          ingredients: this.getAttribute("ingredients"),
+          calories: this.getAttribute("calories"),
+          img: this.getAttribute("img"),
+          location: this.getAttribute("location")
+        },
+        bubbles: true,
+        composed: true
+      }));
     });
   }
 }

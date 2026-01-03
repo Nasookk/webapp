@@ -9,6 +9,9 @@ class FoodList extends HTMLElement {
 
   connectedCallback() {
     this.loadData();
+    this.addEventListener("open-food", (e) => {
+      this.openFoodDetail(e.detail);
+    });
   }
 
   async loadData() {
@@ -20,6 +23,14 @@ class FoodList extends HTMLElement {
       console.error("Failed to load foods.json:", err);
       this.shadowRoot.innerHTML = `<p style="color:red">Error loading food data</p>`;
     }
+  }
+  
+  openFoodDetail(food){
+    const card = document.createElement("food-card");
+    Object.entries(food).forEach(([k,v]) => {
+      if(v!=null) card.setAttribute(k,v);
+    });
+    document.body.appendChild(card);
   }
 
   render() {
@@ -79,8 +90,8 @@ class FoodList extends HTMLElement {
             rating="${food.rating}" 
             ingredients="${food.ingredients}" 
             calories="${food.calories}" 
-            img="${food.img}">
             restaurant="${food.restaurant}"
+            img="${food.img}">
           </food-card>
         `).join('')}
       </div>

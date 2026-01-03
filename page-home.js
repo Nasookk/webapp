@@ -39,21 +39,23 @@ class FoodInfoApp extends HTMLElement {
 
   renderFoodCards() {
     return this.food.map(f => `
-      <card-home 
-        name="${f.name}" 
-        location="${f.location}" 
-        price="${f.price}" 
-        rating="${f.rating}" 
-        img="${f.img}" 
-        ingredients="${f.ingredients}" 
-        calories="${f.calories}">
-      </card-home>
-    `).join("");
+    <card-home 
+      food-id="${f.id}"
+      name="${f.name}" 
+      location="${f.restaurant_location}" 
+      price="${f.price}" 
+      rating="${f.rating}" 
+      img="${f.img}" 
+      ingredients="${f.ingredients}" 
+      calories="${f.calories}">
+    </card-home>
+  `).join("");
   }
 
   renderRestaurants() {
     return this.restaurant.map(r => `
       <card-home 
+        type="restaurant"
         name="${r.name}" 
         location="${r.location}" 
         rating="${r.rating}" 

@@ -4,7 +4,7 @@ class FoodCard extends HTMLElement {
     this.attachShadow({ mode: "open" });
     this.state = {
       isFavorite: false,
-      userRating: null 
+      userRating: null
     };
   }
 
@@ -19,6 +19,8 @@ class FoodCard extends HTMLElement {
     const ingredients = this.getAttribute("ingredients") || "Мэдээлэл байхгүй";
     const calories = this.getAttribute("calories") || "0";
     const img = this.getAttribute("img") || "back.png";
+    const restaurantName = this.getAttribute("restaurant-name") || "";
+    const location = this.getAttribute("location") || "";
 
     this.shadowRoot.innerHTML = `
       <style>
@@ -103,6 +105,8 @@ class FoodCard extends HTMLElement {
           <h3>${name}</h3>
           <div class="price">${price}</div>
           <div class="details">
+            <div><b>Ресторан:</b> ${restaurantName}</div>
+            <div><b>Байршил:</b> ${location}</div>
             <div><b>Орц:</b> ${ingredients}</div>
             <div><b>Калори:</b> ${calories} ккал</div>
           </div>
@@ -140,7 +144,7 @@ class FoodCard extends HTMLElement {
     inputs.forEach(input => {
       input.addEventListener("change", (e) => {
         const val = e.target.value;
-        display.textContent = val; 
+        display.textContent = val;
         display.classList.add("show");
         this.state.userRating = val;
       });
