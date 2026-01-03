@@ -25,23 +25,37 @@ router.post("/:restaurantId",
 
 router.get("/search", (req, res) => {
     const q = `%${req.query.q || ""}%`;
-    const rows = db.prepare(
-        `SELECT foods.*, restaurants.name AS restaurant
-     FROM foods
-     JOIN restaurants ON foods.restaurant_id = restaurants.id
-     WHERE foods.name LIKE ?`
-    ).all(q);
-
+    const rows = db.prepare(`
+    SELECT 
+      foods.id,
+      foods.name,
+      foods.price,
+      foods.rating,
+      restaurants.name AS restaurant_name,
+      restaurants.location AS restaurant_location
+    FROM foods
+    JOIN restaurants ON foods.restaurant_id = restaurants.id
+    WHERE foods.name LIKE ?
+  `).all(q);
     res.json(rows);
 });
 
 router.get("/", (req, res) => {
     const rows = db.prepare(`
-        SELECT foods.*, restaurants.name AS restaurant
-        FROM foods
-        JOIN restaurants ON foods.restaurant_id = restaurants.id
-    `).all();
+    SELECT 
+      foods.id,
+      foods.name,
+      foods.price,
+      foods.rating,
+      foods.ingredients,
+      foods.calories,
+      foods.img,
+      foods.restaurant_id,
+      restaurants.name AS restaurant_name,
+      restaurants.location AS restaurant_location
+    FROM foods
+    JOIN restaurants ON foods.restaurant_id = restaurants.id
+  `).all();
     res.json(rows);
 });
-
 export default router;
