@@ -1,5 +1,10 @@
 class RegisterPage extends HTMLElement {
   connectedCallback() {
+    document.title = "Нэвтрэх – Food App";
+    const meta = document.querySelector('meta[name="description"]');
+    if (meta) {
+      meta.content = "Food App-д нэвтэрч захиалга болон дуртай хоолоо удирдаарай.";
+    }
     this.innerHTML = `
       <style>
         :host {
@@ -138,7 +143,7 @@ class RegisterPage extends HTMLElement {
 
           <div class="form-group">
             <label>Нууц үг</label>
-            <input type="password" id="reg-password" placeholder="••••••••" required>
+            <input type="password" autocomplete="new-password" id="reg-password" placeholder="••••••••" required>
           </div>
 
           <button type="submit" class="submit-button">Бүртгэл үүсгэх</button>

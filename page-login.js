@@ -134,29 +134,30 @@ class LoginPage extends HTMLElement {
           font-weight: bold;
         }
       </style>
+      <main>
+        <section class="login-section" aria-label="Login form">
+          <form id="login-form">
+            <h2>Нэвтрэх</h2>
+            <p class="subtitle">Амтлаг бүхний ертөнцөд тавтай морил</p>
 
-      <section class="login-section">
-        <form id="login-form">
-          <h2>Нэвтрэх</h2>
-          <p class="subtitle">Амтлаг бүхний ертөнцөд тавтай морил</p>
+            <div class="form-group">
+              <label for="login-id">Нэвтрэх и-мэйл</label>
+              <input type="email" id="login-id" autocomplete="email" required>
+            </div>
 
-          <div class="form-group">
-            <label for="login-id">Нэвтрэх нэр</label>
-            <input type="text" id="login-id" placeholder="Нэр эсвэл и-мэйл" required>
-          </div>
+            <div class="form-group">
+              <label for="login-password">Нууц үг</label>
+              <input type="password" autocomplete="current-password" id="login-password" placeholder="••••••••" required>
+            </div>
 
-          <div class="form-group">
-            <label for="login-password">Нууц үг</label>
-            <input type="password" id="login-password" placeholder="••••••••" required>
-          </div>
+            <button type="submit" class="login-button">Нэвтрэх</button>
 
-          <button type="submit" class="login-button">Нэвтрэх</button>
-
-          <div class="register-link">
-            Шинэ хэрэглэгч үү? <a href="#/register">Бүртгэл үүсгэх</a>
-          </div>
-        </form>
-      </section>
+            <div class="register-link">
+              Шинэ хэрэглэгч үү? <a href="#/register">Бүртгэл үүсгэх</a>
+            </div>
+          </form>
+        </section>
+      </main>
     `;
 
     this.querySelector("#login-form").addEventListener("submit", async (e) => {
