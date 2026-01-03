@@ -2,7 +2,6 @@ class HomeCard extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
-    this.isLiked = this.getAttribute("is_favorite") === "1";
   }
 
   connectedCallback() {
@@ -48,15 +47,6 @@ class HomeCard extends HTMLElement {
           transform: translateY(-3px);
           box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
-        
-        .like-btn {
-          position: absolute; top: 20px; right: 20px;
-          background: rgba(255,255,255,0.9); border: none; border-radius: 50%;
-          width: 30px; height: 30px; cursor: pointer; font-size: 18px; color: #ccc;
-          display: flex; align-items: center; justify-content: center;
-          box-shadow: 0 2px 5px rgba(0,0,0,0.1); z-index: 2;
-        }
-        .like-btn.active { color: #ff4d4d; }
 
         img {
           width: 100%;
@@ -106,7 +96,6 @@ class HomeCard extends HTMLElement {
       </style>
 
       <div class="card">
-        <button class="like-btn" id="likeBtn">❤</button>
         <img src="${img}" alt="${name}" />
         <div class="info">
           <h3>${location}</h3>
@@ -125,38 +114,6 @@ class HomeCard extends HTMLElement {
 
   setupEvents() {
     const card = this.shadowRoot.querySelector(".card");
-    const likeBtn = this.shadowRoot.querySelector("#likeBtn");
-    likeBtn.classList.toggle("active", this.isLiked);
-    const token = localStorage.getItem("token");
-
-    likeBtn.addEventListener("click", async (e) => {
-      e.stopPropagation();
-      if (!token) {
-        alert("Please Login");
-        return;
-      }
-      const foodId = this.getAttribute("food-id");
-      const method = this.isLiked ? "DELETE" : "POST";
-      const url = this.isLiked
-        ? `http://localhost:3000/api/favorites/foods/${foodId}`
-        : `http://localhost:3000/api/favorites/foods`;
-      try {
-        await fetch(url, {
-          method,
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": "Bearer " + token
-          },
-          body: !this.isLiked ? JSON.stringify({ id: foodId }) : undefined
-        });
-        this.isLiked = !this.isLiked;
-        likeBtn.classList.toggle("active", this.isLiked);
-      } catch (err) {
-        console.error(err);
-        alert("Could not update favorite");
-      }
-    });
-
     card.addEventListener("click", () => {
       this.dispatchEvent(new CustomEvent("open-food", {
         detail: {
@@ -167,7 +124,8 @@ class HomeCard extends HTMLElement {
           ingredients: this.getAttribute("ingredients"),
           calories: this.getAttribute("calories"),
           img: this.getAttribute("img"),
-          location: this.getAttribute("location")
+          location: this.getAttribute("location"),
+          restaurantName: this.getAttribute("restaurant-name") || ""
         },
         bubbles: true,
         composed: true
