@@ -5,7 +5,7 @@
     "rating": "5/5",
     "ingredients": "Гурил, мах, сонгино",
     "calories": "~320 ккал",
-    "img": "./img/img_foods/piroshki.png"
+    "img": "./img/img_foods/piroshki.webp"
   },
   {
     "name": "Гурилтай шөл",
@@ -13,7 +13,7 @@
     "rating": "4/5",
     "ingredients": "Гурил, мах, ногоо",
     "calories": "~280 ккал",
-    "img": "./img/img_foods/shul.png"
+    "img": "./img/img_foods/shul.webp"
   },
   {
     "name": "Цуйван",
@@ -21,7 +21,7 @@
     "rating": "4.5/5",
     "ingredients": "Гахайн мах, гоймон, ногоо",
     "calories": "~520 ккал",
-    "img": "./img/img_foods/tsuivan.png"
+    "img": "./img/img_foods/tsuivan.webp"
   },
   {
     "name": "Төмсний хучмал",
@@ -29,7 +29,7 @@
     "rating": "4.5/5",
     "ingredients": "Гахайн мах, гоймон, ногоо",
     "calories": "~520 ккал",
-    "img": "./img/img_foods/huchmal.png"
+    "img": "./img/img_foods/huchmal.webp"
   },
    {
     "name": "Өндөгтэй хуурга",
@@ -37,7 +37,7 @@
     "rating": "4.5/5",
     "ingredients": "Гахайн мах, гоймон, ногоо",
     "calories": "~520 ккал",
-    "img": "./img/img_foods/uhuurga.png"
+    "img": "./img/img_foods/uhuurga.webp"
   },
   {
     "name": "Тактуритан",
@@ -45,7 +45,7 @@
     "rating": "4.5/5",
     "ingredients": "Гахайн мах, гоймон, ногоо",
     "calories": "~520 ккал",
-    "img": "./img/img_foods/takturitan.png"
+    "img": "./img/img_foods/takturitan.webp"
   },
   {
     "name": "Банштай цай",
@@ -53,7 +53,7 @@
     "rating": "4.5/5",
     "ingredients": "Гахайн мах, гоймон, ногоо",
     "calories": "~520 ккал",
-    "img": "./img/img_foods/tsai.png"
+    "img": "./img/img_foods/tsai.webp"
   },
   {
     "name": "Хуушуур",
@@ -61,6 +61,6 @@
     "rating": "4.5/5",
     "ingredients": "Гахайн мах, гоймон, ногоо",
     "calories": "~520 ккал",
-    "img": "./img/img_foods/huushuur.png"
+    "img": "./img/img_foods/huushuur.webp"
   }
 ]

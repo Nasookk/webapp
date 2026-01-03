@@ -5,42 +5,42 @@
     "rating": "5/5",
     "menu": "Цуйван,Хуушуур",
     "traf" : "80%",
-    "img": "./img/img_restaurants/etugen.png"
+    "img": "./img/img_restaurants/etugen.webp"
   },
   {
     "name": "Мандах зоог",
     "location": "MUIS II",
     "rating": "4/5",
-    "img": "./img/img_restaurants/mandah.png"
+    "img": "./img/img_restaurants/mandah.webp"
   },
   {
     "name": "Friends зоог",
     "location": "MUIS II",
     "rating": "4/5",
-    "img": "./img/img_restaurants/friends.png"
+    "img": "./img/img_restaurants/friends.webp"
   },
   {
     "name": "Дэлгэрэх зоог",
     "location": "MUIS I",
     "rating": "4.5/5",
-    "img": "https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=300&auto=format&fit=crop"
+    "img": "./img/img_restaurants/friends.webp"
   },
   {
     "name": "Зөгий үүр зоогийн газар",
     "location": "MUIS I",
     "rating": "4.5/5",
-    "img": "https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=300&auto=format&fit=crop"
+    "img": "./img/img_restaurants/friends.webp"
   },
   {
     "name": "Сайн зоог",
     "location": "MUIS I",
     "rating": "4.5/5",
-    "img": "https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=300&auto=format&fit=crop"
+    "img": "./img/img_restaurants/friends.webp"
   },
   {
     "name": "Малатан",
     "location": "MUIS I",
     "rating": "4.5/5",
-    "img": "https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=300&auto=format&fit=crop"
+    "img": "./img/img_restaurants/friends.webp"
   }
 ]
