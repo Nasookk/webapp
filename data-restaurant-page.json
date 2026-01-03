@@ -27,19 +27,19 @@
   },
   {
     "name": "Зөгий үүр зоогийн газар",
-    "location": "MUIS I",
+    "location": "MUIS III",
     "rating": "4.5/5",
     "img": "./img/img_restaurants/friends.webp"
   },
   {
     "name": "Сайн зоог",
-    "location": "MUIS I",
+    "location": "MUIS II",
     "rating": "4.5/5",
     "img": "./img/img_restaurants/friends.webp"
   },
   {
     "name": "Малатан",
-    "location": "MUIS I",
+    "location": "MUIS IV",
     "rating": "4.5/5",
     "img": "./img/img_restaurants/friends.webp"
   }
