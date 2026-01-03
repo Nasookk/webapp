@@ -8,74 +8,64 @@ class Footer extends HTMLElement {
         footer {
           display: flex;
           flex-direction: column;
-          padding: 3rem 10% 2rem 10%;
+          padding: 1.5rem 8% 1rem 8%;
           background: linear-gradient(135deg, #ff8c42 0%, #ff6b35 100%);
           color: white;
           font-family: 'Arial', sans-serif;
-          box-shadow: 0 -4px 10px rgba(255, 107, 53, 0.4);
+          box-shadow: 0 -6px 20px rgba(255, 107, 53, 0.6);
+          border-top: 2px solid rgba(255,255,255,0.3);
+          overflow: hidden; /* урсгал текст илүүдлийг далдлана */
         }
 
-        /* ЛОГО ХЭСЭГ */
         .footer-bottom {
           display: flex;
           justify-content: center;
           align-items: center;
-          padding-bottom: 20px;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+          padding-bottom: 10px;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.3);
         }
-      
+
         .logo-area {
           display: flex;
           flex-direction: column;
           align-items: center;
-          gap: 10px;
-          opacity: 0.9;
+          gap: 6px;
           text-align: center;
         }
 
         .logo-text {
           font-weight: 900;
-          font-size: 2rem;
-          letter-spacing: -1px;
+          font-size: 1.5rem;
+          letter-spacing: 1px;
+          text-transform: uppercase;
+          /* anivchdag/pulse-г устгасан */
         }
 
         .copyright-text {
-          font-size: 0.85rem;
+          font-size: 0.7rem;
+          opacity: 0.8;
         }
 
-        /* ТАНЫ АНИМЭЙШН ТЕКСТ */
+        /* Урсах motion */
         .promo-text {
-          margin-top: 3rem;
-          font-size: 2.2rem;
-          font-weight: 800;
+          position: relative;
+          margin-top: 1.2rem;
+          font-size: 1.6rem;
+          font-weight: 900;
           letter-spacing: 2px;
           text-transform: uppercase;
-          text-align: center;
-          text-shadow: 0 0 10px rgba(255,255,255,0.8),
+          color: black;
+          white-space: nowrap;          /* нэг мөрт */
+          will-change: transform;
+          text-shadow: 0 0 10px rgba(0,0,0,0.5),
                        0 0 20px rgba(255,140,66,0.8),
-                       0 0 30px rgba(255,107,53,0.6);
-          animation: epicGlow 4s ease-in-out infinite alternate;
+                       0 0 30px rgba(255,107,53,0.8);
+          animation: flowX 12s linear infinite; /* жигд урсана */
         }
 
-        @keyframes epicGlow {
-          0% {
-            transform: scale(1);
-            color: #fff;
-            text-shadow: 0 0 10px rgba(255,255,255,0.8),
-                         0 0 20px rgba(255,140,66,0.8);
-          }
-          50% {
-            transform: scale(1.1);
-            color: #ffe082;
-            text-shadow: 0 0 15px rgba(255,255,255,1),
-                         0 0 40px rgba(255,140,66,0.8);
-          }
-          100% {
-            transform: scale(1.05);
-            color: #fff;
-            text-shadow: 0 0 12px rgba(255,255,255,0.9),
-                         0 0 35px rgba(255,107,53,0.7);
-          }
+        @keyframes flowX {
+          0%   { transform: translateX(100%); }
+          100% { transform: translateX(-100%); }
         }
       </style>
 
@@ -87,7 +77,7 @@ class Footer extends HTMLElement {
           </div>
         </div>
 
-        <p class="promo-text">Та хоолны бизнесийг базах цаг боллоо</p>
+        <p class="promo-text">Бизнесээ базах цаг...</p>
       </footer>
     `;
   }
