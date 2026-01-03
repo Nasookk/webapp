@@ -40,22 +40,31 @@ router.get("/search", (req, res) => {
     res.json(rows);
 });
 
-router.get("/", (req, res) => {
-    const rows = db.prepare(`
-    SELECT 
-      foods.id,
-      foods.name,
-      foods.price,
-      foods.rating,
-      foods.ingredients,
-      foods.calories,
-      foods.img,
-      foods.restaurant_id,
-      restaurants.name AS restaurant_name,
-      restaurants.location AS restaurant_location
-    FROM foods
-    JOIN restaurants ON foods.restaurant_id = restaurants.id
-  `).all();
-    res.json(rows);
+router.get("/", authenticate, (req, res) => {
+    try {
+        const rows = db.prepare(`
+      SELECT 
+        foods.id,
+        foods.name,
+        foods.price,
+        foods.rating,
+        foods.ingredients,
+        foods.calories,
+        foods.img,
+        foods.restaurant_id,
+        restaurants.name AS restaurant_name,
+        restaurants.location AS restaurant_location,
+        CASE WHEN ff.id IS NOT NULL THEN 1 ELSE 0 END AS is_favorite
+      FROM foods
+      JOIN restaurants ON foods.restaurant_id = restaurants.id
+      LEFT JOIN favorite_foods ff
+        ON ff.food_id = foods.id AND ff.user_id = ?
+    `).all(req.user.id);
+        res.json(rows);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Could not fetch foods" });
+    }
 });
+
 export default router;

@@ -2,7 +2,7 @@ class HomeCard extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
-    this.isLiked = false;
+    this.isLiked = this.getAttribute("is_favorite") === "1";
   }
 
   connectedCallback() {
@@ -126,6 +126,7 @@ class HomeCard extends HTMLElement {
   setupEvents() {
     const card = this.shadowRoot.querySelector(".card");
     const likeBtn = this.shadowRoot.querySelector("#likeBtn");
+    likeBtn.classList.toggle("active", this.isLiked);
     const token = localStorage.getItem("token");
 
     likeBtn.addEventListener("click", async (e) => {
@@ -136,7 +137,9 @@ class HomeCard extends HTMLElement {
       }
       const foodId = this.getAttribute("food-id");
       const method = this.isLiked ? "DELETE" : "POST";
-      const url = `http://localhost:3000/api/favorites/foods${this.isLiked ? "/" + foodId : ""}`;
+      const url = this.isLiked
+        ? `http://localhost:3000/api/favorites/foods/${foodId}`
+        : `http://localhost:3000/api/favorites/foods`;
       try {
         await fetch(url, {
           method,

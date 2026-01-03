@@ -26,7 +26,7 @@ class FoodInfoApp extends HTMLElement {
         const name = card.getAttribute("name").toLowerCase();
         const loc = card.getAttribute("location");
         const matchSearch = !searchText || name.includes(searchText);
-        const matchLoc = !location || loc === location;
+        const matchLoc = !location || loc.toLowerCase() === location.toLowerCase();
         card.style.display = (matchSearch && matchLoc) ? "" : "none";
       });
     });
@@ -47,7 +47,8 @@ class FoodInfoApp extends HTMLElement {
       rating="${f.rating}" 
       img="${f.img}" 
       ingredients="${f.ingredients}" 
-      calories="${f.calories}">
+      calories="${f.calories}"
+      is_favorite="${f.is_favorite}">
     </card-home>
   `).join("");
   }
@@ -163,8 +164,22 @@ class FoodInfoApp extends HTMLElement {
         <div class="foods-section">
           <h2>Popular</h2>
           <div class="foods-grid">${this.renderFoodCards()}</div>
-          <h2>Favourite</h2>
-          <div class="foods-grid">${this.renderFoodCards()}</div>
+          <h2>Favorite</h2>
+          <div class="foods-grid">
+            ${this.food.filter(f => f.is_favorite === 1).map(f => `
+              <card-home 
+                food-id="${f.id}"
+                name="${f.name}" 
+                location="${f.restaurant_location}" 
+                price="${f.price}" 
+                rating="${f.rating}" 
+                img="${f.img}" 
+                ingredients="${f.ingredients}" 
+                calories="${f.calories}"
+                is_favorite="${f.is_favorite}">
+              </card-home>
+            `).join('')}
+          </div>
         </div>
         <div class="restaurants-section">
           <h2>Top Restaurants</h2>
