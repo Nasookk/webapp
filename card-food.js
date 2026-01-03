@@ -51,7 +51,7 @@ class FoodCard extends HTMLElement {
         
         
         .fav-btn {
-          position: absolute; top: 25px; right: 25px;
+          position: absolute; top: 25px; left: 25px;
           background: rgba(255, 255, 255, 0.9); border: none; border-radius: 50%;
           width: 35px; height: 35px; cursor: pointer; font-size: 1.2rem; color: #ccc;
           display: flex; align-items: center; justify-content: center;
@@ -109,6 +109,7 @@ class FoodCard extends HTMLElement {
             <div><b>Байршил:</b> ${location}</div>
             <div><b>Орц:</b> ${ingredients}</div>
             <div><b>Калори:</b> ${calories} ккал</div>
+            <div><b>Үнэлгээ:</b> ${rating}</div>
           </div>
         </div>
         
@@ -135,10 +136,37 @@ class FoodCard extends HTMLElement {
     const display = this.shadowRoot.querySelector("#rating-display");
     const inputs = this.shadowRoot.querySelectorAll('input[name="star"]');
     const favBtn = this.shadowRoot.querySelector("#favBtn");
+    const token = localStorage.getItem("token");
+    this.state.isFavorite = this.getAttribute("is_favorite") === "1";
+    favBtn.classList.toggle("active", this.state.isFavorite);
 
-    favBtn.addEventListener("click", () => {
-      this.state.isFavorite = !this.state.isFavorite;
-      favBtn.classList.toggle("active");
+    favBtn.addEventListener("click", async () => {
+      if (!token) {
+        alert("Please Login");
+        return;
+      }
+      const foodId = this.getAttribute("food-id");
+      const method = this.state.isFavorite ? "DELETE" : "POST";
+      const url = this.state.isFavorite
+        ? `http://localhost:3000/api/favorites/foods/${foodId}`
+        : `http://localhost:3000/api/favorites/foods`;
+
+      try {
+        await fetch(url, {
+          method,
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + token
+          },
+          body: !this.state.isFavorite ? JSON.stringify({ id: foodId }) : undefined
+        });
+
+        this.state.isFavorite = !this.state.isFavorite;
+        favBtn.classList.toggle("active", this.state.isFavorite);
+      } catch (err) {
+        console.error(err);
+        alert("Could not update favorite");
+      }
     });
 
     inputs.forEach(input => {

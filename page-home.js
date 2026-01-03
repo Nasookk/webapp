@@ -64,6 +64,68 @@ class FoodInfoApp extends HTMLElement {
       </card-home>
     `).join("");
   }
+  openFoodCard(foodData) {
+    const overlay = document.createElement("div");
+    overlay.style.position = "fixed";
+    overlay.style.top = 0;
+    overlay.style.left = 0;
+    overlay.style.width = "100%";
+    overlay.style.height = "100%";
+    overlay.style.background = "rgba(0,0,0,0.5)";
+    overlay.style.display = "flex";
+    overlay.style.alignItems = "center";
+    overlay.style.justifyContent = "center";
+    overlay.style.zIndex = 9999;
+    overlay.style.opacity = "0";
+    overlay.style.transition = "opacity 0.3s ease";
+
+    overlay.addEventListener("click", (e) => {
+      if (e.target === overlay) closeModal();
+    });
+
+    const foodCard = document.createElement("food-card");
+    Object.entries(foodData).forEach(([key, value]) => {
+      if (value != null) foodCard.setAttribute(key, value);
+    });
+
+    const container = document.createElement("div");
+    container.style.position = "relative";
+    container.style.maxWidth = "500px";
+    container.style.width = "90%";
+    container.style.transform = "scale(0.5)";
+    container.style.transition = "transform 0.3s ease";
+
+    const closeBtn = document.createElement("button");
+    closeBtn.textContent = "×";
+    closeBtn.style.position = "absolute";
+    closeBtn.style.top = "10px";
+    closeBtn.style.right = "10px";
+    closeBtn.style.fontSize = "1.5rem";
+    closeBtn.style.background = "#ff6b35";
+    closeBtn.style.color = "#fff";
+    closeBtn.style.border = "none";
+    closeBtn.style.borderRadius = "50%";
+    closeBtn.style.width = "35px";
+    closeBtn.style.height = "35px";
+    closeBtn.style.cursor = "pointer";
+    closeBtn.addEventListener("click", closeModal);
+
+    container.appendChild(foodCard);
+    container.appendChild(closeBtn);
+    overlay.appendChild(container);
+    document.body.appendChild(overlay);
+
+    requestAnimationFrame(() => {
+      overlay.style.opacity = "1";
+      container.style.transform = "scale(1)";
+    });
+    function closeModal() {
+      overlay.style.opacity = "0";
+      container.style.transform = "scale(0.5)";
+      setTimeout(() => overlay.remove(), 300); // remove after animation
+    }
+  }
+
 
   async connectedCallback() {
     const foodUrl = this.getAttribute("food-url");
@@ -189,6 +251,9 @@ class FoodInfoApp extends HTMLElement {
     `;
 
     this.attachEventListeners();
+    this.shadowRoot.addEventListener("open-food", (e) => {
+      this.openFoodCard(e.detail);
+    });
   }
 }
 
