@@ -2,7 +2,7 @@ PRAGMA foreign_keys = ON;
 
 CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    username TEXT,             -- Хэрэглэгчийн нэр эсвэл Байгууллагын нэрийг энд хадгална
+    username TEXT,
     email TEXT UNIQUE NOT NULL,
     password TEXT NOT NULL,
     role TEXT CHECK(role IN ('user', 'owner', 'admin')) NOT NULL
@@ -14,7 +14,6 @@ CREATE TABLE IF NOT EXISTS restaurants (
     location TEXT,
     rating TEXT,
     menu TEXT,
-    traf TEXT,
     img TEXT,
     owner_id INTEGER DEFAULT 1,
     FOREIGN KEY (owner_id) REFERENCES users(id) ON DELETE CASCADE

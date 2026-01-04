@@ -30,12 +30,6 @@ function router() {
   const role = localStorage.getItem("role");
   const token = localStorage.getItem("token");
 
-  const publicPaths = ["/food", "/restaurant"];
-  if (token && role === "owner" && publicPaths.includes(path)) {
-    window.location.hash = "#/owner";
-    return;
-  }
-
   if (path === "/owner" && role !== "owner") {
     window.location.hash = "#/";
     return;
