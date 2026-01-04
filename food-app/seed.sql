@@ -21,10 +21,10 @@ INSERT OR IGNORE INTO restaurants (id, name, location, rating, menu, traf, img, 
 
 INSERT OR IGNORE INTO foods (name, price, rating, ingredients, calories, img, restaurant_id) VALUES 
 ('Пирошки', '2,000₮', '5/5', 'Гурил, мах, сонгино', '~320 ккал', './img/img_foods/piroshki.webp', 1),
-('Гурилтай шөл', '13,000₮', '4/5', 'Гурил, мах, ногоо', '~280 ккал', './img/img_foods/shul.webp', 1),
+('Гурилтай шөл', '13,000₮', '4/5', 'Гурил, мах, ногоо', '~280 ккал', './img/img_foods/shul.webp', 2),
 ('Цуйван', '12,000₮', '4.5/5', 'Гахайн мах, гоймон, ногоо', '~520 ккал', './img/img_foods/tsuivan.webp', 1),
-('Төмсний хучмал', '12,000₮', '4.5/5', 'Төмс, татсан мах, ногоо', '~520 ккал', './img/img_foods/huchmal.webp', 1),
+('Төмсний хучмал', '12,000₮', '4.5/5', 'Төмс, татсан мах, ногоо', '~520 ккал', './img/img_foods/huchmal.webp', 4),
 ('Өндөгтэй хуурга', '12,000₮', '4.5/5', 'Өндөг, мах, ногоо', '~520 ккал', './img/img_foods/uhuurga.webp', 1),
-('Тактуритан', '12,000₮', '4.5/5', 'Тахианы мах, төмс, лууван', '~520 ккал', './img/img_foods/takturitan.webp', 1),
+('Тактуритан', '12,000₮', '4.5/5', 'Тахианы мах, төмс, лууван', '~520 ккал', './img/img_foods/takturitan.webp', 3),
 ('Банштай цай', '12,000₮', '4.5/5', 'Банш, сүүтэй цай', '~520 ккал', './img/img_foods/tsai.webp', 1),
 ('Хуушуур', '12,000₮', '4.5/5', 'Мах, гурил', '~520 ккал', './img/img_foods/huushuur.webp', 1);

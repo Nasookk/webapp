@@ -8,6 +8,8 @@ import restaurantRoutes from "./routes/restaurants.js";
 import foodRoutes from "./routes/foods.js";
 import favoritesRoutes from "./routes/favorites.js";
 import ratingsRoutes from "./routes/ratings.js";
+import ownerRoutes from "./routes/owner.js";
+
 
 dotenv.config();
 const __filename = fileURLToPath(import.meta.url);
@@ -22,7 +24,9 @@ app.use("/api/restaurants", restaurantRoutes);
 app.use("/api/foods", foodRoutes);
 app.use("/api/favorites", favoritesRoutes);
 app.use("/api/ratings", ratingsRoutes);
+app.use("/api/owner", ownerRoutes);
 app.use(express.static(path.join(__dirname, "..")));
+
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "..", "index.html"));
 });

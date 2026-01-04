@@ -15,6 +15,7 @@ class Footer extends HTMLElement {
           border-top: 2px solid rgba(255,255,255,0.2);
           overflow: hidden;
           align-items: center;
+          min-height: 80px;
         }
 
         .footer-content {

@@ -75,3 +75,4 @@ CREATE TABLE IF NOT EXISTS food_ratings (
     FOREIGN KEY(food_id) REFERENCES foods(id) ON DELETE CASCADE,
     UNIQUE(user_id, food_id)
 );
+UPDATE users SET role = 'user' WHERE role IS NULL OR role = '';

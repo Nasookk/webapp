@@ -11,3 +11,10 @@ export function authenticate(req, res, next) {
         res.sendStatus(403);
     }
 }
+export function requireOwner(req, res, next) {
+    if (req.user && req.user.role === 'owner') {
+        next();
+    } else {
+        res.status(403).json({ message: "Зөвхөн рестораны эзэн хандах эрхтэй" });
+    }
+}

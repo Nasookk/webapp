@@ -18,6 +18,7 @@ class LoginPage extends HTMLElement {
           justify-content: center;
           align-items: center;
           background: url('./img/back.webp') no-repeat center center;
+          background-size: cover;
           position: relative;
           padding: 20px;
         }
@@ -160,29 +161,46 @@ class LoginPage extends HTMLElement {
       </main>
     `;
 
-    this.querySelector("#login-form").addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const email = this.querySelector("#login-id").value;
-      const password = this.querySelector("#login-password").value;
-      try {
-        const API_URL = `${window.location.origin}`;
-        const res = await fetch(`http://localhost:3000/api/auth/login`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email, password })
-        });
-        if (!res.ok) {
-          alert("Нэвтрэх нэр эсвэл нууц үг буруу");
-          return;
-        }
-        const data = await res.json();
-        localStorage.setItem("token", data.token);
-        window.location.hash = "/";
-      } catch (err) {
-        console.error(err);
-        alert("Сервертэй холбогдож чадсангүй");
-      }
+
+this.querySelector("#login-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const email = this.querySelector("#login-id").value;
+  const password = this.querySelector("#login-password").value;
+
+  try {
+    const res = await fetch(`http://localhost:3000/api/auth/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password })
     });
+
+    const data = await res.json(); // Эхлээд хариугаа авна
+
+    if (!res.ok) {
+      // Хэрэв 401 алдаа ирвэл энд баригдана
+      alert(data.message || "Нэвтрэх нэр эсвэл нууц үг буруу");
+      return;
+    }
+
+    // Одоо data дотор user байгаа нь тодорхой болсон
+    if (data.user && data.user.role) {
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("role", data.user.role);
+
+      if (data.user.role === 'owner') {
+        window.location.hash = "#/owner";
+      } else {
+        window.location.hash = "#/";
+      }
+    } else {
+      throw new Error("Серверээс дутуу мэдээлэл ирлээ (role байхгүй)");
+    }
+
+  } catch (err) {
+    console.error("Login Error:", err);
+    alert("Алдаа гарлаа: " + err.message);
+  }
+});
 
 
   }
