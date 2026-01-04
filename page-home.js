@@ -59,6 +59,22 @@ class FoodInfoApp extends HTMLElement {
   `).join("");
   }
 
+  renderFoodCardsFromArray(arr) {
+    return arr.map(f => `
+    <card-home 
+      food-id="${f.id}"
+      name="${f.name}" 
+      location="${f.restaurant_location}" 
+      price="${f.price}" 
+      rating="${f.rating}" 
+      img="${f.img}" 
+      ingredients="${f.ingredients}" 
+      calories="${f.calories}"
+      is_favorite="${f.is_favorite}">
+    </card-home>
+  `).join("");
+  }
+
   renderFavorites() {
     return this.food
       .filter(f => f.is_favorite === "1")
@@ -99,26 +115,30 @@ class FoodInfoApp extends HTMLElement {
         :host {
           display: block;
           background: linear-gradient(135deg, #ffffff 0%, #fff5eb 100%);
-          min-height: 100vh;
+          padding-bottom: 2rem;
+          padding-left: 2rem;
+          padding-right: 2rem;
         }
         .main-container {
-          max-width: 1400px;
-          margin: 0 auto;
-          padding: 2rem;
-          
           display: flex;
+          flex-wrap: wrap;
           gap: 2rem;
+          align-items: flex-start;
+          justify-content: space-between;
+          max-width: 100%;
         }
         .foods-section { 
           flex: 1; 
           min-width: 0; 
-          margin-top: 20px;}
-
+          margin-top: 20px;
+        }
         .restaurants-section { 
+          flex: 0 0 30%;
           width: 350px; 
           flex-shrink: 0; 
-          margin-top: 20px;}
-      h2 {
+          margin-top: 20px;
+        }
+        h2 {
           color: #ff6b35;
           font-size: 2rem;
           margin-bottom: 1.5rem;
@@ -132,40 +152,145 @@ class FoodInfoApp extends HTMLElement {
           padding-bottom: 1rem;
           scroll-behavior: smooth;
         }
+        .foods-grid.single-row {
+          display: flex;
+          overflow-x: auto;
+          padding-bottom: 1rem;
+        }
         .foods-grid > card-home {
           flex: 0 0 calc(100% / 3.5);
           min-width: 200px;
           display: block;
         }
-        .foods-grid::-webkit-scrollbar { height: 8px; }
+        .favorites-grid > card-home {
+          flex: 0 0 calc(100% / 3.5);
+          min-width: 200px;
+          display: block;
+        }
+        .foods-grid::-webkit-scrollbar { height: 6px; }
         .foods-grid::-webkit-scrollbar-track { background: #fff5eb; border-radius: 10px; }
         .foods-grid::-webkit-scrollbar-thumb { background: #ff8c42; border-radius: 10px; }
         .foods-grid::-webkit-scrollbar-thumb:hover { background: #ff6b35; }
+
         .restaurants-grid {
           display: flex;
           flex-direction: column;
           gap: 1.5rem;
-          max-height: calc(100vh);
+          max-height: calc(70vh);
           overflow-y: auto;
           overflow-x: hidden;
           padding-right: 0.5rem;
         }
-        .restaurants-grid::-webkit-scrollbar { width: 8px; }
+        .restaurants-grid::-webkit-scrollbar { width: 6px; }
         .restaurants-grid::-webkit-scrollbar-track { background: #fff5eb; border-radius: 10px; }
         .restaurants-grid::-webkit-scrollbar-thumb { background: #ff8c42; border-radius: 10px; }
         .restaurants-grid::-webkit-scrollbar-thumb:hover { background: #ff6b35; }
+
         @media (max-width: 1024px) {
           .main-container { flex-direction: column; }
+          :host {
+            padding-left: 0;
+            padding-right: 0;
+          }
+          .foods-section {
+            width: 100%;
+          }
+          .foods-grid {
+            display: flex;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            width: 100%;
+          }
+          .foods-grid > card-home { 
+            flex: 1 1 auto; 
+            min-width: 200px;
+          }
+          .favorites-grid > card-home {
+            flex: 0 0 200px;
+            min-width: 200px;
+          }
           .restaurants-section { width: 100%; }
-          .restaurants-grid { max-height: 500px; }
-          .foods-grid > card-home { flex: 0 0 calc(100% / 2.2); }
+          .restaurants-grid {
+            display: flex;
+            flex-direction: row;
+            overflow-x: auto;
+            overflow-y: hidden;
+            gap: 1rem;
+            padding-bottom: 1rem;
+            scroll-behavior: smooth;
+            max-height: 500px;
+          }
+          .restaurants-grid > card-home {
+            flex: 1 1 auto;
+            min-width: 200px;
+          }
+          .restaurants-grid::-webkit-scrollbar {
+            height: 6px;
+          }
+          .restaurants-grid::-webkit-scrollbar-track {
+            background: #fff5eb;
+            border-radius: 10px;
+          }
+          .restaurants-grid::-webkit-scrollbar-thumb {
+            background: #ff8c42;
+            border-radius: 10px;
+          }
+          .restaurants-grid::-webkit-scrollbar-thumb:hover {
+            background: #ff6b35;
+          }
         }
         @media (max-width: 768px) {
-          .foods-grid > card-home { flex: 0 0 calc(100% / 1.2); }
+          :host {
+            padding-left: 0;
+            padding-right: 0;
+          }
+          .foods-section {
+            width: 100%;
+          }
+          .foods-grid {
+            display: flex;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            width: 100%;
+          }
+          .foods-grid > card-home { 
+            flex: 1 1 auto; 
+            min-width: 200px;
+          }
+          .favorites-grid > card-home {
+            flex: 0 0 200px;
+            min-width: 200px;
+          }
           h2 { font-size: 1.5rem; }
           .main-container { padding: 0 1rem; }
+          .restaurants-grid {
+            display: flex;
+            flex-direction: row;
+            overflow-x: auto;
+            overflow-y: hidden;
+            gap: 1rem;
+            max-height: none;
+            padding-bottom: 1rem;
+            scroll-behavior: smooth;
+          }
+          .restaurants-grid > card-home {
+            flex: 1 1 auto;
+            min-width: 200px;
+          }
         }
         @media (max-width: 480px) {
+          :host {
+            padding-left: 0;
+            padding-right: 0;
+          }
+          .foods-grid > card-home { 
+            flex: 1 1 auto; 
+            min-width: 200px;
+          }
+          .favorites-grid > card-home {
+            flex: 0 0 200px;
+            min-width: 200px;
+          }
           h2 { font-size: 1.2rem; }
         }
       </style>
@@ -176,10 +301,27 @@ class FoodInfoApp extends HTMLElement {
       <div class="main-container">
         <div class="foods-section">
           <h2>Popular</h2>
-          <div class="foods-grid">${this.renderFoodCards()}</div>
+          ${this.hasFavorites() ? `
+            <div class="foods-grid single-row">
+              ${this.renderFoodCards()}
+            </div>
+          ` : (() => {
+        const mid = Math.ceil(this.food.length / 2);
+        return `
+              <div class="foods-grid single-row">
+                ${this.renderFoodCardsFromArray(this.food.slice(0, mid))}
+              </div>
+              <br>
+              <br>
+              <br>
+              <div class="foods-grid single-row">
+                ${this.renderFoodCardsFromArray(this.food.slice(mid))}
+              </div>
+            `;
+      })()}
           ${this.hasFavorites() ? `
             <h2>Favorite</h2>
-            <div class="foods-grid">
+            <div class="foods-grid single-row favorites-grid">
               ${this.renderFavorites()}
             </div>
           ` : ``}

@@ -8,7 +8,6 @@ class Footer extends HTMLElement {
         footer {
           display: flex;
           flex-direction: column;
-          padding: 2rem 8%;
           background: linear-gradient(135deg, #ff8c42 0%, #ff6b35 100%);
           color: white;
           font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
@@ -41,7 +40,6 @@ class Footer extends HTMLElement {
           font-weight: 300;
         }
 
-        /* Хүчтэй анимэйшн */
         .promo-text {
           margin-top: 1.5rem;
           font-size: 1.6rem;
@@ -60,7 +58,6 @@ class Footer extends HTMLElement {
           padding: 8px 25px;
         }
 
-        /* Гэрэлтэх эффект */
         .promo-text::after {
           content: '';
           position: absolute;
@@ -71,7 +68,6 @@ class Footer extends HTMLElement {
           animation: shine 2s infinite;
         }
 
-        /* Хөдөлгөөн: дээшээ гарч, бага зэрэг тэлэлттэй */
         @keyframes moveUp {
           0% {
             transform: translateY(40px) scale(0.9);
@@ -87,14 +83,12 @@ class Footer extends HTMLElement {
           }
         }
 
-        /* Гэрэлтэх анимэйшн */
         @keyframes shine {
           0% { left: -150%; }
           50% { left: 100%; }
           100% { left: 100%; }
         }
 
-        /* Text glow */
         @keyframes glow {
           0% { text-shadow: 0 0 5px rgba(255,255,255,0.5); }
           50% { text-shadow: 0 0 25px rgba(255,255,255,1); }

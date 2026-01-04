@@ -1,4 +1,3 @@
--- Хэрэглэгчдийг username-тэй нь хамт оруулахd
 DELETE FROM foods;
 DELETE FROM restaurants;
 
@@ -13,11 +12,9 @@ INSERT OR IGNORE INTO restaurants (id, name, location, rating, menu, traf, img, 
 (2, 'Мандах зоог', 'MUIS II', '4/5', NULL, NULL, './img/img_restaurants/mandah.webp', 1),
 (3, 'Friends зоог', 'MUIS II', '4/5', NULL, NULL, './img/img_restaurants/friends.webp', 1),
 (4, 'Дэлгэрэх зоог', 'MUIS I', '4.5/5', NULL, NULL, './img/img_restaurants/etugen.webp', 1),
-(5, 'Зөгий үүр зоогийн газар', 'MUIS I', '4.5/5', NULL, NULL, './img/img_restaurants/friends.webp', 1),
+(5, 'Зөгий үүр зоог', 'MUIS I', '4.5/5', NULL, NULL, './img/img_restaurants/friends.webp', 1),
 (6, 'Сайн зоог', 'MUIS I', '4.5/5', NULL, NULL, './img/img_restaurants/mandah.webp', 1),
-(7, 'Малатан', 'MUIS I', '4.5/5', NULL, NULL, './img/img_restaurants/mandah.webp', 1);
-
--- Хоолнуудыг оруулах 
+(7, 'Малатан', 'MUIS I', '4.5/5', NULL, NULL, './img/img_restaurants/mandah.webp', 1); 
 
 INSERT OR IGNORE INTO foods (name, price, rating, ingredients, calories, img, restaurant_id) VALUES 
 ('Пирошки', '2,000₮', '5/5', 'Гурил, мах, сонгино', '~320 ккал', './img/img_foods/piroshki.webp', 1),
