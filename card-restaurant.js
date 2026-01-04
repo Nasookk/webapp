@@ -41,16 +41,6 @@ class RestaurantCard extends HTMLElement {
           transform: translateY(-8px); 
           box-shadow: 0 15px 35px rgba(0,0,0,0.1);
         }
-        
-        .fav-btn {
-          position: absolute; top: 25px; right: 25px;
-          background: rgba(255, 255, 255, 0.9); border: none; border-radius: 50%;
-          width: 35px; height: 35px; cursor: pointer; font-size: 1.2rem; color: #ccc;
-          display: flex; align-items: center; justify-content: center;
-          transition: 0.2s; box-shadow: 0 4px 8px rgba(0,0,0,0.1); z-index: 10;
-        }
-        .fav-btn.active { color: #ff4d4d; }
-
         img { 
           width: 100%; 
           height: 160px; 
@@ -88,7 +78,6 @@ class RestaurantCard extends HTMLElement {
       </style>
 
       <div class="card">
-        <button class="fav-btn" id="favBtn">❤</button>
         <img src="${img}" alt="${name}" />
         
         <div class="info">
@@ -122,12 +111,6 @@ class RestaurantCard extends HTMLElement {
   initEvents() {
     const display = this.shadowRoot.querySelector("#rating-display");
     const inputs = this.shadowRoot.querySelectorAll('input[name="rest-star"]');
-    const favBtn = this.shadowRoot.querySelector("#favBtn");
-
-    favBtn.addEventListener("click", () => {
-      this.state.isFavorite = !this.state.isFavorite;
-      favBtn.classList.toggle("active");
-    });
 
     inputs.forEach(input => {
       input.addEventListener("change", (e) => {

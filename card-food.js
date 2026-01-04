@@ -8,19 +8,24 @@ class FoodCard extends HTMLElement {
     };
   }
   static get observedAttributes() {
-    return ["is_favorite"];
+    return ["is_favorite", "name", "price", "rating", "ingredients", "calories", "img", "restaurant-name", "location"];
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
-    if (name === "is_favorite" && oldValue !== newValue) {
+    if (name === "is_favorite") {
       this.state.isFavorite = newValue === "1";
-      const favBtn = this.shadowRoot?.querySelector("#favBtn");
-      favBtn?.classList.toggle("active", this.state.isFavorite);
+      this.updateFavoriteButton();
+      return;
+    }
+    if (oldValue !== newValue) {
+      this.render();
     }
   }
 
   connectedCallback() {
+    this.state.isFavorite = this.getAttribute("is_favorite") === "1";
     this.render();
+    this.updateFavoriteButton();
   }
 
   render() {
@@ -29,7 +34,7 @@ class FoodCard extends HTMLElement {
     const rating = this.getAttribute("rating") || "0.0";
     const ingredients = this.getAttribute("ingredients") || "Мэдээлэл байхгүй";
     const calories = this.getAttribute("calories") || "0";
-    const img = this.getAttribute("img") || "back.png";
+    const img = this.getAttribute("img") || "./img/img_foods/default.webp";
     const restaurantName = this.getAttribute("restaurant-name") || "";
     const location = this.getAttribute("location") || "";
 
@@ -141,6 +146,13 @@ class FoodCard extends HTMLElement {
     `;
 
     this.initEvents();
+    this.updateFavoriteButton();
+  }
+
+  updateFavoriteButton() {
+    const favBtn = this.shadowRoot?.querySelector("#favBtn");
+    if (!favBtn) return;
+    favBtn.classList.toggle("active", this.state.isFavorite);
   }
 
   initEvents() {
@@ -148,8 +160,6 @@ class FoodCard extends HTMLElement {
     const inputs = this.shadowRoot.querySelectorAll('input[name="star"]');
     const favBtn = this.shadowRoot.querySelector("#favBtn");
     const token = localStorage.getItem("token");
-    this.state.isFavorite = this.getAttribute("is_favorite") === "1";
-    favBtn.classList.toggle("active", this.state.isFavorite);
     favBtn.addEventListener("click", async () => {
       if (!token) {
         alert("Please Login");
@@ -172,7 +182,7 @@ class FoodCard extends HTMLElement {
         });
         this.state.isFavorite = !this.state.isFavorite;
         this.setAttribute("is_favorite", this.state.isFavorite ? "1" : "0");
-        favBtn.classList.toggle("active", this.state.isFavorite);
+        this.updateFavoriteButton();
         this.dispatchEvent(new CustomEvent("favorite-updated", {
           bubbles: true,
           composed: true

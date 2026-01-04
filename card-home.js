@@ -21,9 +21,8 @@ class HomeCard extends HTMLElement {
     const name = this.getAttribute("name") || "Нэр байхгүй";
     const price = this.getAttribute("price") || "0₮";
     const rating = parseFloat(this.getAttribute("rating")) || 0;
-    const ingredients = this.getAttribute("ingredients") || "Мэдээлэлгүй";
-    const calories = this.getAttribute("calories") || "0";
     const imgAttr = this.getAttribute("img");
+    const restaurantName = this.getAttribute("restaurant-name") || "Ресторан";
     const img = imgAttr && imgAttr.trim() !== ""
       ? imgAttr
       : "https://via.placeholder.com/300x200";
@@ -107,7 +106,8 @@ class HomeCard extends HTMLElement {
       <div class="card">
         <img src="${img}" alt="${name}" />
         <div class="info">
-          <h3>${location}</h3>
+          <h3>${restaurantName}</h3>
+          <div style="font-size:12px;color:#888">${location}</div>
           <div class="food-name">${name}</div>
           ${type === "food" ? `<div class="price-tag">${price}</div>` : ""}
           <div class="rating-container">
@@ -134,7 +134,8 @@ class HomeCard extends HTMLElement {
           calories: this.getAttribute("calories"),
           img: this.getAttribute("img"),
           location: this.getAttribute("location"),
-          restaurantName: this.getAttribute("restaurant-name") || ""
+          restaurantName: this.getAttribute("restaurant-name") || "",
+          is_favorite: this.getAttribute("is_favorite") || "0" 
         },
         bubbles: true,
         composed: true

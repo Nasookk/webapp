@@ -24,7 +24,10 @@ class FoodList extends HTMLElement {
       if (!Array.isArray(data)) {
         throw new Error("API did not return array");
       }
-      this.foodsData = data;
+      this.foodsData = data.map(f => ({
+        ...f,
+        is_favorite: f.is_favorite ? "1" : "0"
+      }));
       this.render();
     } catch (err) {
       console.error("Failed to load foods:", err);
@@ -102,8 +105,10 @@ class FoodList extends HTMLElement {
             rating="${food.rating}" 
             ingredients="${food.ingredients}" 
             calories="${food.calories}" 
-            restaurant="${food.restaurant}"
-            img="${food.img}">
+            restaurant-name="${food.restaurant_name}"
+            location="${food.restaurant_location}"
+            img="${food.img}"
+            is_favorite="${food.is_favorite}">
           </food-card>
         `).join('')}
       </div>

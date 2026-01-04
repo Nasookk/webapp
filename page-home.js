@@ -16,21 +16,24 @@ class FoodInfoApp extends HTMLElement {
     const searchInput = root.getElementById("searchInput");
     const locationSelect = root.getElementById("locationSelect");
     if (!searchBtn || !searchInput || !locationSelect) return;
-
-    searchBtn.addEventListener("click", () => {
+    const doSearch = () => {
       const searchText = searchInput.value.toLowerCase();
-      const location = locationSelect.value;
+      const location = locationSelect.value.toLowerCase();
       const allCards = this.shadowRoot.querySelectorAll("card-home");
-
       allCards.forEach(card => {
-        const name = card.getAttribute("name").toLowerCase();
-        const loc = card.getAttribute("location");
-        const matchSearch = !searchText || name.includes(searchText);
-        const matchLoc = !location || loc.toLowerCase() === location.toLowerCase();
+        const foodName = card.getAttribute("name").toLowerCase();
+        const restaurantName = card.getAttribute("restaurant-name").toLowerCase();
+        const loc = card.getAttribute("location").toLowerCase();
+        const matchSearch = !searchText || foodName.includes(searchText) || restaurantName.includes(searchText);
+        const matchLoc = !location || loc === location;
         card.style.display = (matchSearch && matchLoc) ? "" : "none";
       });
-    });
+    };
+    searchBtn.addEventListener("click", doSearch);
+    searchInput.addEventListener("input", doSearch);
+    locationSelect.addEventListener("change", doSearch);
   }
+
 
   async downloadData(url) {
     const token = localStorage.getItem("token");
@@ -48,6 +51,7 @@ class FoodInfoApp extends HTMLElement {
     <card-home 
       food-id="${f.id}"
       name="${f.name}" 
+      restaurant-name="${f.restaurant_name}"
       location="${f.restaurant_location}" 
       price="${f.price}" 
       rating="${f.rating}" 
@@ -64,6 +68,7 @@ class FoodInfoApp extends HTMLElement {
     <card-home 
       food-id="${f.id}"
       name="${f.name}" 
+      restaurant-name="${f.restaurant_name}"
       location="${f.restaurant_location}" 
       price="${f.price}" 
       rating="${f.rating}" 
@@ -82,6 +87,7 @@ class FoodInfoApp extends HTMLElement {
         <card-home 
           food-id="${f.id}"
           name="${f.name}" 
+          restaurant-name="${f.restaurant_name}"
           location="${f.restaurant_location}" 
           price="${f.price}" 
           rating="${f.rating}" 
@@ -95,13 +101,13 @@ class FoodInfoApp extends HTMLElement {
 
   renderRestaurants() {
     return this.restaurant.map(r => `
-      <card-home 
+      <restaurant-card
         type="restaurant"
         name="${r.name}" 
         location="${r.location}" 
         rating="${r.rating}" 
         img="${r.img}">
-      </card-home>
+      </restaurant-card>
     `).join("");
   }
   hasFavorites() {
@@ -341,6 +347,7 @@ class FoodInfoApp extends HTMLElement {
     ]);
     this.food = foodData.map(f => ({
       ...f,
+      restaurant_name: f.restaurant_name || f.restaurant?.name || "Unknown",
       is_favorite: String(f.is_favorite)
     }));
     this.restaurant = restaurantData;
@@ -349,6 +356,16 @@ class FoodInfoApp extends HTMLElement {
   }
 
   openFoodCard(foodData) {
+    const foodCard = document.createElement("food-card");
+    foodCard.setAttribute("food-id", foodData.id);
+    foodCard.setAttribute("name", foodData.name);
+    foodCard.setAttribute("price", foodData.price);
+    foodCard.setAttribute("rating", foodData.rating);
+    foodCard.setAttribute("ingredients", foodData.ingredients);
+    foodCard.setAttribute("calories", foodData.calories);
+    foodCard.setAttribute("img", foodData.img);
+    foodCard.setAttribute("restaurant-name", foodData.restaurant_name);
+    foodCard.setAttribute("location", foodData.restaurant_location);
     const overlay = document.createElement("div");
     overlay.style.position = "fixed";
     overlay.style.top = 0;
@@ -362,12 +379,9 @@ class FoodInfoApp extends HTMLElement {
     overlay.style.zIndex = 9999;
     overlay.style.opacity = "0";
     overlay.style.transition = "opacity 0.3s ease";
-
     overlay.addEventListener("click", (e) => {
       if (e.target === overlay) closeModal();
     });
-
-    const foodCard = document.createElement("food-card");
     foodCard.setAttribute("food-id", foodData.id);
     Object.entries(foodData).forEach(([key, value]) => {
       if (value != null) foodCard.setAttribute(key, value);
@@ -375,14 +389,12 @@ class FoodInfoApp extends HTMLElement {
     if (foodData.is_favorite != null) {
       foodCard.setAttribute("is_favorite", foodData.is_favorite);
     }
-
     const container = document.createElement("div");
     container.style.position = "relative";
     container.style.maxWidth = "500px";
     container.style.width = "90%";
     container.style.transform = "scale(0.5)";
     container.style.transition = "transform 0.3s ease";
-
     const closeBtn = document.createElement("button");
     closeBtn.textContent = "×";
     closeBtn.style.position = "absolute";
@@ -397,12 +409,10 @@ class FoodInfoApp extends HTMLElement {
     closeBtn.style.height = "35px";
     closeBtn.style.cursor = "pointer";
     closeBtn.addEventListener("click", closeModal);
-
     container.appendChild(foodCard);
     container.appendChild(closeBtn);
     overlay.appendChild(container);
     document.body.appendChild(overlay);
-
     requestAnimationFrame(() => {
       overlay.style.opacity = "1";
       container.style.transform = "scale(1)";
