@@ -4,18 +4,31 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Food App</title>
-  <meta
-    name="description"
-    content="Discover Mongolian foods, restaurants, and order your favorite meals easily."
-  />
+  <meta name="description" content="Discover Mongolian foods, restaurants, and order your favorite meals easily." />
+
+  <link rel="preconnect" href="http://localhost:3000">
+  <link rel="preload" href="/api/foods" as="fetch" crossorigin>
+  <link rel="preload" href="/api/restaurants" as="fetch" crossorigin>
+
+  <link rel="modulepreload" href="./router.js">
+  <link rel="modulepreload" href="./pages/home.js">
+  <link rel="modulepreload" href="./page-home.js">
+
+  <style>
+    #app {
+      min-height: 80vh;
+      display: block;
+    }
+  </style>
 </head>
 
 <body>
   <header-js></header-js>
-  <div id="app"></div>
+  <main id="app"></main>
   <footer-js></footer-js>
-  <script type="module" src="./header.js"></script>
-  <script type="module" src="./footer.js"></script>
-  <script type="module" src="./router.js"></script>
+
+  <script type="module" src="./header.js" defer></script>
+  <script type="module" src="./footer.js" defer></script>
+  <script type="module" src="./router.js" defer></script>
 </body>
 </html>

@@ -5,7 +5,6 @@ import { LoginPage } from "./pages/login.js";
 import { RegisterPage } from "./pages/register.js";
 import { OwnerDashboard } from "./pages/owner.js";
 
-// Бүх компонентуудаа импортлох
 import "./search-bar.js";
 import './page-home.js';
 import './page-food.js';
@@ -31,30 +30,21 @@ function router() {
   const role = localStorage.getItem("role");
   const token = localStorage.getItem("token");
 
-  // --- ХАМГААЛАЛТЫН ХЭСЭГ ---
-
-  // 1. Хэрэв Owner нэвтэрсэн үед Home, Food, Restaurant руу орох гэвэл 
-  // шууд өөрийнх нь Dashboard (/owner) руу шилжүүлнэ.
-  const publicPaths = ["/", "/food", "/restaurant"];
+  const publicPaths = ["/food", "/restaurant"];
   if (token && role === "owner" && publicPaths.includes(path)) {
     window.location.hash = "#/owner";
     return;
   }
 
-  // 2. Хэрэв Энгийн хэрэглэгч эсвэл нэвтрээгүй хүн /owner руу орох гэвэл
-  // шууд Home (/) руу буцаана.
   if (path === "/owner" && role !== "owner") {
     window.location.hash = "#/";
     return;
   }
-
-  // 3. Нэвтэрсэн хэрэглэгч Login/Register хуудас руу орох гэвэл буцаах
   if (token && (path === "/login" || path === "/register")) {
     window.location.hash = "#/";
     return;
   }
 
-  // Хуудсаа зурах
   const page = routes[path] || (() => "<h1>404 - Хуудас олдсонгүй</h1>");
   document.getElementById("app").innerHTML = page();
 }
@@ -65,5 +55,4 @@ export function navigate(path) {
 
 window.addEventListener("hashchange", router);
 
-// Анх ачаалагдах үед ажиллуулах
 router();

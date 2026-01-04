@@ -89,8 +89,7 @@ class SearchBar extends HTMLElement {
             ${css}
             <div class="search-bar">
                 <input id="searchInput" type="text" placeholder="Search...">
-
-            <select id="locationSelect">
+            <select id="locationSelect" aria-label="Байршил сонгох">
                 <option value="">All Locations</option>
                 <option value="MUIS I">MUIS I</option>
                 <option value="MUIS II">MUIS II</option>

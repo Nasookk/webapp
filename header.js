@@ -62,7 +62,7 @@ class Header extends HTMLElement {
         <nav>
           <ul>
             ${isOwner ? `
-              <li><a href="#/owner" class="dashboard-btn"><span>Миний ресторан</span></a></li>
+              <li><a href="#/owner" class="dashboard-btn"><span>My restaurants</span></a></li>
             ` : `
               <li><a href="#/"><span>Home</span></a></li>
               <li><a href="#/food"><span>Foods</span></a></li>
@@ -70,8 +70,8 @@ class Header extends HTMLElement {
             `}
 
             ${token
-              ? `<li><a href="#/logout" id="logout-link"><span>Гарах</span></a></li>`
-              : `<li><a href="#/login"><span>Нэвтрэх</span></a></li>`
+              ? `<li><a href="#/logout" id="logout-link"><span>Log out</span></a></li>`
+              : `<li><a href="#/login"><span>Log in</span></a></li>`
             }
           </ul>
         </nav>
