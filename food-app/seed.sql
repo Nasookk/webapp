@@ -3,13 +3,11 @@ DELETE FROM restaurants;
 
 INSERT OR IGNORE INTO users (id, username, email, password, role) 
 VALUES 
-(1, 'Admin', 'admin@foodapp.mn', '123456', 'owner'),
-(2, 'Amaraa', 'amaraa@gmail.com', '123456', 'user'), 
-(3, 'Naso', 'naso@gmail.com', '123456', 'user');
+(1, 'Admin', 'admin@foodapp.mn', '123456', 'owner');
 
 INSERT OR IGNORE INTO restaurants (id, name, location, rating, menu, img, owner_id) VALUES 
-(1, 'Этүгэн', 'MUIS III', '5/5', 'Цуйван,Хуушуур', './img/img_restaurants/etugen.webp', 5),
-(2, 'Мандах зоог', 'MUIS II', '4/5', NULL, './img/img_restaurants/mandah.webp', 4),
+(1, 'Этүгэн', 'MUIS III', '5/5', 'Цуйван,Хуушуур', './img/img_restaurants/etugen.webp', 1),
+(2, 'Мандах зоог', 'MUIS II', '4/5', NULL, './img/img_restaurants/mandah.webp', 1),
 (3, 'Friends зоог', 'MUIS II', '4/5', NULL, './img/img_restaurants/friends.webp', 1),
 (4, 'Дэлгэрэх зоог', 'MUIS I', '4.5/5', NULL, './img/img_restaurants/etugen.webp', 1),
 (5, 'Зөгий үүр зоог', 'MUIS I', '4.5/5', NULL, './img/img_restaurants/friends.webp', 1),

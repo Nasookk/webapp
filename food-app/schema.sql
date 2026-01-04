@@ -75,3 +75,9 @@ CREATE TABLE IF NOT EXISTS food_ratings (
     UNIQUE(user_id, food_id)
 );
 UPDATE users SET role = 'user' WHERE role IS NULL OR role = '';
+SELECT 
+    f.*, 
+    r.name AS restaurant_name, 
+    r.location AS restaurant_location
+FROM foods f
+JOIN restaurants r ON f.restaurant_id = r.id;

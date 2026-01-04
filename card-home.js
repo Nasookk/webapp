@@ -64,7 +64,8 @@ class HomeCard extends HTMLElement {
           margin-bottom: 10px;
         }
 
-        .info { width: 100%; }
+        .info { 
+          width: 100%; }
 
         .info h3 {
           margin: 0 0 5px 0;
@@ -95,11 +96,20 @@ class HomeCard extends HTMLElement {
           width: 100%;
         }
 
-        .star { color: #f5a623; font-size: 14px; }
+        .star { 
+          color: #f5a623; 
+          font-size: 14px; }
         .close-btn {
-          background: #ff6b35; color: white; border: none; padding: 12px;
-          border-radius: 8px; cursor: pointer; width: 100%; margin-top: 20px;
-          font-weight: bold; font-size: 16px;
+          background: #ff6b35; 
+          color: white; 
+          border: none; 
+          padding: 12px;
+          border-radius: 8px; 
+          cursor: pointer; 
+          width: 100%;
+          margin-top: 20px;
+          font-weight: bold; 
+          font-size: 16px;
         }
       </style>
 
@@ -120,6 +130,7 @@ class HomeCard extends HTMLElement {
 
     this.setupEvents();
   }
+<<<<<<< HEAD
 
   setupEvents() {
     const card = this.shadowRoot.querySelector(".card");
@@ -142,6 +153,28 @@ class HomeCard extends HTMLElement {
       }));
     });
   }
+=======
+setupEvents() {
+  const card = this.shadowRoot.querySelector(".card");
+  card.addEventListener("click", () => {
+    this.dispatchEvent(new CustomEvent("open-food", {
+      detail: {
+        "food-id": this.getAttribute("food-id"),
+        "name": this.getAttribute("name"),
+        "price": this.getAttribute("price"),
+        "rating": this.getAttribute("rating"),
+        "ingredients": this.getAttribute("ingredients"),
+        "calories": this.getAttribute("calories"),
+        "img": this.getAttribute("img"),
+        "location": this.getAttribute("location"),
+        "restaurant-name": this.getAttribute("restaurant-name") 
+      },
+      bubbles: true,
+      composed: true
+    }));
+  });
+}
+>>>>>>> b0e28b28909e38f091571aa273ea3761ab128a44
 }
 
 customElements.define("card-home", HomeCard);

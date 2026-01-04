@@ -15,6 +15,6 @@ export function requireOwner(req, res, next) {
     if (req.user && req.user.role === 'owner') {
         next();
     } else {
-        res.status(403).json({ message: "Зөвхөн рестораны эзэн хандах эрхтэй" });
+        res.status(403).json({ message: "owner handah erhtei" });
     }
 }

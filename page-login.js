@@ -174,15 +174,14 @@ this.querySelector("#login-form").addEventListener("submit", async (e) => {
       body: JSON.stringify({ email, password })
     });
 
-    const data = await res.json(); // Эхлээд хариугаа авна
+    const data = await res.json(); 
 
     if (!res.ok) {
-      // Хэрэв 401 алдаа ирвэл энд баригдана
+      
       alert(data.message || "Нэвтрэх нэр эсвэл нууц үг буруу");
       return;
     }
 
-    // Одоо data дотор user байгаа нь тодорхой болсон
     if (data.user && data.user.role) {
       localStorage.setItem("token", data.token);
       localStorage.setItem("role", data.user.role);
