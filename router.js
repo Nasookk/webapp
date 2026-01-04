@@ -14,7 +14,7 @@ import './card-food.js';
 import './header.js';
 import './page-login.js';
 import './page-register.js';
-import './owner-page.js';
+import './page-owner.js';
 
 const routes = {
   "/": HomePage,
