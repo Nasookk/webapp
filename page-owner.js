@@ -29,8 +29,13 @@ class OwnerPage extends HTMLElement {
   render() {
     this.shadowRoot.innerHTML = `
       <style>
-        :host { display: block; padding: 20px; font-family: 'Segoe UI', Tahoma, sans-serif; background: #f0f2f5; min-height: 100vh; }
-        .container { max-width: 1200px; margin: 0 auto; }
+        :host { 
+          display: block; 
+          padding: 20px; 
+          font-family: 'Segoe UI', Tahoma, sans-serif; 
+          background: #f0f2f5; min-height: 100vh; }
+        .container { 
+        max-width: 1200px; margin: 0 auto; }
         
         .header-card { background: white; padding: 20px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 8px rgba(0,0,0,0.05); margin-bottom: 25px; }
         .header-card h1 { margin: 0; font-size: 1.5rem; color: #1a1a1a; }
@@ -49,7 +54,7 @@ class OwnerPage extends HTMLElement {
         .btn-delete { width: 100%; padding: 8px; background: #fee2e2; color: #ef4444; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; margin-top: 10px; }
         .btn-delete:hover { background: #fecaca; }
 
-        /* Modal CSS */
+       
         .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.5); display: none; justify-content: center; align-items: center; z-index: 1000; backdrop-filter: blur(4px); }
         .modal.active { display: flex; }
         .modal-content { background: white; padding: 30px; border-radius: 16px; width: 400px; box-shadow: 0 20px 25px rgba(0,0,0,0.1); }
