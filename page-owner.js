@@ -77,14 +77,24 @@ class OwnerPage extends HTMLElement {
         padding:20px;
       }
       .card {
-        background:white;
-        padding:40px 30px;
-        border-radius:16px;
-        box-shadow:0 10px 25px rgba(0,0,0,0.1);
-        width:100%;
-        max-width:400px;
-        text-align:center;
+        background: #ffffff;
+        border-radius: 20px;
+        padding: 18px;
+        width: 100%;
+        min-height: 400px;
+        box-sizing: border-box;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        position: relative;
+        transition: 0.3s ease;
+        border: 1px solid #f0f0f0;
+        display: flex;
+        flex-direction: column;
       }
+        .card:hover { 
+          transform: translateY(-8px); 
+          box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
       h2 {
         margin-bottom:25px;
         color:#1a1a1a;
@@ -123,6 +133,7 @@ class OwnerPage extends HTMLElement {
       button:hover {
         background:#e85a2a;
       }
+        
     </style>
 
     <div class="center-container">
@@ -130,11 +141,11 @@ class OwnerPage extends HTMLElement {
         <h2>Шинэ Restaurant үүсгэх</h2>
         <div class="form-group">
           <label>Restaurant нэр</label>
-          <input type="text" id="rName" placeholder="Nomad Kitchen">
+          <input type="text" id="rName" placeholder="restaurant name">
         </div>
         <div class="form-group">
           <label>Байршил</label>
-          <input type="text" id="rAddress" placeholder="Улаанбаатар">
+          <input type="text" id="rAddress" placeholder="location">
         </div>
         <div class="form-group">
           <label>Зургийн зам</label>
@@ -173,7 +184,7 @@ class OwnerPage extends HTMLElement {
         .container { 
         max-width: 1200px; margin: 0 auto; }
         
-        .header-card { background: white; padding: 20px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 8px rgba(0,0,0,0.05); margin-bottom: 25px; }
+        .header-card { background: white; padding: 20px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 8px rgba(0,0,0,0.05); margin-bottom: 25px; margin-top: 50px;}
         .header-card h1 { margin: 0; font-size: 1.5rem; color: #1a1a1a; }
         
         .btn-add { background: #ff6b35; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; transition: 0.3s; }
@@ -258,12 +269,18 @@ class OwnerPage extends HTMLElement {
         box-shadow: 0 10px 20px rgba(0,0,0,0.12);
       }
 
-      .food-card img {
-        width: 100%;
-        height: 180px;
-        object-fit: cover;
-      }
-
+     .food-card img { 
+    width: 100%;           
+    height: 160px;         
+    border-radius: 15px; 
+    object-fit: cover;     
+    object-position: center; 
+    background: #f8f8f8;
+    display: block;        
+    margin: 0 auto 12px auto; 
+     padding: 10px;         
+    box-sizing: border-box; 
+}
       .food-content {
         padding: 15px;
         display: flex;
