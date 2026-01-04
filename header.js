@@ -18,7 +18,6 @@ class Header extends HTMLElement {
     const token = localStorage.getItem("token");
     const role = localStorage.getItem("role");
 
-    // Owneriig shalgah 
     const isOwner = token && role === 'owner';
 
     this.shadowRoot.innerHTML = `
@@ -61,14 +60,12 @@ class Header extends HTMLElement {
 
         <nav>
           <ul>
+            <li><a href="#/"><span>Home</span></a></li>
+            <li><a href="#/food"><span>Foods</span></a></li>
+            <li><a href="#/restaurant"><span>Restaurants</span></a></li>
             ${isOwner ? `
               <li><a href="#/owner" class="dashboard-btn"><span>My restaurants</span></a></li>
-            ` : `
-              <li><a href="#/"><span>Home</span></a></li>
-              <li><a href="#/food"><span>Foods</span></a></li>
-              <li><a href="#/restaurant"><span>Restaurants</span></a></li>
-            `}
-
+            ` : ""}
             ${token
               ? `<li><a href="#/logout" id="logout-link"><span>Log out</span></a></li>`
               : `<li><a href="#/login"><span>Log in</span></a></li>`
