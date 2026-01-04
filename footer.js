@@ -12,7 +12,6 @@ class Footer extends HTMLElement {
         footer {
           display: flex;
           flex-direction: column;
-          padding: 2rem 8%;
           background: linear-gradient(135deg, #ff8c42 0%, #ff6b35 100%);
           color: white;
           font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
@@ -63,7 +62,10 @@ class Footer extends HTMLElement {
           will-change: transform, opacity;
         }
 
+<<<<<<< HEAD
         /* Гэрэлтэх эффект - left-ийн оронд transform ашиглав */
+=======
+>>>>>>> 9109db3db670a13084f76b0d4db1d1f8d6f65d26
         .promo-text::after {
           content: '';
           position: absolute;
@@ -77,7 +79,10 @@ class Footer extends HTMLElement {
           will-change: transform;
         }
 
+<<<<<<< HEAD
       
+=======
+>>>>>>> 9109db3db670a13084f76b0d4db1d1f8d6f65d26
         @keyframes moveUp {
           0% {
             transform: translateY(10px);
@@ -89,10 +94,23 @@ class Footer extends HTMLElement {
           }
         }
 
+<<<<<<< HEAD
         /* Layout Shift үүсгэдэггүй shine анимэйшн */
         @keyframes shine {
           0% { transform: translateX(-200%); }
           100% { transform: translateX(250%); }
+=======
+        @keyframes shine {
+          0% { left: -150%; }
+          50% { left: 100%; }
+          100% { left: 100%; }
+        }
+
+        @keyframes glow {
+          0% { text-shadow: 0 0 5px rgba(255,255,255,0.5); }
+          50% { text-shadow: 0 0 25px rgba(255,255,255,1); }
+          100% { text-shadow: 0 0 10px rgba(255,255,255,0.7); }
+>>>>>>> 9109db3db670a13084f76b0d4db1d1f8d6f65d26
         }
 
         .divider {
