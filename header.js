@@ -23,7 +23,9 @@ class Header extends HTMLElement {
 
     this.shadowRoot.innerHTML = `
       <style>
-        :host { display: block; width: 100%; }
+        :host { 
+          display: block; 
+          width: 100%; }
         header {
           display: flex;
           justify-content: space-between;

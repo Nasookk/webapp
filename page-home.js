@@ -44,11 +44,12 @@ class FoodInfoApp extends HTMLElement {
   }
 
   renderFoodCards() {
-    return this.food.map(f => `
+  return this.food.map(f => `
     <card-home 
       food-id="${f.id}"
       name="${f.name}" 
       location="${f.restaurant_location}" 
+      restaurant-name="${f.restaurant_name}" 
       price="${f.price}" 
       rating="${f.rating}" 
       img="${f.img}" 
@@ -57,7 +58,7 @@ class FoodInfoApp extends HTMLElement {
       is_favorite="${f.is_favorite}">
     </card-home>
   `).join("");
-  }
+}
 
   renderFoodCardsFromArray(arr) {
     return arr.map(f => `

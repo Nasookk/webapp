@@ -15,7 +15,6 @@ class Footer extends HTMLElement {
           border-top: 2px solid rgba(255,255,255,0.2);
           overflow: hidden;
           align-items: center;
-          /* CLS-ээс сэргийлж тогтмол өндөр зааж өгөх эсвэл min-height-ийг тодорхой болгох */
           min-height: 180px; 
         }
 
@@ -33,7 +32,6 @@ class Footer extends HTMLElement {
           letter-spacing: 2px;
           text-transform: uppercase;
           margin: 0;
-          /* text-shadow-г анимэйшн биш тогтмол болгох нь гүйцэтгэлд сайн */
           text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
 
@@ -56,12 +54,9 @@ class Footer extends HTMLElement {
           border-bottom: 2px solid rgba(255,255,255,0.3);
           padding: 8px 25px;
 
-          /* Зөвхөн compositor ашиглах анимэйшн (transform болон opacity) */
           animation: moveUp 2s ease-out forwards;
           will-change: transform, opacity;
         }
-
-        /* Гэрэлтэх эффект - left-ийн оронд transform ашиглав */
         .promo-text::after {
           content: '';
           position: absolute;
@@ -70,12 +65,9 @@ class Footer extends HTMLElement {
           width: 70%;
           height: 100%;
           background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
-          /* transform: translateX ашиглах нь CLS үүсгэхгүй */
           animation: shine 2s infinite linear;
           will-change: transform;
         }
-
-        /* CLS-ээс сэргийлсэн зөөлөн хөдөлгөөн */
         @keyframes moveUp {
           0% {
             transform: translateY(10px);
@@ -86,13 +78,10 @@ class Footer extends HTMLElement {
             opacity: 1;
           }
         }
-
-        /* Layout Shift үүсгэдэггүй shine анимэйшн */
         @keyframes shine {
           0% { transform: translateX(-200%); }
           100% { transform: translateX(250%); }
         }
-
         .divider {
           width: 50px;
           height: 3px;

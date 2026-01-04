@@ -12,7 +12,6 @@ class RestaurantCard extends HTMLElement {
     const location = this.getAttribute("location") || "Байршил тодорхойгүй";
     const rating = this.getAttribute("rating") || "0.0";
     const menu = this.getAttribute("menu") || "Мэдээлэлгүй";
-    const traf = this.getAttribute("traf") || "Хэвийн";
     const img = this.getAttribute("img") || "restaurant.png";
 
     this.shadowRoot.innerHTML = `
@@ -96,7 +95,7 @@ class RestaurantCard extends HTMLElement {
           <div class="location-text">${location}</div>
           <div class="details">
             <div><b>Цэс:</b> ${menu}</div>
-            <div><span class="traffic-light"></span><b>Ачаалал:</b> ${traf}</div>
+           
           </div>
         </div>
         
