@@ -33,7 +33,12 @@ class FoodInfoApp extends HTMLElement {
   }
 
   async downloadData(url) {
-    const r = await fetch(url);
+    const token = localStorage.getItem("token");
+    const r = await fetch(url, {
+      headers: token
+        ? { Authorization: `Bearer ${token}` }
+        : {}
+    });
     const data = await r.json();
     return Array.isArray(data) ? data : [];
   }
@@ -56,7 +61,7 @@ class FoodInfoApp extends HTMLElement {
 
   renderFavorites() {
     return this.food
-      .filter(f => f.is_favorite === 1)
+      .filter(f => f.is_favorite === "1")
       .map(f => `
         <card-home 
           food-id="${f.id}"
@@ -82,6 +87,9 @@ class FoodInfoApp extends HTMLElement {
         img="${r.img}">
       </card-home>
     `).join("");
+  }
+  hasFavorites() {
+    return this.food.some(f => f.is_favorite === "1");
   }
 
   render() {
@@ -169,13 +177,12 @@ class FoodInfoApp extends HTMLElement {
         <div class="foods-section">
           <h2>Popular</h2>
           <div class="foods-grid">${this.renderFoodCards()}</div>
-          <h2>Favorite</h2>
-          <div class="foods-grid">
-            ${this.food.filter(f => f.is_favorite === 1).length > 0
-              ? this.renderFavorites()
-              : this.renderFoodCards()
-            }
-          </div>
+          ${this.hasFavorites() ? `
+            <h2>Favorite</h2>
+            <div class="foods-grid">
+              ${this.renderFavorites()}
+            </div>
+          ` : ``}
         </div>
         <div class="restaurants-section">
           <h2>Top Restaurants</h2>
@@ -190,7 +197,10 @@ class FoodInfoApp extends HTMLElement {
       this.downloadData(this.getAttribute("food-url")),
       this.downloadData(this.getAttribute("restaurant-url"))
     ]);
-    this.food = foodData;
+    this.food = foodData.map(f => ({
+      ...f,
+      is_favorite: String(f.is_favorite)
+    }));
     this.restaurant = restaurantData;
     this.render();
     this.attachEventListeners();
@@ -278,7 +288,10 @@ class FoodInfoApp extends HTMLElement {
       this.downloadData(foodUrl),
       this.downloadData(restaurantUrl)
     ]);
-    this.food = foodData;
+    this.food = foodData.map(f => ({
+      ...f,
+      is_favorite: String(f.is_favorite)
+    }));
     this.restaurant = restaurantData;
     this.render();
     this.attachEventListeners();

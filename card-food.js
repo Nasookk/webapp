@@ -7,6 +7,17 @@ class FoodCard extends HTMLElement {
       userRating: null
     };
   }
+  static get observedAttributes() {
+    return ["is_favorite"];
+  }
+
+  attributeChangedCallback(name, oldValue, newValue) {
+    if (name === "is_favorite" && oldValue !== newValue) {
+      this.state.isFavorite = newValue === "1";
+      const favBtn = this.shadowRoot?.querySelector("#favBtn");
+      favBtn?.classList.toggle("active", this.state.isFavorite);
+    }
+  }
 
   connectedCallback() {
     this.render();
@@ -25,25 +36,25 @@ class FoodCard extends HTMLElement {
     this.shadowRoot.innerHTML = `
       <style>
         :host { 
-  display: block;
-  width: 100%;
-}
+        display: block;
+        width: 100%;
+      }
 
-.card {
-  background: #ffffff;
-  border-radius: 20px;
-  padding: 18px;
-  width: 100%;
-  min-height: 400px;
-  box-sizing: border-box;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.06);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  position: relative;
-  transition: 0.3s ease;
-  border: 1px solid #f0f0f0;
-  display: flex;
-  flex-direction: column;
-}
+      .card {
+        background: #ffffff;
+        border-radius: 20px;
+        padding: 18px;
+        width: 100%;
+        min-height: 400px;
+        box-sizing: border-box;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        position: relative;
+        transition: 0.3s ease;
+        border: 1px solid #f0f0f0;
+        display: flex;
+        flex-direction: column;
+      }
         .card:hover { 
           transform: translateY(-8px); 
           box-shadow: 0 15px 35px rgba(0,0,0,0.1);
@@ -160,6 +171,7 @@ class FoodCard extends HTMLElement {
           body: !this.state.isFavorite ? JSON.stringify({ id: foodId }) : undefined
         });
         this.state.isFavorite = !this.state.isFavorite;
+        this.setAttribute("is_favorite", this.state.isFavorite ? "1" : "0");
         favBtn.classList.toggle("active", this.state.isFavorite);
         this.dispatchEvent(new CustomEvent("favorite-updated", {
           bubbles: true,

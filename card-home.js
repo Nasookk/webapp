@@ -28,6 +28,7 @@ class HomeCard extends HTMLElement {
       ? imgAttr
       : "https://via.placeholder.com/300x200";
     const location = this.getAttribute("location") || "Тодорхойгүй";
+    const isFavorite = this.getAttribute("is_favorite") === "1";
 
     const stars = Array.from({ length: 5 }, (_, i) =>
       `<span class="star">${i < Math.floor(rating) ? '★' : '☆'}</span>`
