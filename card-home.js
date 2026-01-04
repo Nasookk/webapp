@@ -130,7 +130,6 @@ class HomeCard extends HTMLElement {
 
     this.setupEvents();
   }
-<<<<<<< HEAD
 
   setupEvents() {
     const card = this.shadowRoot.querySelector(".card");
@@ -153,28 +152,6 @@ class HomeCard extends HTMLElement {
       }));
     });
   }
-=======
-setupEvents() {
-  const card = this.shadowRoot.querySelector(".card");
-  card.addEventListener("click", () => {
-    this.dispatchEvent(new CustomEvent("open-food", {
-      detail: {
-        "food-id": this.getAttribute("food-id"),
-        "name": this.getAttribute("name"),
-        "price": this.getAttribute("price"),
-        "rating": this.getAttribute("rating"),
-        "ingredients": this.getAttribute("ingredients"),
-        "calories": this.getAttribute("calories"),
-        "img": this.getAttribute("img"),
-        "location": this.getAttribute("location"),
-        "restaurant-name": this.getAttribute("restaurant-name") 
-      },
-      bubbles: true,
-      composed: true
-    }));
-  });
-}
->>>>>>> b0e28b28909e38f091571aa273ea3761ab128a44
 }
 
 customElements.define("card-home", HomeCard);

@@ -37,6 +37,7 @@ class FoodCard extends HTMLElement {
     const img = this.getAttribute("img") || "./img/img_foods/default.webp";
     const restaurantName = this.getAttribute("restaurant-name") || "";
     const location = this.getAttribute("location") || "";
+    this.state.isFavorite = this.getAttribute("is_favorite") === "1";
 
     this.shadowRoot.innerHTML = `
       <style>
@@ -154,7 +155,6 @@ class FoodCard extends HTMLElement {
     if (!favBtn) return;
     favBtn.classList.toggle("active", this.state.isFavorite);
   }
-
   initEvents() {
     const display = this.shadowRoot.querySelector("#rating-display");
     const inputs = this.shadowRoot.querySelectorAll('input[name="star"]');
@@ -166,11 +166,11 @@ class FoodCard extends HTMLElement {
         return;
       }
       const foodId = this.getAttribute("food-id");
-      const method = this.state.isFavorite ? "DELETE" : "POST";
-      const url = this.state.isFavorite
+      const currentlyFavorite = this.state.isFavorite;
+      const method = currentlyFavorite ? "DELETE" : "POST";
+      const url = currentlyFavorite
         ? `http://localhost:3000/api/favorites/foods/${foodId}`
         : `http://localhost:3000/api/favorites/foods`;
-
       try {
         await fetch(url, {
           method,
@@ -178,11 +178,9 @@ class FoodCard extends HTMLElement {
             "Content-Type": "application/json",
             "Authorization": "Bearer " + token
           },
-          body: !this.state.isFavorite ? JSON.stringify({ id: foodId }) : undefined
+          body: !currentlyFavorite ? JSON.stringify({ id: foodId }) : undefined
         });
-        this.state.isFavorite = !this.state.isFavorite;
-        this.setAttribute("is_favorite", this.state.isFavorite ? "1" : "0");
-        this.updateFavoriteButton();
+        this.setAttribute("is_favorite", currentlyFavorite ? "0" : "1");
         this.dispatchEvent(new CustomEvent("favorite-updated", {
           bubbles: true,
           composed: true
